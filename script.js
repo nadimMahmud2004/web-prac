@@ -1,376 +1,478 @@
-const apartmentsData = [
-  {
-    id: "apt1",
-    name: "Chic Downtown Loft",
-    location: "Downtown Core",
-    price: 2200,
-    beds: 1,
-    baths: 1,
-    sqft: 850,
-    description:
-      "A stylish loft with modern amenities, perfect for professionals seeking city life and vibrant surroundings.",
-    imgSrc:
-      "https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/Rent%20Apartment%20Booking%20Template/1.jpeg",
-    amenities: ["gym", "wifi", "balcony"],
-    rating: 4.8,
-  },
-  {
-    id: "apt2",
-    name: "Riverside Serenity Suite",
-    location: "Riverside District",
-    price: 1850,
-    beds: 2,
-    baths: 2,
-    sqft: 1100,
-    description:
-      "Enjoy peaceful river views from this beautifully appointed 2-bedroom suite. Ideal for relaxation.",
-    imgSrc:
-      "https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/Rent%20Apartment%20Booking%20Template/2.jpeg",
-    amenities: ["pool", "pet friendly", "balcony"],
-    rating: 4.5,
-  },
-  {
-    id: "apt3",
-    name: "Parkview Family Home",
-    location: "Parkside Suburb",
-    price: 2900,
-    beds: 3,
-    baths: 2,
-    sqft: 1500,
-    description:
-      "Spacious 3-bedroom home with a garden, ideal for families. Close to parks and schools.",
-    imgSrc:
-      "https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/Rent%20Apartment%20Booking%20Template/3.jpeg",
-    amenities: ["pet friendly", "gym"],
-    rating: 4.2,
-  },
-  {
-    id: "apt4",
-    name: "Studio Sparkle",
-    location: "Downtown Core",
-    price: 1450, // Adjusted price
-    beds: 0, // Studio often means 0 dedicated bedrooms
-    baths: 1,
-    sqft: 550,
-    description:
-      "A bright and modern studio apartment, perfect for solo travelers or couples. Compact and chic.",
-    imgSrc:
-      "https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/Rent%20Apartment%20Booking%20Template/4.jpeg",
-    amenities: ["wifi", "gym"],
-    rating: 4.0,
-  },
-  {
-    id: "apt5",
-    name: "Uptown Modern Flat",
-    location: "Uptown Views",
-    price: 2600,
-    beds: 2,
-    baths: 2,
-    sqft: 1250,
-    description:
-      "Sleek and contemporary 2-bedroom flat in the bustling uptown area with great city views.",
-    imgSrc:
-      "https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/Rent%20Apartment%20Booking%20Template/5.jpeg",
-    amenities: ["gym", "pool", "balcony"],
-    rating: 4.7,
-  },
-  {
-    id: "apt6",
-    name: "Cozy Garden Studio",
-    location: "Parkside Suburb",
-    price: 1350,
-    beds: 1, // Can be a larger studio with a defined bed area
-    baths: 1,
-    sqft: 600,
-    description:
-      "Charming studio with a private garden entrance. Offers a quiet retreat from city noise.",
-    imgSrc:
-      "https://raw.githubusercontent.com/farazc60/Project-Images/refs/heads/main/Rent%20Apartment%20Booking%20Template/6.jpeg",
-    amenities: ["pet friendly", "wifi"],
-    rating: 4.3,
-  },
-];
-
-// --- DOM ELEMENTS ---
-const apartmentGrid = document.getElementById("apartment-grid");
-const filterLocationSelect = document.getElementById("filter-location");
-const filterPriceSelect = document.getElementById("filter-price");
-const filterAmenitiesSelect = document.getElementById("filter-amenities");
-const sortApartmentsSelect = document.getElementById("sort-apartments");
-
-// --- RENDER FUNCTION ---
-function renderApartments(apartmentsToRender) {
-  apartmentGrid.innerHTML = ""; // Clear existing cards
-
-  if (apartmentsToRender.length === 0) {
-    apartmentGrid.innerHTML = "No apartments match your criteria.";
-    return;
-  }
-
-  apartmentsToRender.forEach((apt) => {
-    const card = `
-                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 group">
-                        <img src="${apt.imgSrc}" alt="${
-      apt.name
-    }" class="w-full object-cover group-hover:opacity-90 transition-opacity">
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold text-slate-800 mb-2">${
-                              apt.name
-                            }</h3>
-                            <p class="text-sm text-slate-500 mb-1 flex items-center">
-                                <i class="fas fa-map-marker-alt mr-2 text-emerald-500"></i>
-                                ${apt.location}
-                            </p>
-                            <div class="flex flex-wrap justify-start items-center text-xs text-slate-600 mt-2 mb-3 space-x-3">
-                                <span><i class="fas fa-bed mr-1 text-emerald-500"></i> ${
-                                  apt.beds === 0 ? "Studio" : apt.beds + " Bed"
-                                }</span>
-                                <span><i class="fas fa-bath mr-1 text-emerald-500"></i> ${
-                                  apt.baths
-                                } Bath</span>
-                                <span><i class="fas fa-ruler-combined mr-1 text-emerald-500"></i> ${
-                                  apt.sqft
-                                } sqft</span>
-                            </div>
-                            <p class="text-lg font-bold text-emerald-600 mb-3">$${apt.price.toLocaleString()} <span class="text-sm font-normal text-slate-500">/month</span></p>
-                            <p class="text-slate-600 text-sm mb-4 leading-relaxed apartment-card-description">${
-                              apt.description
-                            }</p>
-                            <button onclick="scrollToBooking('${
-                              apt.name
-                            }')" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-2.5 px-4 rounded-lg shadow-sm hover:shadow-md transition-all">
-                                Book Now
-                            </button>
-                        </div>
-                    </div>
-                `;
-    apartmentGrid.innerHTML += card;
+document.addEventListener("DOMContentLoaded", function () {
+  // --- Custom Cursor ---
+  const cursorDot = document.getElementById("cursor-dot");
+  window.addEventListener("mousemove", (e) => {
+    cursorDot.style.left = e.clientX + "px";
+    cursorDot.style.top = e.clientY + "px";
   });
-}
 
-// --- FILTER AND SORT LOGIC ---
-function applyFiltersAndSort() {
-  let filteredApartments = [...apartmentsData]; // Start with all apartments
-
-  // Location Filter
-  const selectedLocation = filterLocationSelect.value;
-  if (selectedLocation) {
-    filteredApartments = filteredApartments.filter(
-      (apt) => apt.location === selectedLocation
+  function updateInteractiveElements() {
+    const interactiveElements = document.querySelectorAll(
+      "a, button, .project-card, input, textarea"
     );
-  }
-
-  // Price Filter
-  const selectedPriceRange = filterPriceSelect.value;
-  if (selectedPriceRange) {
-    const [minPriceStr, maxPriceStr] = selectedPriceRange.split("-");
-    const minPrice = parseInt(minPriceStr);
-    const maxPrice = parseInt(maxPriceStr);
-    filteredApartments = filteredApartments.filter(
-      (apt) => apt.price >= minPrice && apt.price < maxPrice
-    ); // Max is exclusive for ranges like "Under 1500" (0-1500)
-  }
-
-  // Amenities Filter
-  const selectedAmenity = filterAmenitiesSelect.value;
-  if (selectedAmenity) {
-    filteredApartments = filteredApartments.filter((apt) =>
-      apt.amenities.includes(selectedAmenity.toLowerCase())
-    );
-  }
-
-  // Sorting
-  const sortBy = sortApartmentsSelect.value;
-  switch (sortBy) {
-    case "price-asc":
-      filteredApartments.sort((a, b) => a.price - b.price);
-      break;
-    case "price-desc":
-      filteredApartments.sort((a, b) => b.price - a.price);
-      break;
-    case "rating-desc":
-      filteredApartments.sort((a, b) => b.rating - a.rating);
-      break;
-    case "featured": // Default or by ID
-      filteredApartments.sort(
-        (a, b) =>
-          apartmentsData.findIndex((x) => x.id === a.id) -
-          apartmentsData.findIndex((x) => x.id === b.id)
+    interactiveElements.forEach((el) => {
+      el.addEventListener("mouseenter", () =>
+        cursorDot.classList.add("hovered")
       );
-      break;
-  }
-
-  renderApartments(filteredApartments);
-}
-
-// --- EVENT LISTENERS ---
-filterLocationSelect.addEventListener("change", applyFiltersAndSort);
-filterPriceSelect.addEventListener("change", applyFiltersAndSort);
-filterAmenitiesSelect.addEventListener("change", applyFiltersAndSort);
-sortApartmentsSelect.addEventListener("change", applyFiltersAndSort);
-
-// --- INITIAL RENDER ---
-document.addEventListener("DOMContentLoaded", () => {
-  renderApartments(apartmentsData); // Initial load of all apartments
-
-  // Populate booking form select options dynamically (optional, but good practice)
-  const apartmentBookingSelect = document.getElementById("apartment-select");
-  // Clear existing options except the first disabled one
-  // apartmentBookingSelect.innerHTML = '<option value="" disabled selected>Choose an apartment</option>';
-  // The above line will clear static ones. Keeping static ones as per current structure and only adding ones not present.
-  // For this version, I've manually updated the static options in HTML to match apartmentsData.
-  // If apartmentsData was the single source of truth, you'd populate it like this:
-  /*
-    apartmentsData.forEach(apt => {
-        const option = document.createElement('option');
-        option.value = apt.name;
-        option.textContent = `${apt.name} - $${apt.price}/month`;
-        option.dataset.price = apt.price;
-        apartmentBookingSelect.appendChild(option);
+      el.addEventListener("mouseleave", () =>
+        cursorDot.classList.remove("hovered")
+      );
     });
-    */
-});
-
-const mobileMenuButton = document.getElementById("mobile-menu-button");
-const mobileMenu = document.getElementById("mobile-menu");
-const hamburgerIcon = document.getElementById("hamburger-icon");
-const closeIcon = document.getElementById("close-icon");
-
-mobileMenuButton.addEventListener("click", () => {
-  mobileMenu.classList.toggle("hidden");
-  hamburgerIcon.classList.toggle("hidden");
-  closeIcon.classList.toggle("hidden");
-  if (!mobileMenu.classList.contains("hidden")) {
-    mobileMenu.style.maxHeight = mobileMenu.scrollHeight + "px";
-  } else {
-    mobileMenu.style.maxHeight = "0px";
   }
-});
+  updateInteractiveElements();
 
-document.querySelectorAll("#mobile-menu a").forEach((link) => {
-  link.addEventListener("click", () => {
-    mobileMenu.classList.add("hidden");
-    hamburgerIcon.classList.remove("hidden");
-    closeIcon.classList.add("hidden");
-    mobileMenu.style.maxHeight = "0px";
+  // --- Typewriter Effect ---
+  const typewriterElement = document.getElementById("typewriter");
+  const roles = [
+    "Frontend Developer",
+    "Backend Developer",
+    "Full Stack Engineer",
+    "UI/UX Enthusiast",
+  ];
+  let roleIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+
+  function type() {
+    const currentRole = roles[roleIndex];
+    if (isDeleting) {
+      typewriterElement.textContent = currentRole.substring(0, charIndex - 1);
+      charIndex--;
+    } else {
+      typewriterElement.textContent = currentRole.substring(0, charIndex + 1);
+      charIndex++;
+    }
+
+    if (!isDeleting && charIndex === currentRole.length) {
+      setTimeout(() => (isDeleting = true), 2000);
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      roleIndex = (roleIndex + 1) % roles.length;
+    }
+
+    const typeSpeed = isDeleting ? 100 : 200;
+    setTimeout(type, typeSpeed);
+  }
+  type();
+
+  // --- Pixel Assembler Hero Effect ---
+  const canvas = document.getElementById("hero-canvas");
+  const heroSection = document.getElementById("hero");
+  const ctx = canvas.getContext("2d", { willReadFrequently: true });
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let particleArray = [];
+  const characters = [
+    "{",
+    "}",
+    ";",
+    ":",
+    "=",
+    "+",
+    "-",
+    "*",
+    "/",
+    ">",
+    "<",
+    "(",
+    ")",
+    "[",
+    "]",
+  ];
+
+  const mouse = {
+    x: null,
+    y: null,
+    radius: 100,
+  };
+
+  heroSection.addEventListener("mousemove", function (event) {
+    const rect = heroSection.getBoundingClientRect();
+    mouse.x = event.clientX - rect.left;
+    mouse.y = event.clientY - rect.top;
   });
-});
 
-const today = new Date().toISOString().split("T")[0];
-document.getElementById("start-date").setAttribute("min", today);
-
-const bookingForm = document.getElementById("bookingForm");
-const bookingModal = document.getElementById("bookingModal");
-const modalContent = document.getElementById("modalContent");
-const closeModalButton = document.getElementById("closeModalButton");
-const modalConfirmButton = document.getElementById("modalConfirmButton");
-
-bookingForm.addEventListener("submit", function (event) {
-  event.preventDefault();
-  const name = document.getElementById("name").value;
-  const email = document.getElementById("email").value;
-  const phone = document.getElementById("phone").value;
-  const apartmentSelect = document.getElementById("apartment-select");
-  const selectedOption = apartmentSelect.options[apartmentSelect.selectedIndex];
-  const apartmentName = selectedOption.value;
-  const apartmentPrice = parseFloat(selectedOption.dataset.price);
-  const startDate = document.getElementById("start-date").value;
-  const duration = parseInt(document.getElementById("duration").value);
-
-  if (isNaN(apartmentPrice) || isNaN(duration) || !apartmentName) {
-    alert("Please select a valid apartment and duration.");
-    return;
-  }
-  const totalCost = apartmentPrice * duration;
-
-  document.getElementById("summaryName").textContent = name;
-  document.getElementById("summaryEmail").textContent = email;
-  document.getElementById("summaryPhone").textContent = phone;
-  document.getElementById("summaryApartmentName").textContent = apartmentName;
-  document.getElementById("summaryMonthlyCost").textContent =
-    apartmentPrice.toFixed(2);
-  document.getElementById("summaryDuration").textContent = duration;
-  document.getElementById("summaryStartDate").textContent = new Date(
-    startDate
-  ).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+  heroSection.addEventListener("mouseleave", function () {
+    mouse.x = null;
+    mouse.y = null;
   });
-  document.getElementById("summaryTotalCost").textContent =
-    totalCost.toFixed(2);
 
-  bookingModal.classList.remove("hidden");
-  setTimeout(() => {
-    bookingModal.classList.add("opacity-100");
-    modalContent.classList.remove("scale-95", "opacity-0");
-    modalContent.classList.add("scale-100", "opacity-100");
-  }, 10);
-  document.body.style.overflow = "hidden";
-});
+  class Particle {
+    constructor(x, y, character, color) {
+      this.x = x;
+      this.y = y;
+      this.character = character;
+      this.color = color;
+      this.baseX = this.x;
+      this.baseY = this.y;
+      this.density = Math.random() * 40 + 5;
+      this.size = 3;
+    }
+    draw() {
+      ctx.fillStyle = this.color;
+      ctx.font = "10px Fira Code";
+      ctx.fillText(this.character, this.x, this.y);
+    }
+    update() {
+      let dx = mouse.x - this.x;
+      let dy = mouse.y - this.y;
+      let distance = Math.sqrt(dx * dx + dy * dy);
+      let forceDirectionX = dx / distance;
+      let forceDirectionY = dy / distance;
+      let maxDistance = mouse.radius;
+      let force = (maxDistance - distance) / maxDistance;
+      let directionX = forceDirectionX * force * this.density;
+      let directionY = forceDirectionY * force * this.density;
 
-function hideModal() {
-  modalContent.classList.remove("scale-100", "opacity-100");
-  modalContent.classList.add("scale-95", "opacity-0");
-  bookingModal.classList.remove("opacity-100");
-  setTimeout(() => {
-    bookingModal.classList.add("hidden");
-    document.body.style.overflow = "auto";
-  }, 300);
-}
-
-closeModalButton.addEventListener("click", hideModal);
-modalConfirmButton.addEventListener("click", () => {
-  hideModal();
-  bookingForm.reset();
-});
-
-bookingModal.addEventListener("click", function (event) {
-  if (event.target === bookingModal) {
-    hideModal();
-  }
-});
-
-function scrollToBooking(apartmentName) {
-  const bookingSection = document.getElementById("booking");
-  const apartmentSelect = document.getElementById("apartment-select");
-  for (let i = 0; i < apartmentSelect.options.length; i++) {
-    if (apartmentSelect.options[i].value === apartmentName) {
-      apartmentSelect.selectedIndex = i;
-      break;
+      if (distance < mouse.radius) {
+        this.x -= directionX;
+        this.y -= directionY;
+      } else {
+        if (this.x !== this.baseX) {
+          let dx = this.x - this.baseX;
+          this.x -= dx / 10;
+        }
+        if (this.y !== this.baseY) {
+          let dy = this.y - this.baseY;
+          this.y -= dy / 10;
+        }
+      }
     }
   }
-  bookingSection.scrollIntoView({ behavior: "smooth" });
-}
 
-const contactForm = document.getElementById("contactForm");
-contactForm.addEventListener("submit", function (event) {
-  event.preventDefault();
-  alert("Thank you for your message! We will get back to you soon.");
-  contactForm.reset();
+  function initParticles(image) {
+    particleArray = [];
+
+    const heroWidth = canvas.width;
+    const heroHeight = canvas.height;
+
+    const imgAspect = image.width / image.height;
+    const canvasAspect = heroWidth / heroHeight;
+
+    let imgWidth, imgHeight;
+
+    if (imgAspect > canvasAspect) {
+      imgHeight = heroHeight;
+      imgWidth = imgHeight * imgAspect;
+    } else {
+      imgWidth = heroWidth;
+      imgHeight = imgWidth / imgAspect;
+    }
+
+    const startX = heroWidth - imgWidth;
+    let startY;
+
+    if (window.innerWidth > 1024) {
+      startY = (heroHeight - imgHeight) / 2 + 100;
+    } else {
+      startY = (heroHeight - imgHeight) / 2;
+    }
+
+    // Draw image to a temporary canvas to grab pixel data
+    const tempCanvas = document.createElement("canvas");
+    const tempCtx = tempCanvas.getContext("2d");
+    tempCanvas.width = imgWidth;
+    tempCanvas.height = imgHeight;
+    tempCtx.drawImage(image, 0, 0, imgWidth, imgHeight);
+
+    const imageData = tempCtx.getImageData(0, 0, imgWidth, imgHeight);
+
+    // step controls particle density → higher = smoother
+    const step = 9;
+
+    for (let y = 0; y < imageData.height; y += step) {
+      for (let x = 0; x < imageData.width; x += step) {
+        const i = (y * imageData.width + x) * 4;
+        const alpha = imageData.data[i + 3];
+
+        if (alpha > 128) {
+          const r = imageData.data[i];
+          const g = imageData.data[i + 1];
+          const b = imageData.data[i + 2];
+          const color = `rgb(${r},${g},${b})`;
+
+          const randomChar =
+            characters[Math.floor(Math.random() * characters.length)];
+          particleArray.push(
+            new Particle(startX + x, startY + y, randomChar, color)
+          );
+        }
+      }
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < particleArray.length; i++) {
+      particleArray[i].draw();
+      particleArray[i].update();
+    }
+    requestAnimationFrame(animate);
+  }
+
+  const profileImage = new Image();
+  profileImage.crossOrigin = "Anonymous";
+  profileImage.src = document.getElementById("about-img").src;
+  profileImage.onload = () => {
+    initParticles(profileImage);
+    animate();
+  };
+
+  window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    initParticles(profileImage);
+  });
+
+  // --- Scroll Reveal Animation ---
+  const revealElements = document.querySelectorAll(".reveal");
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+  revealElements.forEach((el) => revealObserver.observe(el));
+
+  // --- Staggered Skill Bar Animation ---
+  const skillsSection = document.querySelector("#about");
+  const skillBars = document.querySelectorAll(".skill-bar-inner");
+  const skillObserver = new IntersectionObserver(
+    (entries) => {
+      if (entries[0].isIntersecting) {
+        skillBars.forEach((bar, index) => {
+          setTimeout(() => {
+            bar.style.width = bar.getAttribute("data-width");
+          }, index * 150);
+        });
+        skillObserver.unobserve(skillsSection);
+      }
+    },
+    { threshold: 0.5 }
+  );
+  skillObserver.observe(skillsSection);
+
+  // --- Portfolio Filtering & Modals ---
+  const projects = [
+    {
+      id: 0,
+      title: "E-commerce Platform",
+      category: "fullstack",
+      description:
+        "A full-featured e-commerce site with React and Node.js, featuring product catalogs, user authentication, and a Stripe-integrated checkout process.",
+      tech: ["React", "Node.js", "MongoDB", "Stripe"],
+      features: [
+        "User authentication with JWT",
+        "Product search and filtering",
+        "Shopping cart functionality",
+        "Secure payment processing",
+      ],
+      snippet: `<div class="product-card">\n  <img src={product.image} alt={product.name} />\n  <h3>{product.name}</h3>\n  <p>{product.price}</p>\n  <button>Add to Cart</button>\n</div>`,
+      link: "#",
+    },
+    {
+      id: 1,
+      title: "Data Visualization Dashboard",
+      category: "frontend",
+      description:
+        "Interactive dashboard using D3.js for visualizing complex datasets with dynamic charts and graphs.",
+      tech: ["D3.js", "React", "Tailwind"],
+      features: [
+        "Multiple chart types (bar, line, pie)",
+        "Real-time data updates",
+        "Export charts as SVG or PNG",
+        "Responsive design for all devices",
+      ],
+      snippet: `const svg = d3.select(ref.current)\n  .attr("width", width)\n  .attr("height", height);\n\nsvg.selectAll("rect")\n  .data(data)\n  .enter()\n  .append("rect");`,
+      link: "#",
+    },
+    {
+      id: 2,
+      title: "RESTful API for Social App",
+      category: "backend",
+      description:
+        "A scalable backend API for a social media application, handling user profiles, posts, comments, and likes.",
+      tech: ["Node.js", "Express", "PostgreSQL"],
+      features: [
+        "CRUD operations for users, posts, comments",
+        "Secure authentication endpoints",
+        "Pagination for handling large datasets",
+        "Comprehensive API documentation",
+      ],
+      snippet: `app.get('/api/posts', async (req, res) => {\n  try {\n    const posts = await Post.findAll();\n    res.json(posts);\n  } catch (err) {\n    res.status(500).send('Server Error');\n  }\n});`,
+      link: "#",
+    },
+    {
+      id: 3,
+      title: "Real-time Chat Application",
+      category: "fullstack",
+      description:
+        "A chat app built with WebSockets for instant communication.",
+      tech: ["Socket.IO", "React", "Node.js"],
+      features: [
+        "Instant messaging between users",
+        "User online status indicators",
+        "Room-based chat functionality",
+        "Message history",
+      ],
+      snippet: `io.on('connection', (socket) => {\n  console.log('a user connected');\n  socket.on('chat message', (msg) => {\n    io.emit('chat message', msg);\n  });\n});`,
+      link: "#",
+    },
+  ];
+
+  const portfolioGrid = document.getElementById("portfolio-grid");
+  const filterBtns = document.querySelectorAll(".filter-btn");
+  const modalOverlay = document.getElementById("project-modal-overlay");
+  const modalBody = document.querySelector(".modal-body");
+  const modalTabs = document.querySelectorAll(".modal-tab");
+
+  function displayProjects(filter) {
+    portfolioGrid.innerHTML = "";
+    const filteredProjects =
+      filter === "all"
+        ? projects
+        : projects.filter((p) => p.category === filter);
+
+    filteredProjects.forEach((project) => {
+      const projectCard = `
+                      <div class="project-card rounded-lg overflow-hidden" data-id="${
+                        project.id
+                      }">
+                          <div class="p-6">
+                              <h3 class="text-xl font-bold mb-2 text-accent">${
+                                project.title
+                              }</h3>
+                              <p class="text-secondary mb-4">${project.description.substring(
+                                0,
+                                80
+                              )}...</p>
+                              <div class="flex flex-wrap gap-2 mb-4">
+                                  ${project.tech
+                                    .map(
+                                      (t) =>
+                                        `<span class="bg-gray-700 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">${t}</span>`
+                                    )
+                                    .join("")}
+                              </div>
+                              <span class="text-green hover:underline">View Details →</span>
+                          </div>
+                      </div>
+                  `;
+      portfolioGrid.innerHTML += projectCard;
+    });
+
+    document.querySelectorAll(".project-card").forEach((card) => {
+      card.addEventListener("click", (e) =>
+        openModal(e.currentTarget.dataset.id)
+      );
+    });
+    updateInteractiveElements();
+  }
+
+  function openModal(projectId) {
+    const project = projects.find((p) => p.id == projectId);
+    if (!project) return;
+    updateModalContent(project, "description");
+    modalOverlay.classList.add("active");
+  }
+
+  function updateModalContent(project, activeTab) {
+    let content = "";
+    modalTabs.forEach((tab) => {
+      tab.classList.toggle("active", tab.dataset.tab === activeTab);
+      tab.onclick = () => updateModalContent(project, tab.dataset.tab);
+    });
+
+    switch (activeTab) {
+      case "features":
+        content = `<h3 class="text-xl font-bold mb-4 text-accent">Key Features</h3><ul class="list-disc list-inside space-y-2">${project.features
+          .map((f) => `<li>${f}</li>`)
+          .join("")}</ul>`;
+        break;
+      case "snippet":
+        content = `<h3 class="text-xl font-bold mb-4 text-accent">Code Snippet</h3><pre><code class="language-javascript rounded-lg">${project.snippet}</code></pre>`;
+        break;
+      default:
+        content = `<h3 class="text-xl font-bold mb-4 text-accent">${project.title}</h3><p class="text-primary mb-4">${project.description}</p><a href="${project.link}" target="_blank" class="text-green hover:underline font-bold">Visit Website →</a>`;
+    }
+    modalBody.innerHTML = content;
+    if (activeTab === "snippet") {
+      hljs.highlightAll();
+    }
+  }
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      filterBtns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      displayProjects(btn.dataset.filter);
+    });
+  });
+
+  document
+    .getElementById("modal-close-btn")
+    .addEventListener("click", () => modalOverlay.classList.remove("active"));
+  modalOverlay.addEventListener("click", (e) => {
+    if (e.target === modalOverlay) modalOverlay.classList.remove("active");
+  });
+
+  displayProjects("all");
+  document
+    .querySelector('.filter-btn[data-filter="all"]')
+    .classList.add("active");
+
+  const experiences = [
+    {
+      date: "2022 - Present",
+      role: "Aspired Software Engineer",
+      company: "Student",
+      description:
+        "Led the development of a new microservices architecture, improving system scalability by 40%. Mentored junior developers and conducted code reviews.",
+    },
+    {
+      date: "2023 - 2012",
+      role: "Mern Stack",
+      company: "Innovate Co.",
+      description:
+        "Developed and maintained features for a high-traffic web application using React and Node.js. Collaborated with cross-functional teams to deliver high-quality software.",
+    },
+    {
+      date: "2017 - 2019",
+      role: "Junior Developer",
+      company: "CodeCrafters LLC",
+      description:
+        "Assisted in the development of client websites using HTML, CSS, and JavaScript. Gained experience with version control systems like Git.",
+    },
+  ];
+  const experienceContainer = document.querySelector("#experience .relative");
+  experiences.forEach((exp) => {
+    const item = `<div class="timeline-item"><div class="timeline-dot"></div><p class="text-sm text-secondary mb-1">${exp.date}</p><h3 class="text-xl font-bold text-accent">${exp.role}</h3><p class="font-semibold mb-2">${exp.company}</p><p class="text-primary">${exp.description}</p></div>`;
+    experienceContainer.innerHTML += item;
+  });
+
+  const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  mobileMenuBtn.addEventListener("click", () =>
+    mobileMenu.classList.toggle("hidden")
+  );
+
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      document
+        .querySelector(this.getAttribute("href"))
+        .scrollIntoView({ behavior: "smooth" });
+
+      if (!mobileMenu.classList.contains("hidden"))
+        mobileMenu.classList.add("hidden");
+    });
+  });
 });
-
-document.getElementById("currentYear").textContent = new Date().getFullYear();
-
-const animationStyle = document.createElement("style");
-animationStyle.innerHTML = `
-            .animation-delay-300 { animation-delay: 0.3s; }
-            .animation-delay-600 { animation-delay: 0.6s; }
-            .animate-fade-in-down {
-                animation: fadeInDown 0.8s ease-out forwards;
-                opacity: 0;
-            }
-            .animate-fade-in-up {
-                animation: fadeInUp 0.8s ease-out forwards;
-                opacity: 0;
-            }
-            @keyframes fadeInDown {
-                from { opacity: 0; transform: translateY(-20px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-            @keyframes fadeInUp {
-                from { opacity: 0; transform: translateY(20px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-        `;
-document.head.appendChild(animationStyle);

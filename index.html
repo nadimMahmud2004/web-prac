@@ -3,883 +3,339 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Apex Apartments | Monthly Booking</title>
+    <title>Nadim Mahmud</title>
+    <link
+      rel="icon"
+      href="https://www.codewithfaraz.com/tools/placeholder?size=32x32&bgColor=0d1117&textColor=c9d1d9&text=EC"
+      type="image/png"
+    />
+    <!-- Tailwind Css -->
     <link rel="stylesheet" href="src/output.css" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <!-- highlight.js for syntax highlighting in modals -->
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
     />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body class="bg-slate-50 text-slate-700 antialiased">
-    <nav
-      id="navbar"
-      class="bg-white shadow-md top-0 z-50 transition-all duration-300"
+  <body class="overflow-x-hidden">
+    <!-- Cursor Dot -->
+
+    <div id="cursor-dot"></div>
+
+    <!-- Header -->
+
+    <header
+      class="fixed top-0 left-0 right-0 z-50 opacity-65 backdrop-blur-md border-b border-gray-800"
     >
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16">
-          <a href="#" class="flex-shrink-0">
-            <h1 class="text-2xl font-bold text-emerald-600">
-              Apex<span class="text-sky-500">Living</span>
-            </h1>
-          </a>
-
-          <div class="hidden md:flex space-x-6 items-center">
-            <a
-              href="#home"
-              class="text-slate-600 hover:text-emerald-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-              >Home</a
-            >
-            <a
-              href="#apartments"
-              class="text-slate-600 hover:text-emerald-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-              >Apartments</a
-            >
-            <a
-              href="#booking"
-              class="text-slate-600 hover:text-emerald-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-              >Booking</a
-            >
-            <a
-              href="#reviews"
-              class="text-slate-600 hover:text-emerald-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-              >Reviews</a
-            >
-            <a
-              href="#contact"
-              class="text-slate-600 hover:text-emerald-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-              >Contact</a
-            >
-            <a
-              href="#booking"
-              class="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-sm hover:shadow-md transition-all"
-              >Book Now</a
-            >
-          </div>
-
-          <div class="md:hidden flex items-center">
-            <button
-              id="mobile-menu-button"
-              class="inline-flex items-center justify-center p-2 rounded-md text-slate-500 hover:text-emerald-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-emerald-500 transition-all"
-            >
-              <span class="sr-only">Open main menu</span>
-              <svg
-                id="hamburger-icon"
-                class="h-6 w-6"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 6h16M4 12h16m-7 6h7"
-                />
-              </svg>
-              <svg
-                id="close-icon"
-                class="h-6 w-6 hidden"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div
-        id="mobile-menu"
-        class="md:hidden hidden transition-all ease-out duration-300 origin-top"
+      <nav
+        class="container mx-auto px-6 py-4 flex justify-between items-center"
       >
-        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <a
-            href="#home"
-            class="text-slate-600 hover:bg-slate-100 hover:text-emerald-600 block px-3 py-2 rounded-md text-base font-medium transition-colors"
-            >Home</a
+        <a href="#" class="text-2xl font-bold text-white"><< NM >></a>
+        <div class="hidden md:flex space-x-8">
+          <a href="#about" class="hover:text-white transition-colors">About</a>
+          <a href="#experience" class="hover:text-white transition-colors"
+            >Experience</a
           >
-          <a
-            href="#apartments"
-            class="text-slate-600 hover:bg-slate-100 hover:text-emerald-600 block px-3 py-2 rounded-md text-base font-medium transition-colors"
-            >Apartments</a
-          >
-          <a
-            href="#booking"
-            class="text-slate-600 hover:bg-slate-100 hover:text-emerald-600 block px-3 py-2 rounded-md text-base font-medium transition-colors"
-            >Booking</a
-          >
-          <a
-            href="#reviews"
-            class="text-slate-600 hover:bg-slate-100 hover:text-emerald-600 block px-3 py-2 rounded-md text-base font-medium transition-colors"
-            >Reviews</a
-          >
-          <a
-            href="#contact"
-            class="text-slate-600 hover:bg-slate-100 hover:text-emerald-600 block px-3 py-2 rounded-md text-base font-medium transition-colors"
+          <a href="#contact" class="hover:text-white transition-colors"
             >Contact</a
           >
-          <a
-            href="#booking"
-            class="bg-emerald-500 hover:bg-emerald-600 text-white block w-full text-center px-4 py-2 mt-2 rounded-lg text-base font-medium shadow-sm hover:shadow-md transition-all"
-            >Book Now</a
-          >
+        </div>
+        <button
+          id="mobile-menu-btn"
+          class="md:hidden text-2xl hover:text-white"
+        >
+          ☰
+        </button>
+      </nav>
+      <div id="mobile-menu" class="hidden md:hidden bg-gray-900 opacity-90">
+        <a href="#about" class="block py-2 px-4 text-sm hover:bg-gray-700"
+          >About</a
+        >
+        <a href="#experience" class="block py-2 px-4 text-sm hover:bg-gray-700"
+          >Experience</a
+        >
+        <a href="#contact" class="block py-2 px-4 text-sm hover:bg-gray-700"
+          >Contact</a
+        >
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+
+    <section id="hero" class="h-screen relative overflow-hidden">
+      <!-- Canvas Background -->
+      <canvas
+        id="hero-canvas"
+        class="absolute top-0 left-0 w-full h-full z-0"
+      ></canvas>
+
+      <!-- Fake Terminal Card -->
+
+      <div
+        class="absolute bottom-8 left-8 w-105 bg-[#0d1117] border border-gray-700 rounded-xl shadow-2xl z-10"
+      >
+        <!-- Fake window navbar -->
+
+        <div
+          class="flex items-center gap-2 px-3 py-2 border-b border-e-gray-700 bg-[#161b22] rounded-t-xl"
+        >
+          <span class="w-3 h-3 rounded-full bg-red-500"></span>
+          <span class="w-3 h-3 rounded-full bg-green-500"></span>
+          <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+          <span class="ml-4 text-gray-400 text-sm font-mono"> Terminal </span>
+        </div>
+
+        <!-- Terminal Content -->
+
+        <div class="p-4 font-mono text-gray-400 text-sm leading-relaxed">
+          <p>$ Hello , I am <span class="text-accent">Nadim Mahmud</span></p>
+          <p>
+            $ I am a <span id="typewriter"></span
+            ><span class="typewriter-cursor">|</span>
+          </p>
+          <p>$ View my work 👇</p>
         </div>
       </div>
-    </nav>
+    </section>
 
-    <main>
-      <section
-        id="home"
-        class="hero-bg w-full h-[calc(100vh-80px)] flex items-center justify-center text-white relative"
-      >
-        <div class="text-center px-4">
-          <h1
-            class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight animate-fade-in-down"
-          >
-            Find Your Perfect Monthly Stay
-          </h1>
-          <p
-            class="text-lg sm:text-xl md:text-2xl mb-8 max-w-2xl mx-auto animate-fade-in-up animation-delay-300"
-          >
-            Comfortable, flexible, and fully-furnished apartments for your
-            extended stay.
-          </p>
-          <a
-            href="#apartments"
-            class="bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 px-8 rounded-lg text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 animate-fade-in-up animation-delay-600"
-          >
-            Explore Apartments
-          </a>
+    <!-- About Section -->
+    <section id="about" class="py-20 reveal">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-12">
+          <span class="text-accent">01.</span> About Me
+        </h2>
+        <div class="flex flex-col md:flex-row items-center gap-12">
+          <div class="md:w-1/3 flex justify-center">
+            <div class="relative w-64 h-64">
+              <img
+                src="images/Nadim.jpg"
+                alt="Nadim Mahmud"
+                class="rounded-full w-full h-full object-cover border-4 border-accent"
+                id="about-img"
+                crossorigin="anonymous"
+              />
+              <div class="absolute inset-0 rounded-full glow opacity-75"></div>
+            </div>
+          </div>
+          <div class="md:w-2/3">
+            <div class="bg-[#010409] border border-gray-800 rounded-lg p-6">
+              <div class="flex items-center mb-4">
+                <span class="h-3 w-3 bg-red-500 rounded-full mr-2"></span>
+                <span class="h-3 w-3 bg-yellow-500 rounded-full mr-2"></span>
+                <span class="h-3 w-3 bg-green-500 rounded-full"></span>
+              </div>
+              <p class="text-secondary mb-4">
+                > nadim_mahmud@portfolio:~$ cat ./bio.txt
+              </p>
+              <p class="text-primary leading-relaxed">
+                Hello! I'm Nadim, an aspired for passionate software engineer
+                with a knack for creating elegant and efficient solutions. With
+                some technical experience in the tech industry, I've had the
+                privilege of working on a diverse range of projects, from
+                scalable web applications to complex backend systems. My journey
+                in coding started with a simple "Hello, World!" and has since
+                evolved into a deep love for building things that make a
+                difference.
+              </p>
+              <p class="text-secondary mt-4">
+                > <span class="blinking-cursor">_</span>
+              </p>
+            </div>
+            <div class="mt-8">
+              <h3 class="text-2xl font-semibold mb-4">My Skills</h3>
+              <div class="space-y-4">
+                <div class="skill">
+                  <p class="flex justify-between mb-1">
+                    <span>JavaScript</span><span>90%</span>
+                  </p>
+                  <div class="w-full bg-gray-700 rounded-full h-2.5">
+                    <div
+                      class="bg-accent h-2.5 rounded-full skill-bar-inner"
+                      style="width: 0%"
+                      data-width="90%"
+                    ></div>
+                  </div>
+                </div>
+                <div class="skill">
+                  <p class="flex justify-between mb-1">
+                    <span>React</span><span>85%</span>
+                  </p>
+                  <div class="w-full bg-gray-700 rounded-full h-2.5">
+                    <div
+                      class="bg-accent h-2.5 rounded-full skill-bar-inner"
+                      style="width: 0%"
+                      data-width="85%"
+                    ></div>
+                  </div>
+                </div>
+                <div class="skill">
+                  <p class="flex justify-between mb-1">
+                    <span>Tailwind</span><span>80%</span>
+                  </p>
+                  <div class="w-full bg-gray-700 rounded-full h-2.5">
+                    <div
+                      class="bg-accent h-2.5 rounded-full skill-bar-inner"
+                      style="width: 0%"
+                      data-width="80%"
+                    ></div>
+                  </div>
+                </div>
+                <div class="skill">
+                  <p class="flex justify-between mb-1">
+                    <span>Node.js</span><span>75%</span>
+                  </p>
+                  <div class="w-full bg-gray-700 rounded-full h-2.5">
+                    <div
+                      class="bg-green h-2.5 rounded-full skill-bar-inner"
+                      style="width: 0%"
+                      data-width="75%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Portfolio Section -->
+
+    <section id="portfolio" class="py-20 bg-[#010409] reveal">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-12">
+          <span class="text-accent">02.</span> My Portfolio
+        </h2>
+        <div class="flex justify-center mb-8 space-x-2 md:space-x-4">
+          <button class="filter-btn" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="frontend">Frontend</button>
+          <button class="filter-btn" data-filter="backend">Backend</button>
+          <button class="filter-btn" data-filter="fullstack">Full Stack</button>
+        </div>
+
         <div
-          class="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8 bg-white/90 backdrop-blur-sm shadow-lg rounded-t-xl md:mx-auto md:max-w-4xl md:mb-[-40px] transform md:translate-y-1/2"
+          id="portfolio-grid"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          <form
-            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end"
-          >
-            <div>
-              <label
-                for="location-search"
-                class="block text-sm font-medium text-slate-700 mb-1"
-                >Location</label
-              >
+          <!-- Project cards will be injected here by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+
+    <section id="experience" class="py-20 reveal">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-12">
+          <span class="text-accent">03.</span> My Experience
+        </h2>
+
+        <div class="relative max-w-3xl mx-auto">
+          <!-- Experience items will be injected here by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+
+    <section id="contact" class="py-20 bg-[#010409] reveal">
+      <div class="container mx-auto px-6 max-w-2xl">
+        <h2 class="text-3xl font-bold text-center mb-12">
+          <span class="text-accent">04.</span> Get In Touch
+        </h2>
+
+        <div class="bg-[#161b22] border border-gray-800 rounded-lg p-8">
+          <div class="flex items-center mb-4">
+            <span class="w-3 h-3 bg-red-500 rounded-full mr-2"></span>
+            <span class="w-3 h-3 bg-yellow-500 rounded-full mr-2"></span>
+            <span class="w-3 h-3 bg-green-500 rounded-full mr-2"></span>
+          </div>
+
+          <form action="">
+            <div class="mb-4">
+              <label for="name" class="block mb-2 text-secondary"
+                >> Name :
+              </label>
               <input
                 type="text"
-                id="location-search"
-                placeholder="e.g., Downtown, Seaside"
-                class="w-full p-3 text-slate-700 border border-slate-300 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500"
+                name="name"
+                id="name"
+                class="w-full p-2 rounded-md form-input"
               />
             </div>
-            <div>
-              <label
-                for="price-range"
-                class="block text-sm font-medium text-slate-700 mb-1"
-                >Price Range</label
+
+            <div class="mb-4">
+              <label for="email" class="block mb-2 text-secondary"
+                >> Email :</label
               >
-              <select
-                id="price-range"
-                class="w-full p-3 border border-slate-300 rounded-lg shadow-sm text-slate-700 focus:ring-emerald-500 focus:border-emerald-500"
-              >
-                <option>Any</option>
-                <option>$1000 - $2000</option>
-                <option>$2000 - $3000</option>
-                <option>$3000+</option>
-              </select>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                class="w-full p-2 rounded-md form-input"
+              />
             </div>
-            <div>
-              <label
-                for="bedrooms-filter"
-                class="block text-sm font-medium text-slate-700 mb-1"
-                >Bedrooms</label
+
+            <div class="mb-4">
+              <label for="message" class="block mb-2 text-secondary"
+                >Message</label
               >
-              <select
-                id="bedrooms-filter"
-                class="w-full p-3 border border-slate-300 rounded-lg shadow-sm text-slate-700 focus:ring-emerald-500 focus:border-emerald-500"
-              >
-                <option>Any</option>
-                <option>1 Bedroom</option>
-                <option>2 Bedrooms</option>
-                <option>3+ Bedrooms</option>
-              </select>
+              <textarea
+                name="message"
+                id="message"
+                rows="4"
+                class="w-full p-2 rounded-md form-input"
+              ></textarea>
             </div>
+
             <button
-              type="button"
-              class="bg-sky-500 hover:bg-sky-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all w-full sm:col-span-2 lg:col-span-1"
+              type="submit"
+              class="w-full py-2 px-4 rounded-md text-white font-bold submit-btn"
             >
-              Search
+              SEND MESSAGE
             </button>
           </form>
         </div>
-      </section>
-
-      <div class="pt-24 md:pt-32"></div>
-
-      <section id="apartments" class="py-8 sm:py-16 bg-slate-100">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="text-center mb-12">
-            <h2 class="text-3xl sm:text-4xl font-bold text-slate-800 mb-4">
-              Our Premier Apartments
-            </h2>
-            <p class="text-lg text-slate-600 max-w-2xl mx-auto">
-              Discover a range of apartments tailored to your needs, from cozy
-              studios to spacious penthouses.
-            </p>
-          </div>
-
-          <div
-            class="mb-10 flex flex-col sm:flex-row justify-between items-center gap-4"
-          >
-            <div class="flex flex-wrap gap-2">
-              <select
-                id="filter-location"
-                class="p-2 border border-slate-300 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500 bg-white"
-              >
-                <option value="">All Locations</option>
-                <option value="Downtown Core">Downtown</option>
-                <option value="Riverside District">Riverside</option>
-                <option value="Parkside Suburb">Parkside</option>
-                <option value="Uptown Views">Uptown</option>
-              </select>
-              <select
-                id="filter-price"
-                class="p-2 border border-slate-300 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500 bg-white"
-              >
-                <option value="">All Prices</option>
-                <option value="0-1500">Under $1500</option>
-                <option value="1500-2500">$1500 - $2500</option>
-                <option value="2500-100000">Over $2500</option>
-              </select>
-              <select
-                id="filter-amenities"
-                class="p-2 border border-slate-300 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500 bg-white"
-              >
-                <option value="">All Amenities</option>
-                <option value="gym">Gym</option>
-                <option value="pool">Pool</option>
-                <option value="pet friendly">Pet Friendly</option>
-                <option value="balcony">Balcony</option>
-              </select>
-            </div>
-            <div>
-              <select
-                id="sort-apartments"
-                class="p-2 border border-slate-300 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500 bg-white"
-              >
-                <option value="featured">Sort by: Featured</option>
-                <option value="price-asc">Price: Low to High</option>
-                <option value="price-desc">Price: High to Low</option>
-                <option value="rating-desc">Top Rated</option>
-              </select>
-            </div>
-          </div>
-
-          <div
-            id="apartment-grid"
-            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
-          ></div>
-        </div>
-      </section>
-
-      <section id="booking" class="py-8 sm:py-16 bg-white">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="max-w-2xl mx-auto">
-            <div class="text-center mb-12">
-              <h2 class="text-3xl sm:text-4xl font-bold text-slate-800 mb-4">
-                Secure Your Stay
-              </h2>
-              <p class="text-lg text-slate-600">
-                Fill out the form below to book your preferred apartment.
-              </p>
-            </div>
-            <form
-              id="bookingForm"
-              class="space-y-6 bg-slate-50 p-8 sm:p-10 rounded-xl shadow-xl"
-            >
-              <div>
-                <label
-                  for="name"
-                  class="block text-sm font-medium text-slate-700 mb-1"
-                  >Full Name</label
-                >
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  required
-                  class="w-full p-3 border border-slate-300 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500"
-                  placeholder="John Doe"
-                />
-              </div>
-              <div>
-                <label
-                  for="email"
-                  class="block text-sm font-medium text-slate-700 mb-1"
-                  >Email Address</label
-                >
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  required
-                  class="w-full p-3 border border-slate-300 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500"
-                  placeholder="you@example.com"
-                />
-              </div>
-              <div>
-                <label
-                  for="phone"
-                  class="block text-sm font-medium text-slate-700 mb-1"
-                  >Phone Number</label
-                >
-                <input
-                  type="tel"
-                  name="phone"
-                  id="phone"
-                  required
-                  class="w-full p-3 border border-slate-300 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500"
-                  placeholder="+1 (555) 123-4567"
-                />
-              </div>
-              <div>
-                <label
-                  for="apartment-select"
-                  class="block text-sm font-medium text-slate-700 mb-1"
-                  >Select Apartment</label
-                >
-                <select
-                  name="apartment"
-                  id="apartment-select"
-                  required
-                  class="w-full p-3 border border-slate-300 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500 bg-white"
-                >
-                  <option value="" disabled selected>
-                    Choose an apartment
-                  </option>
-                  <option value="Chic Downtown Loft" data-price="2200">
-                    Chic Downtown Loft - $2200/month
-                  </option>
-                  <option value="Riverside Serenity Suite" data-price="1850">
-                    Riverside Serenity Suite - $1850/month
-                  </option>
-                  <option value="Parkview Family Home" data-price="2900">
-                    Parkview Family Home - $2900/month
-                  </option>
-                  <option value="Studio Sparkle" data-price="1500">
-                    Studio Sparkle - $1500/month
-                  </option>
-                  <option value="Uptown Modern Flat" data-price="2600">
-                    Uptown Modern Flat - $2600/month
-                  </option>
-                  <option value="Cozy Garden Studio" data-price="1350">
-                    Cozy Garden Studio - $1350/month
-                  </option>
-                </select>
-              </div>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div>
-                  <label
-                    for="start-date"
-                    class="block text-sm font-medium text-slate-700 mb-1"
-                    >Start Date</label
-                  >
-                  <input
-                    type="date"
-                    name="start-date"
-                    id="start-date"
-                    required
-                    class="w-full p-3 border border-slate-300 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500"
-                    min=""
-                  />
-                </div>
-                <div>
-                  <label
-                    for="duration"
-                    class="block text-sm font-medium text-slate-700 mb-1"
-                    >Duration (Months)</label
-                  >
-                  <input
-                    type="number"
-                    name="duration"
-                    id="duration"
-                    min="1"
-                    max="12"
-                    required
-                    class="w-full p-3 border border-slate-300 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500"
-                    placeholder="e.g., 3"
-                  />
-                </div>
-              </div>
-              <div>
-                <button
-                  type="submit"
-                  class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all text-lg"
-                >
-                  Submit Booking Request
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </section>
-
-      <section id="reviews" class="py-8 sm:py-16 bg-slate-100">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="text-center mb-12">
-            <h2 class="text-3xl sm:text-4xl font-bold text-slate-800 mb-4">
-              What Our Guests Say
-            </h2>
-            <p class="text-lg text-slate-600 max-w-2xl mx-auto">
-              Hear from our satisfied residents who found their home away from
-              home with us.
-            </p>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="bg-white p-8 rounded-xl shadow-lg">
-              <div class="flex items-center mb-4">
-                <img
-                  src="https://www.codewithfaraz.com/tools/placeholder?size=40&bgColor=e2e8f0&textColor=4a5568&text=SA"
-                  alt="Avatar Sarah Adams"
-                  class="w-16 h-16 rounded-full mr-4 object-cover"
-                />
-                <div>
-                  <h4 class="font-semibold text-slate-800 text-lg">
-                    Sarah Adams
-                  </h4>
-                  <div class="flex text-yellow-400">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="fas fa-star"></i>
-                  </div>
-                </div>
-              </div>
-              <p class="text-slate-600 leading-relaxed">
-                "The apartment was fantastic, clean, and in a great location.
-                The booking process was smooth and the team was very helpful.
-                Highly recommend!"
-              </p>
-            </div>
-            <div class="bg-white p-8 rounded-xl shadow-lg">
-              <div class="flex items-center mb-4">
-                <img
-                  src="https://www.codewithfaraz.com/tools/placeholder?size=40&bgColor=cbd5e0textColor=4a5568&text=MJ"
-                  alt="Avatar Mark Johnson"
-                  class="w-16 h-16 rounded-full mr-4 object-cover"
-                />
-                <div>
-                  <h4 class="font-semibold text-slate-800 text-lg">
-                    Mark Johnson
-                  </h4>
-                  <div class="flex text-yellow-400">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="far fa-star"></i>
-                  </div>
-                </div>
-              </div>
-              <p class="text-slate-600 leading-relaxed">
-                "A perfect solution for my month-long business trip. The
-                amenities were top-notch and the apartment felt like a true
-                home. Will definitely use again."
-              </p>
-            </div>
-            <div
-              class="bg-white p-8 rounded-xl shadow-lg md:col-span-2 lg:col-span-1"
-            >
-              <div class="flex items-center mb-4">
-                <img
-                  src="https://www.codewithfaraz.com/tools/placeholder?size=40&bgColor=a0aec0&textColor=4a5568&text=LC"
-                  alt="Avatar Lisa Chen"
-                  class="w-16 h-16 rounded-full mr-4 object-cover"
-                />
-                <div>
-                  <h4 class="font-semibold text-slate-800 text-lg">
-                    Lisa Chen
-                  </h4>
-                  <div class="flex text-yellow-400">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="fas fa-star-half-alt"></i>
-                  </div>
-                </div>
-              </div>
-              <p class="text-slate-600 leading-relaxed">
-                "My family and I stayed for two months and it was exceptional.
-                The apartment was spacious, well-equipped, and the customer
-                service was always responsive."
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="py-8 sm:py-16 bg-emerald-600 text-white">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 class="text-3xl sm:text-4xl font-bold mb-6">
-            Ready to Find Your Next Home?
-          </h2>
-          <p class="text-lg sm:text-xl mb-8 max-w-2xl mx-auto">
-            Don't wait to secure your ideal monthly rental. Explore our listings
-            or get in touch with our team for personalized assistance.
-          </p>
-          <div
-            class="flex flex-col sm:flex-row justify-center items-center gap-4"
-          >
-            <a
-              href="#apartments"
-              class="bg-white hover:bg-slate-100 text-emerald-600 font-semibold py-3 px-8 rounded-lg text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-            >
-              View Apartments
-            </a>
-            <a
-              href="https://wa.me/1234567890?text=Hi%2C%20I'm%20interested%20in%20your%20apartments."
-              target="_blank"
-              class="bg-sky-500 hover:bg-sky-600 text-white font-semibold py-3 px-8 rounded-lg text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center"
-            >
-              <i class="fab fa-whatsapp h-5 w-5 mr-2"></i> Chat on WhatsApp
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" class="py-8 sm:py-16 bg-white">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="text-center mb-12">
-            <h2 class="text-3xl sm:text-4xl font-bold text-slate-800 mb-4">
-              Get In Touch
-            </h2>
-            <p class="text-lg text-slate-600 max-w-2xl mx-auto">
-              Have questions or need assistance? We're here to help.
-            </p>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-            <form
-              id="contactForm"
-              class="space-y-6 bg-slate-50 p-8 sm:p-10 rounded-xl shadow-xl"
-            >
-              <div>
-                <label
-                  for="contact-name"
-                  class="block text-sm font-medium text-slate-700 mb-1"
-                  >Full Name</label
-                >
-                <input
-                  type="text"
-                  name="contact-name"
-                  id="contact-name"
-                  required
-                  class="w-full p-3 border border-slate-300 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500"
-                  placeholder="Your Name"
-                />
-              </div>
-              <div>
-                <label
-                  for="contact-email"
-                  class="block text-sm font-medium text-slate-700 mb-1"
-                  >Email Address</label
-                >
-                <input
-                  type="email"
-                  name="contact-email"
-                  id="contact-email"
-                  required
-                  class="w-full p-3 border border-slate-300 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500"
-                  placeholder="your.email@example.com"
-                />
-              </div>
-              <div>
-                <label
-                  for="message"
-                  class="block text-sm font-medium text-slate-700 mb-1"
-                  >Message</label
-                >
-                <textarea
-                  name="message"
-                  id="message"
-                  rows="4"
-                  required
-                  class="w-full p-3 border border-slate-300 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500"
-                  placeholder="How can we help you?"
-                ></textarea>
-              </div>
-              <div>
-                <button
-                  type="submit"
-                  class="w-full bg-sky-500 hover:bg-sky-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all text-lg"
-                >
-                  Send Message
-                </button>
-              </div>
-            </form>
-
-            <div class="space-y-8">
-              <div>
-                <h3 class="text-2xl font-semibold text-slate-800 mb-4">
-                  Contact Information
-                </h3>
-                <ul class="space-y-3 text-slate-600">
-                  <li class="flex items-center">
-                    <i
-                      class="fas fa-envelope h-6 w-6 mr-3 text-emerald-500"
-                    ></i>
-                    <span
-                      >Email:
-                      <a
-                        href="mailto:info@apexliving.com"
-                        class="hover:text-emerald-600"
-                        >info@apexliving.com</a
-                      ></span
-                    >
-                  </li>
-                  <li class="flex items-center">
-                    <i
-                      class="fas fa-phone-alt h-6 w-6 mr-3 text-emerald-500"
-                    ></i>
-                    <span
-                      >Phone:
-                      <a href="tel:+1234567890" class="hover:text-emerald-600"
-                        >+1 (234) 567-890</a
-                      ></span
-                    >
-                  </li>
-                  <li class="flex items-start">
-                    <i
-                      class="fas fa-map-marker-alt h-6 w-6 mr-3 text-emerald-500 flex-shrink-0 mt-1"
-                    ></i>
-                    <span>Office: 123 Apex Tower, Metro City, ST 12345</span>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h3 class="text-2xl font-semibold text-slate-800 mb-4">
-                  Our Location
-                </h3>
-                <div class="map-placeholder w-full h-72">
-                  Static Map Placeholder (e.g., Google Maps Embed)
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="bg-slate-800 text-slate-300 py-12 sm:py-16">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-8">
-          <div>
-            <h3 class="text-xl font-semibold text-white mb-4">
-              Apex<span class="text-sky-400">Living</span>
-            </h3>
-            <p class="text-sm mb-4">
-              Providing premium monthly apartment rentals for comfort and
-              convenience.
-            </p>
-            <div class="flex space-x-4">
-              <a
-                href="#"
-                class="text-slate-400 hover:text-white transition-colors"
-                ><i class="fab fa-facebook-f h-6 w-6"></i
-              ></a>
-              <a
-                href="#"
-                class="text-slate-400 hover:text-white transition-colors"
-                ><i class="fab fa-instagram h-6 w-6"></i
-              ></a>
-              <a
-                href="#"
-                class="text-slate-400 hover:text-white transition-colors"
-                ><i class="fab fa-twitter h-6 w-6"></i
-              ></a>
-            </div>
-          </div>
-          <div>
-            <h3 class="text-lg font-semibold text-white mb-4">Quick Links</h3>
-            <ul class="space-y-2">
-              <li>
-                <a
-                  href="#home"
-                  class="text-sm text-slate-400 hover:text-white transition-colors"
-                  >Home</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#apartments"
-                  class="text-sm text-slate-400 hover:text-white transition-colors"
-                  >Apartments</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#booking"
-                  class="text-sm text-slate-400 hover:text-white transition-colors"
-                  >Booking</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#reviews"
-                  class="text-sm text-slate-400 hover:text-white transition-colors"
-                  >Reviews</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#contact"
-                  class="text-sm text-slate-400 hover:text-white transition-colors"
-                  >Contact Us</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-sm text-slate-400 hover:text-white transition-colors"
-                  >FAQs</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 class="text-lg font-semibold text-white mb-4">Legal</h3>
-            <ul class="space-y-2">
-              <li>
-                <a
-                  href="#"
-                  class="text-sm text-slate-400 hover:text-white transition-colors"
-                  >Privacy Policy</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-sm text-slate-400 hover:text-white transition-colors"
-                  >Terms of Service</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-sm text-slate-400 hover:text-white transition-colors"
-                  >Cookie Policy</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 class="text-lg font-semibold text-white mb-4">Stay Updated</h3>
-            <p class="text-sm text-slate-400 mb-3">
-              Subscribe to our newsletter for the latest deals and updates.
-            </p>
-            <form class="flex">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                class="w-full p-2.5 rounded-l-lg border-0 focus:ring-2 focus:ring-emerald-500 text-slate-800 text-sm"
-              />
-              <button
-                type="submit"
-                class="bg-emerald-500 hover:bg-emerald-600 text-white p-2.5 rounded-r-lg text-sm font-medium transition-colors"
-              >
-                Subscribe
-              </button>
-            </form>
-          </div>
-        </div>
-        <div class="border-t border-slate-700 pt-8 text-center">
-          <p class="text-sm text-slate-400">
-            © <span id="currentYear"></span> ApexLiving. All rights reserved.
-          </p>
-        </div>
       </div>
-    </footer>
+    </section>
 
-    <div
-      id="bookingModal"
-      class="fixed inset-0 z-[60] modal-backdrop items-center justify-center p-4 hidden transition-opacity duration-300 ease-in-out opacity-0"
-    >
-      <div
-        class="bg-white rounded-xl shadow-2xl max-w-lg w-full mx-auto p-6 sm:p-8 transform transition-all duration-300 ease-in-out scale-95 opacity-0"
-        id="modalContent"
-      >
-        <div class="flex justify-between items-center mb-6">
-          <h3 class="text-2xl font-semibold text-slate-800">Booking Summary</h3>
-          <button
-            id="closeModalButton"
-            class="text-slate-400 hover:text-slate-600 transition-colors"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-7 w-7"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
+    <!-- Project Modal -->
+    <div id="project-modal-overlay">
+      <div id="project-modal">
+        <div class="modal-header">
+          <div class="flex items-center">
+            <span class="h-3 w-3 bg-red-500 rounded-full mr-2"></span>
+            <span class="h-3 w-3 bg-yellow-500 rounded-full mr-2"></span>
+            <span class="h-3 w-3 bg-green-500 rounded-full"></span>
+          </div>
+          <button id="modal-close-btn" class="text-2xl">×</button>
         </div>
-        <div class="space-y-4 text-slate-600">
-          <p><strong>Name:</strong> <span id="summaryName"></span></p>
-          <p><strong>Email:</strong> <span id="summaryEmail"></span></p>
-          <p><strong>Phone:</strong> <span id="summaryPhone"></span></p>
-          <hr class="my-3 border-slate-200" />
-          <p>
-            <strong>Apartment:</strong> <span id="summaryApartmentName"></span>
-          </p>
-          <p>
-            <strong>Monthly Cost:</strong> $<span
-              id="summaryMonthlyCost"
-            ></span>
-          </p>
-          <p>
-            <strong>Duration:</strong> <span id="summaryDuration"></span> months
-          </p>
-          <p>
-            <strong>Start Date:</strong> <span id="summaryStartDate"></span>
-          </p>
-          <hr class="my-3 border-slate-200" />
-          <p class="text-lg font-semibold text-slate-800">
-            <strong>Total Estimated Cost:</strong> $<span
-              id="summaryTotalCost"
-              class="text-emerald-600"
-            ></span>
-          </p>
-        </div>
-        <div class="mt-8 text-center">
-          <p class="text-sm text-slate-500 mb-3">
-            Thank you for your booking request! We will contact you shortly to
-            confirm the details.
-          </p>
-          <button
-            id="modalConfirmButton"
-            class="bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-2.5 px-6 rounded-lg shadow-sm hover:shadow-md transition-all"
-          >
-            Okay, Got It!
+        <div class="border-b border-gray-800 flex px-4">
+          <button class="modal-tab active" data-tab="description">
+            Description.md
           </button>
+          <button class="modal-tab" data-tab="features">Features.js</button>
+          <button class="modal-tab" data-tab="snippet">Snippet.html</button>
+        </div>
+        <div class="modal-body">
+          <!-- Content will be injected here -->
         </div>
       </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="py-6 text-center text-secondary border-t border-gray-800">
+      <p>
+        © 2025 Nadim Mahmud . Designed & Built with by
+        <a>MySelf</a>
+      </p>
+    </footer>
     <script src="script.js"></script>
   </body>
 </html>
