@@ -3,339 +3,210 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nadim Mahmud</title>
     <link
-      rel="icon"
-      href="https://www.codewithfaraz.com/tools/placeholder?size=32x32&bgColor=0d1117&textColor=c9d1d9&text=EC"
-      type="image/png"
-    />
-    <!-- Tailwind Css -->
-    <link rel="stylesheet" href="src/output.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap"
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
-    <!-- highlight.js for syntax highlighting in modals -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <link rel="stylesheet" href="style.css" />
+    <title>Responsive Dashboard Design</title>
   </head>
-  <body class="overflow-x-hidden">
-    <!-- Cursor Dot -->
 
-    <div id="cursor-dot"></div>
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <a href="#" class="logo">
+        <i class="bx bx-code-alt"></i>
+        <div class="logo-name"><span>Dash</span>Board</div>
+      </a>
+      <ul class="side-menu">
+        <li>
+          <a href="#"><i class="bx bxs-dashboard"></i>Dashboard</a>
+        </li>
+        <li>
+          <a href="#"><i class="bx bx-store-alt"></i>Shop</a>
+        </li>
+        <li class="active">
+          <a href="#"><i class="bx bx-analyse"></i>Analytics</a>
+        </li>
+        <li>
+          <a href="#"><i class="bx bx-message-square-dots"></i>Tickets</a>
+        </li>
+        <li>
+          <a href="#"><i class="bx bx-group"></i>Users</a>
+        </li>
+        <li>
+          <a href="#"><i class="bx bx-cog"></i>Settings</a>
+        </li>
+      </ul>
+      <ul class="side-menu">
+        <li>
+          <a href="#" class="logout">
+            <i class="bx bx-log-out-circle"></i>
+            Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- End of Sidebar -->
 
-    <!-- Header -->
-
-    <header
-      class="fixed top-0 left-0 right-0 z-50 opacity-65 backdrop-blur-md border-b border-gray-800"
-    >
-      <nav
-        class="container mx-auto px-6 py-4 flex justify-between items-center"
-      >
-        <a href="#" class="text-2xl font-bold text-white"><< NM >></a>
-        <div class="hidden md:flex space-x-8">
-          <a href="#about" class="hover:text-white transition-colors">About</a>
-          <a href="#experience" class="hover:text-white transition-colors"
-            >Experience</a
-          >
-          <a href="#contact" class="hover:text-white transition-colors"
-            >Contact</a
-          >
-        </div>
-        <button
-          id="mobile-menu-btn"
-          class="md:hidden text-2xl hover:text-white"
-        >
-          ☰
-        </button>
-      </nav>
-      <div id="mobile-menu" class="hidden md:hidden bg-gray-900 opacity-90">
-        <a href="#about" class="block py-2 px-4 text-sm hover:bg-gray-700"
-          >About</a
-        >
-        <a href="#experience" class="block py-2 px-4 text-sm hover:bg-gray-700"
-          >Experience</a
-        >
-        <a href="#contact" class="block py-2 px-4 text-sm hover:bg-gray-700"
-          >Contact</a
-        >
-      </div>
-    </header>
-
-    <!-- Hero Section -->
-
-    <section id="hero" class="h-screen relative overflow-hidden">
-      <!-- Canvas Background -->
-      <canvas
-        id="hero-canvas"
-        class="absolute top-0 left-0 w-full h-full z-0"
-      ></canvas>
-
-      <!-- Fake Terminal Card -->
-
-      <div
-        class="absolute bottom-8 left-8 w-105 bg-[#0d1117] border border-gray-700 rounded-xl shadow-2xl z-10"
-      >
-        <!-- Fake window navbar -->
-
-        <div
-          class="flex items-center gap-2 px-3 py-2 border-b border-e-gray-700 bg-[#161b22] rounded-t-xl"
-        >
-          <span class="w-3 h-3 rounded-full bg-red-500"></span>
-          <span class="w-3 h-3 rounded-full bg-green-500"></span>
-          <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
-          <span class="ml-4 text-gray-400 text-sm font-mono"> Terminal </span>
-        </div>
-
-        <!-- Terminal Content -->
-
-        <div class="p-4 font-mono text-gray-400 text-sm leading-relaxed">
-          <p>$ Hello , I am <span class="text-accent">Nadim Mahmud</span></p>
-          <p>
-            $ I am a <span id="typewriter"></span
-            ><span class="typewriter-cursor">|</span>
-          </p>
-          <p>$ View my work 👇</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-20 reveal">
-      <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-center mb-12">
-          <span class="text-accent">01.</span> About Me
-        </h2>
-        <div class="flex flex-col md:flex-row items-center gap-12">
-          <div class="md:w-1/3 flex justify-center">
-            <div class="relative w-64 h-64">
-              <img
-                src="images/Nadim.jpg"
-                alt="Nadim Mahmud"
-                class="rounded-full w-full h-full object-cover border-4 border-accent"
-                id="about-img"
-                crossorigin="anonymous"
-              />
-              <div class="absolute inset-0 rounded-full glow opacity-75"></div>
-            </div>
-          </div>
-          <div class="md:w-2/3">
-            <div class="bg-[#010409] border border-gray-800 rounded-lg p-6">
-              <div class="flex items-center mb-4">
-                <span class="h-3 w-3 bg-red-500 rounded-full mr-2"></span>
-                <span class="h-3 w-3 bg-yellow-500 rounded-full mr-2"></span>
-                <span class="h-3 w-3 bg-green-500 rounded-full"></span>
-              </div>
-              <p class="text-secondary mb-4">
-                > nadim_mahmud@portfolio:~$ cat ./bio.txt
-              </p>
-              <p class="text-primary leading-relaxed">
-                Hello! I'm Nadim, an aspired for passionate software engineer
-                with a knack for creating elegant and efficient solutions. With
-                some technical experience in the tech industry, I've had the
-                privilege of working on a diverse range of projects, from
-                scalable web applications to complex backend systems. My journey
-                in coding started with a simple "Hello, World!" and has since
-                evolved into a deep love for building things that make a
-                difference.
-              </p>
-              <p class="text-secondary mt-4">
-                > <span class="blinking-cursor">_</span>
-              </p>
-            </div>
-            <div class="mt-8">
-              <h3 class="text-2xl font-semibold mb-4">My Skills</h3>
-              <div class="space-y-4">
-                <div class="skill">
-                  <p class="flex justify-between mb-1">
-                    <span>JavaScript</span><span>90%</span>
-                  </p>
-                  <div class="w-full bg-gray-700 rounded-full h-2.5">
-                    <div
-                      class="bg-accent h-2.5 rounded-full skill-bar-inner"
-                      style="width: 0%"
-                      data-width="90%"
-                    ></div>
-                  </div>
-                </div>
-                <div class="skill">
-                  <p class="flex justify-between mb-1">
-                    <span>React</span><span>85%</span>
-                  </p>
-                  <div class="w-full bg-gray-700 rounded-full h-2.5">
-                    <div
-                      class="bg-accent h-2.5 rounded-full skill-bar-inner"
-                      style="width: 0%"
-                      data-width="85%"
-                    ></div>
-                  </div>
-                </div>
-                <div class="skill">
-                  <p class="flex justify-between mb-1">
-                    <span>Tailwind</span><span>80%</span>
-                  </p>
-                  <div class="w-full bg-gray-700 rounded-full h-2.5">
-                    <div
-                      class="bg-accent h-2.5 rounded-full skill-bar-inner"
-                      style="width: 0%"
-                      data-width="80%"
-                    ></div>
-                  </div>
-                </div>
-                <div class="skill">
-                  <p class="flex justify-between mb-1">
-                    <span>Node.js</span><span>75%</span>
-                  </p>
-                  <div class="w-full bg-gray-700 rounded-full h-2.5">
-                    <div
-                      class="bg-green h-2.5 rounded-full skill-bar-inner"
-                      style="width: 0%"
-                      data-width="75%"
-                    ></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Portfolio Section -->
-
-    <section id="portfolio" class="py-20 bg-[#010409] reveal">
-      <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-center mb-12">
-          <span class="text-accent">02.</span> My Portfolio
-        </h2>
-        <div class="flex justify-center mb-8 space-x-2 md:space-x-4">
-          <button class="filter-btn" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="frontend">Frontend</button>
-          <button class="filter-btn" data-filter="backend">Backend</button>
-          <button class="filter-btn" data-filter="fullstack">Full Stack</button>
-        </div>
-
-        <div
-          id="portfolio-grid"
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
-          <!-- Project cards will be injected here by JS -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Experience Section -->
-
-    <section id="experience" class="py-20 reveal">
-      <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-center mb-12">
-          <span class="text-accent">03.</span> My Experience
-        </h2>
-
-        <div class="relative max-w-3xl mx-auto">
-          <!-- Experience items will be injected here by JS -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-
-    <section id="contact" class="py-20 bg-[#010409] reveal">
-      <div class="container mx-auto px-6 max-w-2xl">
-        <h2 class="text-3xl font-bold text-center mb-12">
-          <span class="text-accent">04.</span> Get In Touch
-        </h2>
-
-        <div class="bg-[#161b22] border border-gray-800 rounded-lg p-8">
-          <div class="flex items-center mb-4">
-            <span class="w-3 h-3 bg-red-500 rounded-full mr-2"></span>
-            <span class="w-3 h-3 bg-yellow-500 rounded-full mr-2"></span>
-            <span class="w-3 h-3 bg-green-500 rounded-full mr-2"></span>
-          </div>
-
-          <form action="">
-            <div class="mb-4">
-              <label for="name" class="block mb-2 text-secondary"
-                >> Name :
-              </label>
-              <input
-                type="text"
-                name="name"
-                id="name"
-                class="w-full p-2 rounded-md form-input"
-              />
-            </div>
-
-            <div class="mb-4">
-              <label for="email" class="block mb-2 text-secondary"
-                >> Email :</label
-              >
-              <input
-                type="email"
-                name="email"
-                id="email"
-                class="w-full p-2 rounded-md form-input"
-              />
-            </div>
-
-            <div class="mb-4">
-              <label for="message" class="block mb-2 text-secondary"
-                >Message</label
-              >
-              <textarea
-                name="message"
-                id="message"
-                rows="4"
-                class="w-full p-2 rounded-md form-input"
-              ></textarea>
-            </div>
-
-            <button
-              type="submit"
-              class="w-full py-2 px-4 rounded-md text-white font-bold submit-btn"
-            >
-              SEND MESSAGE
+    <!-- Main Content -->
+    <div class="content">
+      <!-- Navbar -->
+      <nav>
+        <i class="bx bx-menu"></i>
+        <form action="#">
+          <div class="form-input">
+            <input type="search" placeholder="Search..." />
+            <button class="search-btn" type="submit">
+              <i class="bx bx-search"></i>
             </button>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <!-- Project Modal -->
-    <div id="project-modal-overlay">
-      <div id="project-modal">
-        <div class="modal-header">
-          <div class="flex items-center">
-            <span class="h-3 w-3 bg-red-500 rounded-full mr-2"></span>
-            <span class="h-3 w-3 bg-yellow-500 rounded-full mr-2"></span>
-            <span class="h-3 w-3 bg-green-500 rounded-full"></span>
           </div>
-          <button id="modal-close-btn" class="text-2xl">×</button>
+        </form>
+        <input type="checkbox" id="theme-toggle" hidden />
+        <label for="theme-toggle" class="theme-toggle"></label>
+        <a href="#" class="notif">
+          <i class="bx bx-bell"></i>
+          <span class="count">12</span>
+        </a>
+        <a href="#" class="profile">
+          <img src="images/logo.png" />
+        </a>
+      </nav>
+
+      <!-- End of Navbar -->
+
+      <main>
+        <div class="header">
+          <div class="left">
+            <h1>Dashboard</h1>
+            <ul class="breadcrumb">
+              <li><a href="#"> Analytics </a></li>
+              /
+              <li><a href="#" class="active">Shop</a></li>
+            </ul>
+          </div>
+          <a href="#" class="report">
+            <i class="bx bx-cloud-download"></i>
+            <span>Download CSV</span>
+          </a>
         </div>
-        <div class="border-b border-gray-800 flex px-4">
-          <button class="modal-tab active" data-tab="description">
-            Description.md
-          </button>
-          <button class="modal-tab" data-tab="features">Features.js</button>
-          <button class="modal-tab" data-tab="snippet">Snippet.html</button>
+
+        <!-- Insights -->
+        <ul class="insights">
+          <li>
+            <i class="bx bx-calendar-check"></i>
+            <span class="info">
+              <h3>1,074</h3>
+              <p>Paid Order</p>
+            </span>
+          </li>
+          <li>
+            <i class="bx bx-show-alt"></i>
+            <span class="info">
+              <h3>3,944</h3>
+              <p>Site Visit</p>
+            </span>
+          </li>
+          <li>
+            <i class="bx bx-line-chart"></i>
+            <span class="info">
+              <h3>14,721</h3>
+              <p>Searches</p>
+            </span>
+          </li>
+          <li>
+            <i class="bx bx-dollar-circle"></i>
+            <span class="info">
+              <h3>$6,742</h3>
+              <p>Total Sales</p>
+            </span>
+          </li>
+        </ul>
+        <!-- End of Insights -->
+
+        <div class="bottom-data">
+          <div class="orders">
+            <div class="header">
+              <i class="bx bx-receipt"></i>
+              <h3>Recent Orders</h3>
+              <i class="bx bx-filter"></i>
+              <i class="bx bx-search"></i>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Order Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <img src="images/Nadim.jpg" alt="" />
+                    <p>John Doe</p>
+                  </td>
+                  <td>09-01-2026</td>
+                  <td><span class="status completed">Completed</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <img src="images/Nadim.jpg" alt="" />
+                    <p>John Doe</p>
+                  </td>
+                  <td>09-01-2026</td>
+                  <td><span class="status pending">Pending</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <img src="images/Nadim.jpg" alt="" />
+                    <p>John Doe</p>
+                  </td>
+                  <td>14-08-2023</td>
+                  <td><span class="status process">Processing</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Reminders -->
+          <div class="reminders">
+            <div class="header">
+              <i class="bx bx-note"></i>
+              <h3>Reminders</h3>
+              <i class="bx bx-filter"></i>
+              <i class="bx bx-plus"></i>
+            </div>
+            <ul class="task-list">
+              <li class="completed">
+                <div class="task-title">
+                  <i class="bx bx-check-circle"></i>
+                  <p>Start Our Meeting</p>
+                </div>
+                <i class="bx bx-dots-vertical-rounded"></i>
+              </li>
+              <li class="completed">
+                <div class="task-title">
+                  <i class="bx bx-check-circle"></i>
+                  <p>Analyze Our Site</p>
+                </div>
+                <i class="bx bx-dots-vertical-rounded"></i>
+              </li>
+              <li class="not-completed">
+                <div class="task-title">
+                  <i class="bx bx-x-circle"></i>
+                  <p>Play Football</p>
+                </div>
+                <i class="bx bx-dots-vertical-rounded"></i>
+              </li>
+            </ul>
+          </div>
+
+          <!-- End of Reminders-->
         </div>
-        <div class="modal-body">
-          <!-- Content will be injected here -->
-        </div>
-      </div>
+      </main>
     </div>
 
-    <!-- Footer -->
-    <footer class="py-6 text-center text-secondary border-t border-gray-800">
-      <p>
-        © 2025 Nadim Mahmud . Designed & Built with by
-        <a>MySelf</a>
-      </p>
-    </footer>
     <script src="script.js"></script>
   </body>
 </html>
