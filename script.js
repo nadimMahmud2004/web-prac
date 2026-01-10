@@ -1,64 +1,205 @@
-const sideLinks = document.querySelectorAll(
-  ".sidebar .side-menu li a:not(.logout)"
-);
+document.addEventListener("DOMContentLoaded", () => {
+  let controller = new ScrollMagic.Controller();
 
-sideLinks.forEach((item) => {
-  const li = item.parentElement;
-
-  item.addEventListener("click", () => {
-    sideLinks.forEach((i) => {
-      i.parentElement.classList.remove("active");
-    });
-    li.classList.add("active");
+  let t1 = gsap.timeline();
+  t1.from(".section_1_01", 4, {
+    y: -100,
+    x: -150,
+    ease: Power3.easeInOut,
   });
-});
+  t1.from(
+    ".section_1_02",
+    4,
+    {
+      y: -150,
+      x: -250,
+      ease: Power3.easeInOut,
+    },
+    "-=4"
+  )
+    .from(
+      ".section_1_03",
+      4,
+      {
+        y: -80,
+        x: -100,
+        ease: Power3.easeInOut,
+      },
+      "-=4"
+    )
+    .from(
+      ".section_1_04",
+      4,
+      {
+        y: -100,
+        x: -150,
+        ease: Power3.easeInOut,
+      },
+      "-=4"
+    )
+    .from(
+      ".section_1_05",
+      4,
+      {
+        y: -80,
+        x: -200,
+        ease: Power3.easeInOut,
+      },
+      "-=4"
+    )
+    .from(
+      ".section_1_06",
+      4,
+      {
+        y: -100,
+        x: -350,
+        ease: Power3.easeInOut,
+      },
+      "-=4"
+    )
+    .from(
+      ".section_1_07",
+      4,
+      {
+        y: -50,
+        x: -150,
+        ease: Power3.easeInOut,
+      },
+      "-=4"
+    )
+    .from(
+      ".section_1_08",
+      4,
+      {
+        y: 50,
+        x: -350,
+        ease: Power3.easeInOut,
+      },
+      "-=4"
+    )
+    .from(
+      ".section_1_09",
+      4,
+      {
+        y: 100,
+        x: -200,
+        ease: Power3.easeInOut,
+      },
+      "-=4"
+    );
 
-const menuBar = document.querySelector(".content nav .bx.bx-menu");
+  let scene = new ScrollMagic.Scene({
+    triggerElement: ".first-section",
+    duration: "100%",
+    triggerHook: 0,
+    offset: "300",
+  })
+    .setTween(t1)
+    .setPin(".first-section")
+    .addTo(controller);
 
-const sideBar = document.querySelector(".sidebar");
+  let t2 = gsap.timeline();
+  t2.to(".top .image-container", 4, {
+    height: 0,
+  });
 
-menuBar.addEventListener("click", () => {
-  sideBar.classList.toggle("close");
-});
+  let scene2 = new ScrollMagic.Scene({
+    triggerElement: ".second-section",
+    duration: "100%",
+    triggerHook: 0,
+    offset: "100",
+  })
+    .setTween(t2)
+    .setPin(".second-section")
+    .addTo(controller);
 
-const searchBtn = document.querySelector(
-  ".content nav form .form-input button"
-);
+  let t3 = gsap.timeline();
+  t3.to(".section_3_01", 4, {
+    y: -250,
+    ease: Power3.easeInOut,
+  })
+    .to(
+      ".section_3_02",
+      4,
+      {
+        y: -200,
+        ease: Power3.easeInOut,
+      },
+      "-=4"
+    )
+    .to(
+      ".section_3_03",
+      4,
+      {
+        y: -100,
+        ease: Power3.easeInOut,
+      },
+      "-=4"
+    )
+    .to(
+      ".section_3_04",
+      4,
+      {
+        y: 0,
+        ease: Power3.easeInOut,
+      },
+      "-=4"
+    )
+    .to(
+      ".section_3_05",
+      4,
+      {
+        y: 150,
+        ease: Power3.easeInOut,
+      },
+      "-=4"
+    )
+    .to(
+      ".section_3_06",
+      4,
+      {
+        y: 250,
+        ease: Power3.easeInOut,
+      },
+      "-=4"
+    );
 
-const searchBtnIcon = document.querySelector(
-  ".content nav form .form-input button .bx"
-);
+  let scene3 = new ScrollMagic.Scene({
+    triggerElement: ".third-section",
+    duration: "100%",
+    triggerHook: 0,
+    offset: "200",
+  })
+    .setTween(t3)
+    .setPin(".third-section")
+    .addTo(controller);
 
-const searchForm = document.querySelector(".content nav form");
+  let t4 = gsap.timeline();
+  t4.to(".section_4_01", 4, {
+    autoAlpha: 0,
+  })
+    .from(
+      ".section_4_02",
+      4,
+      {
+        autoAlpha: 0,
+      },
+      "-=4"
+    )
+    .from(".section_4_03", 4, {
+      autoAlpha: 0,
+    })
+    .from(".section_4_04", 4, {
+      autoAlpha: 0,
+    });
 
-searchBtn.addEventListener("click", (e) => {
-  if (window.innerWidth < 576) {
-    e.preventDefault();
-
-    searchForm.classList.toggle("show");
-
-    if (searchForm.classList.contains("show")) {
-      searchBtnIcon.classList.replace("bx-search", "bx-x");
-    } else {
-      searchBtnIcon.classList.replace("bx-x", "bx-search");
-    }
-  }
-});
-
-window.addEventListener("resize", () => {
-  if (window.innerWidth < 768) {
-    sideBar.classList.add("close");
-  } else {
-    sideBar.classList.remove("close");
-  }
-});
-
-const toggler = document.getElementById("theme-toggle");
-
-toggler.addEventListener("change", function () {
-  if (this.checked) {
-    document.body.classList.add("dark");
-  } else {
-    document.body.classList.remove("dark");
-  }
+  let scene4 = new ScrollMagic.Scene({
+    triggerElement: ".forth-section",
+    duration: "100%",
+    triggerHook: 0,
+    offset: "200",
+  })
+    .setTween(t4)
+    .setPin(".forth-section")
+    .addTo(controller);
 });
