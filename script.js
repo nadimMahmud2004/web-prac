@@ -1,205 +1,251 @@
-document.addEventListener("DOMContentLoaded", () => {
-  let controller = new ScrollMagic.Controller();
+$(document).ready(function () {
+  // --- 1. New Loader Animation ---
 
-  let t1 = gsap.timeline();
-  t1.from(".section_1_01", 4, {
-    y: -100,
-    x: -150,
-    ease: Power3.easeInOut,
-  });
-  t1.from(
-    ".section_1_02",
-    4,
-    {
-      y: -150,
-      x: -250,
-      ease: Power3.easeInOut,
-    },
-    "-=4"
-  )
-    .from(
-      ".section_1_03",
-      4,
-      {
-        y: -80,
-        x: -100,
-        ease: Power3.easeInOut,
-      },
-      "-=4"
-    )
-    .from(
-      ".section_1_04",
-      4,
-      {
-        y: -100,
-        x: -150,
-        ease: Power3.easeInOut,
-      },
-      "-=4"
-    )
-    .from(
-      ".section_1_05",
-      4,
-      {
-        y: -80,
-        x: -200,
-        ease: Power3.easeInOut,
-      },
-      "-=4"
-    )
-    .from(
-      ".section_1_06",
-      4,
-      {
-        y: -100,
-        x: -350,
-        ease: Power3.easeInOut,
-      },
-      "-=4"
-    )
-    .from(
-      ".section_1_07",
-      4,
-      {
-        y: -50,
-        x: -150,
-        ease: Power3.easeInOut,
-      },
-      "-=4"
-    )
-    .from(
-      ".section_1_08",
-      4,
-      {
-        y: 50,
-        x: -350,
-        ease: Power3.easeInOut,
-      },
-      "-=4"
-    )
-    .from(
-      ".section_1_09",
-      4,
-      {
-        y: 100,
-        x: -200,
-        ease: Power3.easeInOut,
-      },
-      "-=4"
-    );
+  // Animate bar width
+  gsap.to("#loader-bar", {
+    width: "100%",
+    duration: 1.5,
+    ease: "power2.inOut",
+    onComplete: function () {
+      // Slide up loader
+      gsap.to("#loader", {
+        yPercent: -100,
+        duration: 0.8,
+        ease: "power4.inOut",
+      });
 
-  let scene = new ScrollMagic.Scene({
-    triggerElement: ".first-section",
-    duration: "100%",
-    triggerHook: 0,
-    offset: "300",
-  })
-    .setTween(t1)
-    .setPin(".first-section")
-    .addTo(controller);
-
-  let t2 = gsap.timeline();
-  t2.to(".top .image-container", 4, {
-    height: 0,
-  });
-
-  let scene2 = new ScrollMagic.Scene({
-    triggerElement: ".second-section",
-    duration: "100%",
-    triggerHook: 0,
-    offset: "100",
-  })
-    .setTween(t2)
-    .setPin(".second-section")
-    .addTo(controller);
-
-  let t3 = gsap.timeline();
-  t3.to(".section_3_01", 4, {
-    y: -250,
-    ease: Power3.easeInOut,
-  })
-    .to(
-      ".section_3_02",
-      4,
-      {
-        y: -200,
-        ease: Power3.easeInOut,
-      },
-      "-=4"
-    )
-    .to(
-      ".section_3_03",
-      4,
-      {
-        y: -100,
-        ease: Power3.easeInOut,
-      },
-      "-=4"
-    )
-    .to(
-      ".section_3_04",
-      4,
-      {
+      // Trigger Hero Animations
+      gsap.to(".hero-reveal", {
         y: 0,
-        ease: Power3.easeInOut,
-      },
-      "-=4"
-    )
-    .to(
-      ".section_3_05",
-      4,
-      {
-        y: 150,
-        ease: Power3.easeInOut,
-      },
-      "-=4"
-    )
-    .to(
-      ".section_3_06",
-      4,
-      {
-        y: 250,
-        ease: Power3.easeInOut,
-      },
-      "-=4"
-    );
+        opacity: 1,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out",
+        delay: 0.2,
+      });
 
-  let scene3 = new ScrollMagic.Scene({
-    triggerElement: ".third-section",
-    duration: "100%",
-    triggerHook: 0,
-    offset: "200",
-  })
-    .setTween(t3)
-    .setPin(".third-section")
-    .addTo(controller);
+      gsap.to(".hero-img-container", {
+        scale: 1,
+        duration: 2,
+        ease: "power2.out",
+        delay: 0.2,
+      });
+    },
+  });
 
-  let t4 = gsap.timeline();
-  t4.to(".section_4_01", 4, {
-    autoAlpha: 0,
-  })
-    .from(
-      ".section_4_02",
-      4,
-      {
-        autoAlpha: 0,
+  // Set initial state for hero reveal
+  gsap.set(".hero-reveal", { y: 100, opacity: 0 });
+
+  // --- 2. Navbar & Mobile Menu ---
+  // Mobile Dropdown Logic
+  $("#mobile-services-toggle").on("click", function () {
+    const $icon = $(this).find("i");
+    const $list = $("#mobile-services-list");
+
+    $list.slideToggle(300);
+    $icon.toggleClass("rotate-180");
+  });
+
+  // Navbar & Hamburger Logic
+  $("#hamburger").on("click", function () {
+    const $nav = $("#navbar");
+    const $targets = $(".nav-blend-target");
+
+    $(this).toggleClass("nav-open");
+    if ($(this).hasClass("nav-open")) {
+      $("#mobile-menu")
+        .removeClass("translate-x-full")
+        .addClass("translate-x-0");
+      $targets
+        .removeClass("mix-blend-difference")
+        .removeClass("text-white")
+        .addClass("text-v-dark");
+      $("body").css("overflow", "hidden");
+    } else {
+      $("#mobile-menu")
+        .removeClass("translate-x-0")
+        .addClass("translate-x-full");
+      setTimeout(() => {
+        $targets.removeClass("text-v-dark").addClass("text-white");
+        if ($(window).scrollTop() <= 50) {
+          $targets.addClass("mix-blend-difference");
+        }
+      }, 400);
+      $("body").css("overflow", "auto");
+    }
+  });
+
+  $(window).on("scroll", function () {
+    const $targets = $(".nav-blend-target");
+    if (!$("#hamburger").hasClass("nav-open")) {
+      if ($(this).scrollTop() > 50) {
+        $("#navbar")
+          .addClass("bg-black/80 backdrop-blur-md py-3")
+          .removeClass("py-6");
+        $targets.removeClass("mix-blend-difference");
+      } else {
+        $("#navbar")
+          .removeClass("bg-black/80 backdrop-blur-md py-3")
+          .addClass("py-6");
+        $targets.addClass("mix-blend-difference");
+      }
+    }
+  });
+
+  // --- 3. GSAP Animations ---
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Parallax Hero Image
+  gsap.to(".hero-img-container img", {
+    yPercent: 30,
+    ease: "none",
+    scrollTrigger: {
+      trigger: "#home",
+      start: "top top",
+      end: "bottom top",
+      scrub: true,
+    },
+  });
+
+  // Reveal Text on Scroll (About Section)
+  gsap.from(".gs-reveal-text", {
+    scrollTrigger: {
+      trigger: "#about",
+      start: "top 70%",
+    },
+    y: 50,
+    opacity: 0,
+    duration: 1,
+    ease: "power3.out",
+  });
+
+  // Reveal Image on Scroll (About Section)
+  gsap.from(".gs-reveal-img", {
+    scrollTrigger: {
+      trigger: "#about",
+      start: "top 70%",
+    },
+    x: -50,
+    opacity: 0,
+    duration: 1.2,
+    ease: "power3.out",
+  });
+
+  // Number Counters
+  gsap.utils.toArray(".counter").forEach((counter) => {
+    const target = counter.getAttribute("data-target");
+    gsap.to(counter, {
+      innerHTML: target,
+      snap: { innerHTML: 1 },
+      scrollTrigger: {
+        trigger: counter,
+        start: "top 85%",
+        once: true,
       },
-      "-=4"
-    )
-    .from(".section_4_03", 4, {
-      autoAlpha: 0,
-    })
-    .from(".section_4_04", 4, {
-      autoAlpha: 0,
+      duration: 2,
+      ease: "power2.out",
     });
+  });
 
-  let scene4 = new ScrollMagic.Scene({
-    triggerElement: ".forth-section",
-    duration: "100%",
-    triggerHook: 0,
-    offset: "200",
-  })
-    .setTween(t4)
-    .setPin(".forth-section")
-    .addTo(controller);
+  // Horizontal Scroll for Gallery
+  const scrollContainer = document.querySelector(".gallery-wrapper");
+  const scrollDistance = scrollContainer.scrollWidth - window.innerWidth;
+
+  gsap.to(scrollContainer, {
+    x: -scrollDistance,
+    ease: "none",
+    scrollTrigger: {
+      trigger: "#projects",
+      pin: true,
+      start: "center center",
+      scrub: 1,
+      end: "+=3000",
+    },
+  });
+
+  // --- 4. Testimonial Swiper Logic ---
+  const testimonials = [
+    {
+      text: "Verdant & Stone transformed our disorganized backyard into a beautiful garden. Their attention to detail was amazing.",
+      name: "James Sterling",
+      role: "Homeowner, Kensington",
+      img: "https://randomuser.me/api/portraits/men/32.jpg",
+    },
+    {
+      text: "The team is incredibly professional. They show up on time, and my lawn has never looked greener. Highly recommended!",
+      name: "Sarah Jenkins",
+      role: "Resident, Portland",
+      img: "https://randomuser.me/api/portraits/women/44.jpg",
+    },
+    {
+      text: "I love the new garden design. It feels like a completely new home. The designers listened to exactly what I wanted.",
+      name: "Michael Ross",
+      role: "Homeowner, Beaverton",
+      img: "https://randomuser.me/api/portraits/men/64.jpg",
+    },
+  ];
+
+  let currentTestimonial = 0;
+  const $container = $("#testimonial-container");
+
+  function renderTestimonial(index) {
+    const t = testimonials[index];
+    const content = `
+    <div class="testimonial-slide active animate-fade-in">
+    <p class="text-2xl md:text-4xl font-display font-light leading-normal mb-8">
+        "${t.text}"
+    </p>
+    <div class="flex items-center justify-center gap-4">
+        <img src="${t.img}" class="w-12 h-12 rounded-full grayscale border-2 border-v-dark" alt="Client">
+        <div class="text-left">
+            <h5 class="font-bold uppercase tracking-wider text-sm">${t.name}</h5>
+            <span class="text-xs opacity-70">${t.role}</span>
+        </div>
+    </div>
+</div>
+        `;
+    $container.html(content).hide().fadeIn(400);
+  }
+
+  // Initial Render
+  renderTestimonial(currentTestimonial);
+
+  $("#next-testim").click(function () {
+    currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+    renderTestimonial(currentTestimonial);
+  });
+
+  $("#prev-testim").click(function () {
+    currentTestimonial =
+      (currentTestimonial - 1 + testimonials.length) % testimonials.length;
+    renderTestimonial(currentTestimonial);
+  });
+
+  // --- 5. Marquee CSS Injection ---
+  const styleSheet = document.createElement("style");
+  styleSheet.innerText = `
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            animation: marquee 20s linear infinite;
+        }
+    `;
+  document.head.appendChild(styleSheet);
+
+  // --- 6. Floating Buttons Logic ---
+  const scrollTopBtn = $("#scroll-top");
+  $(window).scroll(function () {
+    if ($(this).scrollTop() > 300) {
+      scrollTopBtn.addClass("visible");
+    } else {
+      scrollTopBtn.removeClass("visible");
+    }
+  });
+  scrollTopBtn.click(function () {
+    $("html, body").animate({ scrollTop: 0 }, 500);
+    return false;
+  });
 });
