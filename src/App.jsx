@@ -1,56 +1,20 @@
-import logo from "./assets/react.svg";
-import { Counter } from "./features/counter/Counter";
+import { useGetPokemonByNameQuery } from "./services/pokemon";
 
-function App() {
+export default function App() {
+  const { data, error, isLoading } = useGetPokemonByNameQuery("bulbasaur");
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} alt="App-log" />
-        <Counter />
-        <p>
-          Edit <code>src/App.jsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn</span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+      {error ? (
+        <>Oh no, there was an error</>
+      ) : isLoading ? (
+        <>Loading...</>
+      ) : data ? (
+        <>
+          <h3>{data.species.name}</h3>
+          <img src={data.sprites.front_shiny} alt={data.species.name} />
+        </>
+      ) : null}
     </div>
   );
 }
-
-export default App;
