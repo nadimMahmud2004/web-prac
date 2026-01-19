@@ -1,21 +1,16 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Layout from "./components/Layout/Layout";
-import Dashboard from "./pages/Dashboard/Dashboard";
-import Calendar from "./pages/Calendar/Calendar";
+import AddTask from "./components/AddTask";
+import TaskList from "./components/TaskList";
 
 const App = () => {
   return (
-    <div id="dashboard">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="calendar" element={<Calendar />} />
-
-            <Route path="users" element={<h2>Data grid</h2>} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+    <div className="min-h-screen bg-gray-100 p-4">
+      <div className="max-w-2xl mx-auto bg-white shadow-md rounded-md p-6">
+        <h1 className="text-2xl font-bold mb-4 text-center text-indigo-600">
+          Task Management App
+        </h1>
+        <AddTask />
+        <TaskList />
+      </div>
     </div>
   );
 };
