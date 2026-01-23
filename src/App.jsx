@@ -1,26 +1,42 @@
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { decrement, increment } from "./features/counters/countersSlice";
+import Counter from "./components/Counter";
+import Stats from "./components/Stats";
 import Posts from "./components/Posts";
 
 const App = () => {
-  const [showPosts, setShowPosts] = useState(true);
+  const counters = useSelector((state) => state.counters);
+  console.log(counters);
 
-  const handleToggle = () => {
-    setShowPosts(!showPosts);
+  const dispatch = useDispatch();
+
+  const handleIncrement = (counterId) => {
+    dispatch(increment(counterId));
   };
 
+  const handleDecrement = (counterId) => {
+    dispatch(decrement(counterId));
+  };
+
+  const totalCount = counters.reduce((sum, cur) => sum + cur.value, 0);
+
   return (
-    <div className="w-screen h-full p-10 bg-gray-100 text-gray-900">
-      <h1 className="text-center text-2xl">Understanding query !</h1>
+    <div className="w-screen h-full p-10 bg-gray-100 text-slate-700 ">
+      <h1 className="max-w-md mx-auto text-center text-2xl font-bold">
+        Simple Counter Application
+      </h1>
+
       <div className="max-w-md mx-auto mt-10 space-y-5">
-        <button
-          className="bg-blue-500 text-white rounded py-2 px-3"
-          onClick={handleToggle}
-        >
-          Toggle Post
-        </button>
-      </div>
-      <div className="max-w-md mx-auto mt-10 space-y-10">
-        {showPosts && <Posts />}
+        {counters.map((counter) => (
+          <Counter
+            key={counter.id}
+            count={counter.value}
+            onIncrement={() => handleIncrement(counter.id)}
+            onDecrement={() => handleDecrement(counter.id)}
+          />
+        ))}
+        <Stats totalCount={totalCount} />
+        <Posts />
       </div>
     </div>
   );

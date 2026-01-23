@@ -5,29 +5,48 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:3000/",
   }),
-  tagTypes: ["postT"],
+
+  tagTypes: ["posts"],
+
   endpoints: (builder) => ({
     getPosts: builder.query({
-      query: (limit = 5) => `posts?_limit=${limit}`,
-      providesTags: (result, error, arg) => [{ type: "postT", id: arg }],
+      query: (limit) => `posts?_limit=${limit}`,
+      providesTags: ["posts"],
     }),
+
     getPost: builder.query({
-      query: (id) => `posts/${id}`,
+      query: (id) => `/posts/${id}`,
+      providesTags: (result, error, arg) => [
+        {
+          type: "post",
+          id: arg,
+        },
+      ],
     }),
-    addPost: builder.mutation({
+
+    addPosts: builder.mutation({
       query: (data) => ({
-        url: "/posts",
+        url: `/posts`,
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["postT"],
+      invalidatesTags: ["posts"],
     }),
-    editPost: builder.mutation({
-      query: ({ id }) => ({
-        url: `posts/${id}`,
+
+    editPosts: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/posts/${id}`,
         method: "PATCH",
+        body: data,
       }),
-      providesTags: (result, error, arg) => [{ type: "postT", id: arg.id }],
+      editPosts: builder.mutation({
+        query: ({ id, data }) => ({
+          url: `/posts/${id}`,
+          method: "PATCH",
+          body: data,
+        }),
+        providesTags: (result, error, arg) => [{ type: "post", id: arg.id }],
+      }),
     }),
   }),
 });
@@ -35,6 +54,6 @@ export const apiSlice = createApi({
 export const {
   useGetPostsQuery,
   useGetPostQuery,
-  useAddPostMutation,
-  useEditPostMutation,
+  useAddPostsMutation,
+  useEditPostsMutation,
 } = apiSlice;
