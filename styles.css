@@ -1,0 +1,107 @@
+:root {
+  --bg-dark: #0a0a0a;
+  --bg-light: #1a1a1a;
+  --text-primary: #f0f0f0;
+  --text-secondary: #a0a0a0;
+  --accent: #0abf53;
+  --accent-hover: #089942;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  cursor: none;
+}
+.font-serif {
+  font-family: "Playfair Display", serif;
+}
+
+/* Custom Cursor */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  transition: transform 0.1s ease-out;
+}
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent);
+  border-radius: 50%;
+}
+.cursor-outline {
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  transform: translate(-16px, -16px);
+  transition: all 0.2s ease-out;
+}
+.cursor-outline.hovered {
+  transform: translate(-16px, -16px) scale(1.5);
+  background-color: rgba(10, 191, 83, 0.2);
+}
+
+.hero-bg-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+}
+#particle-canvas {
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(rgba(10, 10, 10, 0.7), var(--bg-dark)),
+    url("https://images.unsplash.com/photo-1651336492616-4eebfdd995d7?q=80&w=2070&auto=format&fit=crop");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.main-content {
+  position: relative;
+  z-index: 10;
+  background-color: var(--bg-dark);
+}
+
+.portfolio-image-wrapper {
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+.testimonial-card::before {
+  content: "“";
+  position: absolute;
+  top: 0;
+  left: 1rem;
+  font-size: 6rem;
+  color: #1f2937;
+  opacity: 0.5;
+  z-index: -10;
+}
+
+.gsap-reveal {
+  opacity: 0;
+}
+
+@media (pointer: coarse) {
+  .cursor {
+    display: none;
+  }
+  body {
+    cursor: auto;
+  }
+}
