@@ -3,205 +3,431 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>School Library Management System</title>
-
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-      xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-
+    <title>Document</title>
+    <link rel="stylesheet" href="src/output.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap"
       rel="stylesheet"
     />
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-    <link
-      rel="stylesheet"
-      href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
-    />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-    <link rel="stylesheet" href="style.css" />
+    <!-- GSAP for advanced animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+    <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
-    <nav id="sidebar">
-      <div class="sidebar-header">
-        <a class="navbar-brand" href="#" data-page="dashboard">
-          <i class="fas fa-book-reader"></i> LibraryMS
-        </a>
-      </div>
+  <body class="bg-black">
+    <!-- Custom Cursor -->
+    <div class="cursor">
+      <div class="cursor-dot"></div>
+      <div class="cursor-outline"></div>
+    </div>
 
-      <ul class="nav flex-column">
-        <li class="nav-item">
-          <a
-            class="nav-link active"
-            aria-current="page"
-            href="#"
-            data-page="dashboard"
-            ><i class="fas fa-tachometer-alt"></i> Dashboard</a
+    <!-- Header -->
+    <header
+      id="header"
+      class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+    >
+      <div class="container mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <a href="#" class="text-2xl font-bold font-serif text-white magnetic"
+            >Stellar</a
           >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" data-page="catalog"
-            ><i class="fas fa-book"></i> Book Catalog</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" data-page="addBook"
-            ><i class="fas fa-plus-circle"></i> Add New Book</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" data-page="borrowBook"
-            ><i class="fas fa-hand-holding-heart"></i> Borrow Book</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" data-page="returnBook"
-            ><i class="fas fa-undo-alt"></i> Return Book</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" data-page="students"
-            ><i class="fas fa-users"></i> Student Records</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" data-page="manageStudents"
-            ><i class="fas fa-user-cog"></i> Manage Students</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" data-page="issuedBooks"
-            ><i class="fas fa-tasks"></i> Issued Books</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" data-page="lateReturns"
-            ><i class="fas fa-exclamation-triangle"></i> Late Returns</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" data-page="reports"
-            ><i class="fas fa-chart-bar"></i> Reports</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" data-page="faq"
-            ><i class="fas fa-question-circle"></i> FAQ/Help</a
-          >
-        </li>
-      </ul>
-      <div class="user-panel mt-auto p-3">
-        <button class="btn btn-outline-light btn-sm w-100 mb-2" type="button">
-          Login
-        </button>
-        <button class="btn btn-primary btn-sm w-100" type="button">
-          Sign Up
-        </button>
+          <nav class="hidden md:flex items-center space-x-8">
+            <a
+              href="#about"
+              class="text-gray-300 hover:text-white transition-colors magnetic"
+              >About</a
+            >
+            <a
+              href="#services"
+              class="text-gray-300 hover:text-white transition-cols magnetic"
+              >Services</a
+            >
+            <a
+              href="#portfolio"
+              class="text-gray-300 hover:text-white transition-colors magnetic"
+              >Work</a
+            >
+            <a
+              href="#contact"
+              class="bg-green-500 text-white px-5 py-2 rounded-md hover:bg-green-600 transition-all font-semibold magnetic"
+              >Get in Touch</a
+            >
+          </nav>
+          <button class="md:hidden magnetic" id="mobile-menu-button">
+            <i data-lucide="menu" class="w-6 h-6 text-white"></i>
+          </button>
+        </div>
       </div>
-    </nav>
-
-    <div id="page-content-wrapper">
-      <button
-        class="btn btn-light sidebar-toggler"
-        type="button"
-        id="sidebarToggle"
+      <!-- Mobile Menu -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden px-6 pb-4"
+        style="background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(10px)"
       >
-        <i class="fas fa-bars"></i>
-      </button>
+        <a href="#about" class="block py-2 text-gray-300 hover:text-white"
+          >About</a
+        >
+        <a href="#services" class="block py-2 text-gray-300 hover:text-white"
+          >Services</a
+        >
+        <a href="#portfolio" class="block py-2 text-gray-300 hover:text-white"
+          >Work</a
+        >
+        <a
+          href="#contact"
+          class="block mt-2 bg-green-500 text-white px-4 py-2 rounded-md text-center hover:bg-green-600"
+          >Get in Touch</a
+        >
+      </div>
+    </header>
 
-      <div class="container-fluid" id="main-content"></div>
+    <main>
+      <!-- Hero Section -->
+      <section
+        id="hero"
+        class="min-h-screen flex items-center justify-center text-white relative overflow-hidden"
+      >
+        <div class="hero-bg-container">
+          <canvas id="particle-canvas"></canvas>
+        </div>
+        <div class="hero-content text-center container mx-auto px-6">
+          <h1
+            id="hero-title"
+            class="text-5xl md:text-8xl font-serif font-bold mb-6 leading-tight"
+          ></h1>
+          <p
+            id="hero-subtitle"
+            class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto text-gray-300 opacity-0"
+          >
+            We forge digital artifacts that define the future. Experience
+            interactive art, not just web design.
+          </p>
+          <a
+            id="hero-cta"
+            href="#about"
+            class="bg-white text-gray-900 font-bold px-10 py-4 rounded-md hover:bg-gray-200 transition-all text-lg transform hover:scale-105 opacity-0 magnetic"
+            >Begin the Journey</a
+          >
+        </div>
+      </section>
 
-      <footer class="footer text-center text-lg-start mt-auto">
-        <div class="container p-4">
-          <div class="row">
-            <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-              <h5 class="text-uppercase">LibraryMS</h5>
-              <p>
-                Your modern solution for efficient school library management.
-              </p>
-            </div>
-            <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
-              <h5 class="text-uppercase">Quick Links</h5>
-              <ul class="list-unstyled mb-0">
-                <li><a href="#" data-page="dashboard">Dashboard</a></li>
-                <li><a href="#" data-page="catalog">Book Catalog</a></li>
-                <li><a href="#" data-page="faq">FAQ</a></li>
-              </ul>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-              <h5 class="text-uppercase">Contact</h5>
-              <ul class="list-unstyled">
-                <li>
-                  <i class="fas fa-map-marker-alt me-2"></i> 123 Library St,
-                  Booksville
-                </li>
-                <li><i class="fas fa-phone me-2"></i> +01 234 567 88</li>
-                <li>
-                  <i class="fas fa-envelope me-2"></i> info@libraryms.example
-                </li>
-              </ul>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-              <h5 class="text-uppercase">Follow Us</h5>
-              <div class="social-icons">
-                <a href="#" class="text-white"
-                  ><i class="fab fa-facebook-f"></i
-                ></a>
-                <a href="#" class="text-white"
-                  ><i class="fab fa-twitter"></i
-                ></a>
-                <a href="#" class="text-white"
-                  ><i class="fab fa-instagram"></i
-                ></a>
+      <!-- Main Content Wrapper -->
+      <div class="main-content">
+        <!-- About Section -->
+        <section id="about" class="py-24 md:py-40 overflow-hidden">
+          <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-5 gap-10 items-center">
+              <div class="md:col-span-3 gsap-reveal">
+                <h2
+                  class="text-4xl md:text-5xl font-serif font-bold text-white mb-4"
+                >
+                  Where code becomes poetry.
+                </h2>
+                <p class="text-gray-400 mt-8 mb-6 text-lg leading-relaxed">
+                  We are a collective of digital artisans—artists, thinkers, and
+                  technologists. Our medium is the web, our canvas the browser.
+                  We don't just solve problems; we craft emotions and build
+                  connections through immersive digital narratives.
+                </p>
+              </div>
+              <div class="md:col-span-2 gsap-reveal" data-gsap-delay="0.2">
+                <div class="relative">
+                  <div
+                    id="about-border"
+                    class="absolute -top-8 -left-8 w-full h-full border-4 border-green-500 rounded-lg z-0"
+                  ></div>
+                  <img
+                    src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=1974&auto=format&fit=crop"
+                    alt="Creative team discussion"
+                    class="rounded-lg shadow-2xl w-full relative z-10"
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div
-          class="text-center p-3"
-          style="background-color: rgba(0, 0, 0, 0.2)"
-        >
-          © 2025 LibraryMS. All Rights Reserved.
-        </div>
-      </footer>
-    </div>
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        </section>
+        <!-- Services Section -->
 
-    <div id="messageBoxContainer" class="message-box"></div>
+        <section id="services" class="py-24 md:py-32 bg-gray-900/50">
+          <div class="container mx-auto px-6 text-center">
+            <h2
+              class="text-4xl md:text-5xl font-serif font-bold text-white mb-4 gsap-reveal"
+            >
+              Our Core Disciplines
+            </h2>
+            <p
+              class="text-lg text-gray-400 mb-12 max-w-2xl mx-auto gsap-reveal"
+            >
+              We provide a holistic approach to digital creation, ensuring every
+              facet of your project is polished to perfection.
+            </p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+              <!-- Service Card 1 -->
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+              <!-- Service Card 1 -->
+              <div
+                class="service-card bg-gray-800 p-8 rounded-lg transition-all duration-300 ease-in-out transform hover:-translate-y-2 gsap-reveal"
+              >
+                <div
+                  class="service-icon bg-gray-700 text-teal-400 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-8 transition-all duration-300"
+                >
+                  <i data-lucide="gem" class="w-10 h-10"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3 text-white">
+                  Experience Design
+                </h3>
+                <p class="text-gray-400">
+                  Crafting user-centric journeys that are both intuitive and
+                  delightful, turning visitors into advocates.
+                </p>
+              </div>
+              <!-- Service Card 2 -->
+              <div
+                class="service-card bg-gray-800 p-8 rounded-lg transition-all duration-300 ease-in-out transform hover:-translate-y-2 gsap-reveal"
+                data-gsap-delay="0.2"
+              >
+                <div
+                  class="service-icon bg-gray-700 text-teal-400 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-8 transition-all duration-300"
+                >
+                  <i data-lucide="cpu" class="w-10 h-10"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3 text-white">
+                  Creative Technology
+                </h3>
+                <p class="text-gray-400">
+                  Leveraging cutting-edge tech to build fast, scalable, and
+                  secure digital platforms that perform.
+                </p>
+              </div>
+              <!-- Service Card 3 -->
+              <div
+                class="service-card bg-gray-800 p-8 rounded-lg transition-all duration-300 ease-in-out transform hover:-translate-y-2 gsap-reveal"
+                data-gsap-delay="0.4"
+              >
+                <div
+                  class="service-icon bg-gray-700 text-teal-400 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-8 transition-all duration-300"
+                >
+                  <i data-lucide="megaphone" class="w-10 h-10"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3 text-white">
+                  Brand Strategy
+                </h3>
+                <p class="text-gray-400">
+                  Defining compelling brand narratives that resonate deeply and
+                  create lasting market impact.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="py-24 md:py-40">
+          <div class="container mx-auto px-6">
+            <h2
+              class="text-4xl md:text-5xl font-serif font-bold text-white mb-4 text-center gsap-reveal"
+            >
+              Our Digital Canvases
+            </h2>
+            <p
+              class="text-lg text-gray-400 mb-12 max-w-2xl mx-auto gsap-reveal text-center"
+            >
+              A gallery of our explorations in digital form and function.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-10 mt-16">
+              <!-- Portfolio Item 1 -->
+
+              <div class="group relative gsap-reveal">
+                <div class="portfolio-image-wrapper">
+                  <img
+                    src="https://images.unsplash.com/photo-1708627193049-4df0693e9a37?q=80&w=1974&auto=format&fit=crop"
+                    alt="Abstract art project"
+                    class="portfolio-image w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-in-out"
+                  />
+                </div>
+
+                <div class="absolute bottom-0 left-0 p-8 text-white">
+                  <h3
+                    class="text-3xl font-serif font-bold mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-in-out"
+                  >
+                    Project Cygnus
+                  </h3>
+                  <p
+                    class="text-green-500 font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-lg"
+                  >
+                    Art Installation Website
+                  </p>
+                </div>
+              </div>
+
+              <!-- Portfolio Item 2 -->
+
+              <div class="group relative gsap-reveal" data-gsap-delay="0.2">
+                <div class="protfolio-image-wrapper">
+                  <img
+                    src="https://images.unsplash.com/photo-1564316800929-be17a69d6966?q=80&w=1974&auto=format&fit=crop"
+                    alt="Fashion brand project"
+                    class="portfolio-image w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-in-out"
+                  />
+                </div>
+
+                <div class="absolute bottom-0 left-0 p-8 text-center">
+                  <h3
+                    class="text-3xl font-serif font-bold mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-in-out"
+                  >
+                    Atelier Noir
+                  </h3>
+                  <p
+                    class="text-green-500 font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-lg"
+                  >
+                    E-commerce Experience
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-24 md:py-32 bg-gray-900/50">
+          <div class="container mx-auto px-6">
+            <h2
+              class="text-4xl md:text-5xl font-serif font-bold text-white mb-4 text-center gsap-reveal"
+            >
+              Voices of Our Partners
+            </h2>
+            <p
+              class="text-lg text-gray-400 mb-12 max-w-2xl mx-auto gsap-reveal"
+            >
+              Our success is measured by the success of those we collaborate
+              with.
+            </p>
+            <div class="grid md:grid-cols-2 gap-8 mt-16">
+              <!-- Testimonial 1 -->
+              <div
+                class="testimonial-card bg-transparent border border-gray-800 p-8 rounded-lg relative gsap-reveal"
+              >
+                <p class="text-gray-300 italic text-xl mb-6">
+                  "Stellar didn't just deliver a product; they delivered a
+                  masterpiece. Their process is a masterclass in creativity and
+                  collaboration."
+                </p>
+                <div class="flex items-center">
+                  <img
+                    src="https://i.pravatar.cc/150?img=5"
+                    alt="Client Photo"
+                    class="w-14 h-14 rounded-full mr-4 border-2 border-teal-400"
+                  />
+                  <div>
+                    <h4 class="font-bold text-white text-lg">
+                      Elena Rodriguez
+                    </h4>
+                    <p class="text-gray-400">Founder, Artifex</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Testimonial 2 -->
+              <div
+                class="testimonial-card bg-transparent border border-gray-800 p-8 rounded-lg relative gsap-reveal"
+                data-gsap-delay="0.2"
+              >
+                <p class="text-gray-300 italic text-xl mb-6">
+                  "The ambition and talent at Stellar are simply unparalleled.
+                  They took our vision and elevated it to heights we never
+                  imagined."
+                </p>
+                <div class="flex items-center">
+                  <img
+                    src="https://i.pravatar.cc/150?img=8"
+                    alt="Client Photo"
+                    class="w-14 h-14 rounded-full mr-4 border-2 border-teal-400"
+                  />
+                  <div>
+                    <h4 class="font-bold text-white text-lg">David Lee</h4>
+                    <p class="text-gray-400">CTO, QuantumLeap</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 md:py-40">
+          <div class="container mx-auto px-6 text-center">
+            <h2
+              class="text-4xl md:text-5xl font-serif font-bold text-white mb-4 gsap-reveal"
+            >
+              Have an idea?
+            </h2>
+            <p
+              class="text-lg text-gray-400 mb-12 max-w-2xl mx-auto gsap-reveal"
+            >
+              Let's make it a reality. We're always excited to hear about
+              ambitious projects.
+            </p>
+            <div class="max-w-xl mx-auto mt-12 gsap-reveal">
+              <form action="#" method="POST" class="space-y-6">
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  class="w-full bg-gray-800 text-white px-5 py-4 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  required
+                />
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  class="w-full bg-gray-800 text-white px-5 py-4 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  required
+                />
+                <textarea
+                  placeholder="Tell us about your project..."
+                  rows="6"
+                  class="w-full bg-gray-800 text-white px-5 py-4 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  required
+                ></textarea>
+                <button
+                  type="submit"
+                  class="w-full bg-teal-500 text-white font-bold px-6 py-4 rounded-md hover:bg-teal-600 transition-all text-lg transform hover:scale-105"
+                >
+                  Send Inquiry
+                </button>
+              </form>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="bg-gray-900 border-t border-gray-800">
+      <div class="container mx-auto px-6 py-8 text-center text-gray-400">
+        <div class="flex justify-center space-x-6 mb-6">
+          <a href="#" class="hover:text-white"
+            ><i data-lucide="twitter" class="w-6 h-6"></i
+          ></a>
+          <a href="#" class="hover:text-white"
+            ><i data-lucide="linkedin" class="w-6 h-6"></i
+          ></a>
+          <a href="#" class="hover:text-white"
+            ><i data-lucide="instagram" class="w-6 h-6"></i
+          ></a>
+        </div>
+        <p>
+          © 2025 Stellar. All Rights Reserved. A new vision of digital craft.
+        </p>
+        <p>
+          Made with ❤️ by
+          <a href="https://www.codewithfaraz.com" target="_blank">CodeWithMe</a>
+        </p>
+      </div>
+    </footer>
     <script src="script.js"></script>
   </body>
 </html>
