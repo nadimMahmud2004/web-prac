@@ -214,9 +214,12 @@ function initProgressChart() {
     },
   });
 }
+
 function initCategoryChart() {
   const ctx = document.getElementById("categoryChart");
+
   if (!ctx) return;
+
   new Chart(ctx, {
     type: "doughnut",
     data: {
@@ -229,6 +232,7 @@ function initCategoryChart() {
         },
       ],
     },
+
     options: {
       responsive: true,
       maintainAspectRatio: false,

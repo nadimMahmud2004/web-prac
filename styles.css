@@ -1,3 +1,6 @@
+/* ===================================
+   CSS VARIABLES
+   =================================== */
 :root {
   /* Primary Colors */
   --color-primary: #8b5cf6;
@@ -529,7 +532,7 @@ button {
 .user-menu-item .icon {
   font-size: 1.4rem;
 }
-/* Content Area */
+
 .dashboard-content {
   flex: 1;
   overflow-y: auto;
@@ -537,10 +540,11 @@ button {
   border-top-left-radius: var(--radius-xl);
   background: var(--color-surface);
 }
-/* Views */
+
 .dashboard-view {
   display: none;
 }
+
 .dashboard-view.active {
   display: block;
   animation: fadeIn 0.3s ease-in-out;
@@ -553,7 +557,7 @@ button {
     opacity: 1;
   }
 }
-/* Stats Cards */
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -571,17 +575,20 @@ button {
   box-shadow: var(--shadow-md);
   transform: translateY(-2px);
 }
+
 .stat-card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: var(--space-md);
 }
+
 .stat-card-title {
   font-size: var(--text-sm);
   color: var(--color-text-secondary);
   font-weight: var(--weight-medium);
 }
+
 .stat-card-icon {
   width: 40px;
   height: 40px;
@@ -595,6 +602,7 @@ button {
   background: var(--color-primary-100);
   color: var(--color-primary);
 }
+
 .stat-card-icon.success {
   background: var(--color-success-100);
   color: var(--color-success);
@@ -607,12 +615,14 @@ button {
   background: var(--color-info-100);
   color: var(--color-info);
 }
+
 .stat-card-value {
   font-size: var(--text-4xl);
   font-weight: var(--weight-bold);
   color: var(--color-text);
   margin-bottom: var(--space-xs);
 }
+
 .stat-card-change {
   display: flex;
   align-items: center;
@@ -625,19 +635,21 @@ button {
 .stat-card-change.negative {
   color: var(--color-error);
 }
-/* Chart Cards */
+
 .chart-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: var(--space-lg);
   margin-bottom: var(--space-2xl);
 }
+
 .chart-card {
   background: var(--color-background);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   padding: var(--space-lg);
 }
+
 .chart-card-header {
   margin-bottom: var(--space-lg);
 }
@@ -681,6 +693,7 @@ button {
   background: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
 }
+
 .dashboard-table th {
   padding: var(--space-md) var(--space-lg);
   text-align: left;
@@ -695,18 +708,21 @@ button {
   border-bottom: 1px solid var(--color-border);
   color: var(--color-text);
 }
+
 .dashboard-table tbody tr:last-child td {
   border-bottom: none;
 }
 .dashboard-table tbody tr:hover {
   background: var(--color-surface-hover);
 }
+
 .project-title-cell {
   display: flex;
   align-items: center;
   gap: var(--space-md);
   max-width: 300px;
 }
+
 .project-icon {
   width: 40px;
   height: 40px;
@@ -718,6 +734,7 @@ button {
   justify-content: center;
   flex-shrink: 0;
 }
+
 .project-info {
   flex: 1;
   min-width: 0;
@@ -727,10 +744,6 @@ button {
   color: var(--color-text);
   margin-bottom: 2px;
 }
-.project-meta-text {
-  font-size: var(--text-sm);
-  color: var(--color-text-secondary);
-}
 .status-badge {
   padding: var(--space-xs) var(--space-sm);
   border-radius: var(--radius-full);
@@ -738,6 +751,7 @@ button {
   font-weight: var(--weight-medium);
   text-transform: uppercase;
 }
+
 .status-badge.success {
   background: var(--color-success-100);
   color: var(--color-success);
