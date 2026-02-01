@@ -1,11 +1,52 @@
 import { Edit2, Plus, Search, Trash2 } from "lucide-react";
-import React from "react";
 import RecordModel from "./RecordModel";
+import { useDispatch, useSelector } from "react-redux";
+
+import {
+  setSearchTerm,
+  selectAllRecords,
+  selectSearchTerm,
+  deleteRecord,
+  selectFilteredRecords,
+} from "../store/recordSlice";
+import { useState } from "react";
 
 const RecordTable = () => {
+  const dispatch = useDispatch();
+
+  const filteredRecords = useSelector(selectFilteredRecords);
+  const allRecords = useSelector(selectAllRecords);
+  const searchTerm = useSelector(selectSearchTerm);
+
+  const storedRecords =
+    filteredRecords?.slice().sort((a, b) => b.id - a.id) || [];
+
+  const [showModel, setShowModel] = useState(false);
+  const [currentRecord, setCurrentRecord] = useState(null);
+
+  const openCreateModal = () => {
+    setCurrentRecord(null);
+    setShowModel(true);
+  };
+
+  const openEditModal = (record) => {
+    setCurrentRecord(record);
+    setShowModel(true);
+  };
+
+  const closeModal = () => {
+    setShowModel(false);
+    setCurrentRecord(null);
+  };
+
+  const handleDelete = (record) => {
+    dispatch(deleteRecord(record.id));
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <div className="max-w-7xl mx-auto">
+        {/* Header */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-6">
           <h1 className="text-3xl font-bold text-gray-800 mb-2">
             Employee Management
@@ -27,10 +68,15 @@ const RecordTable = () => {
               <input
                 type="text"
                 placeholder="Search by name , email or position"
+                value={searchTerm}
+                onChange={(e) => dispatch(setSearchTerm(e.target.value))}
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
-            <div className="flex items-center justify-center gap-2 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-all">
+            <div
+              className="flex items-center justify-center gap-2 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-all"
+              onClick={openCreateModal}
+            >
               <Plus size={20} />
               Add New Record{" "}
             </div>
@@ -65,40 +111,49 @@ const RecordTable = () => {
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {/* Conditional Rendering */}
-
-                <tr className="px-6 py-12 text-center text-gray-500">
-                  <td colSpan={6}>No Records Found</td>
-                </tr>
-                {/* Else */}
-                <tr className="hover:bg-gray-50 transition-colors">
-                  <td className="px-6 py-2 whitespace-nowrap text-sm text-gray-900">
-                    1
-                  </td>
-                  <td className="px-6 py-2 whitespace-nowrap text-sm text-gray-900">
-                    John Doe
-                  </td>
-                  <td className="px-6 py-2 whitespace-nowrap text-sm text-gray-900">
-                    Johndoe@gmail.com
-                  </td>
-                  <td className="px-6 py-2 whitespace-nowrap text-sm text-gray-900">
-                    083438473
-                  </td>
-                  <td className="px-6 py-2 whitespace-nowrap text-sm text-gray-900">
-                    Full stack
-                  </td>
-                  <td className="px-6 py-2 whitespace-nowrap text-sm text-gray-900">
-                    <div className="flex items-center justify-center gap-3">
-                      <button className="flex items-center justify-center gap-1 bg-blue-600 text-white px-3 py-1.5 rounded hover:bg-blue-700 transition-all text-sm font-medium">
-                        <Edit2 size={16} />
-                        Edit
-                      </button>
-                      <button className="flex items-center justify-center gap-1 bg-red-600 text-white px-3 py-1.5 rounded hover:bg-red-700 transition-all text-sm font-medium">
-                        <Trash2 size={16} />
-                        Delete
-                      </button>
-                    </div>
-                  </td>
-                </tr>
+                {storedRecords.length === 0 ? (
+                  <tr className="px-6 py-12 text-center text-gray-500">
+                    <td colSpan={6}>No Records Found</td>
+                  </tr>
+                ) : (
+                  storedRecords.map((record) => (
+                    <tr className="hover:bg-gray-50 transition-colors">
+                      <td className="px-6 py-2 whitespace-nowrap text-sm text-gray-900">
+                        {record.id}
+                      </td>
+                      <td className="px-6 py-2 whitespace-nowrap text-sm text-gray-900">
+                        {record.name}
+                      </td>
+                      <td className="px-6 py-2 whitespace-nowrap text-sm text-gray-900">
+                        {record.email}
+                      </td>
+                      <td className="px-6 py-2 whitespace-nowrap text-sm text-gray-900">
+                        {record.phone}
+                      </td>
+                      <td className="px-6 py-2 whitespace-nowrap text-sm text-gray-900">
+                        {record.position}
+                      </td>
+                      <td className="px-6 py-2 whitespace-nowrap text-sm text-gray-900">
+                        <div className="flex items-center justify-center gap-3">
+                          <button
+                            className="flex items-center justify-center gap-1 bg-blue-600 text-white px-3 py-1.5 rounded hover:bg-blue-700 transition-all text-sm font-medium"
+                            onClick={() => openEditModal(record)}
+                          >
+                            <Edit2 size={16} />
+                            Edit
+                          </button>
+                          <button
+                            className="flex items-center justify-center gap-1 bg-red-600 text-white px-3 py-1.5 rounded hover:bg-red-700 transition-all text-sm font-medium"
+                            onClick={() => handleDelete(record)}
+                          >
+                            <Trash2 size={16} />
+                            Delete
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
@@ -106,13 +161,19 @@ const RecordTable = () => {
           {/* Footer Showing filtered */}
           <div className="bg-gray-50 px-6 py-3 border-t border-gray-200 ">
             <p className="text-sm text-gray-600 text-center">
-              Showing shorted records of all records
+              Showing {storedRecords.length} of {allRecords.length} records.
             </p>
           </div>
         </div>
       </div>
       {/* Model */}
-      <RecordModel />
+      {showModel && (
+        <RecordModel
+          isOpen={showModel}
+          onClose={closeModal}
+          currentRecord={currentRecord}
+        />
+      )}
     </div>
   );
 };
