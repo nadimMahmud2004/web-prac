@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "tailwindcss";
 
 @theme {
   --color-background: #0f1418;
@@ -47,14 +46,13 @@
 @layer components {
   .glass {
     background-color: color-mix(in srgb, var(--color-surface) 50%, transparent);
-    -webkit-backdrop-filter: blur(16);
     backdrop-filter: blur(16px);
     border: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);
   }
 
   .glass-strong {
     background-color: color-mix(in srgb, var(--color-surface) 80%, transparent);
-    -webkit-backdrop-filter: blur(24);
+    backdrop-filter: blur(24px);
     border: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
   }
 
@@ -174,7 +172,6 @@
 
   .animated-border:hover {
     background-color: color-mix(in srgb, #26c4b8 15%, transparent);
-    -webkit-backdrop-filter: blur(16px);
     backdrop-filter: blur(16px);
     box-shadow: 0 0 20px color-mix(in srgb, #26c4b8 20%, transparent);
   }

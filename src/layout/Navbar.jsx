@@ -20,6 +20,8 @@ export const Navbar = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -33,7 +35,9 @@ export const Navbar = () => {
         >
           PM<span className="text-primary">.</span>
         </a>
-        {/* Desktop Nav */}
+
+        {/* Desktop Navbar */}
+
         <div className="hidden md:flex items-center gap-1">
           <div className="glass rounded-full px-2 py-1 flex items-center gap-1">
             {navLinks.map((link, index) => (
@@ -47,11 +51,15 @@ export const Navbar = () => {
             ))}
           </div>
         </div>
-        {/* CTA Button */}
+
+        {/* CTA Buttons */}
+
         <div className="hidden md:block">
-          <Button size="sm">Contact Me </Button>
-        </div>{" "}
+          <Button size="sm">Contact Me</Button>
+        </div>
+
         {/* Mobile Menu Button */}
+
         <button
           className="md:hidden p-2 text-foreground cursor-pointer"
           onClick={() => setIsMobileMenuOpen((prev) => !prev)}
@@ -69,13 +77,11 @@ export const Navbar = () => {
               <a
                 href={link.href}
                 key={index}
-                onClick={() => setIsMobileMenuOpen(false)}
                 className="text-lg text-muted-foreground hover:text-foreground py-2"
               >
                 {link.label}
               </a>
             ))}
-
             <Button onClick={() => setIsMobileMenuOpen(false)}>
               Contact Me
             </Button>
