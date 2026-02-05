@@ -8,7 +8,7 @@ import {
   Download,
 } from "lucide-react";
 import { AnimatedBorderButton } from "../components/AnimatedBorderButton";
-
+import HeroImg from "../images/hero-bg.jpg";
 import profileImg from "../images/profile-photo.jpg";
 
 const skills = [
@@ -38,7 +38,7 @@ export const Hero = () => {
       {/* Bg */}
       <div className="absolute inset-0">
         <img
-          src="/hero-bg.jpg"
+          src={HeroImg}
           alt="Hero image"
           className="w-full h-full object-cover opacity-40"
         />
