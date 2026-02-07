@@ -1,24 +1,19 @@
-import Navbar from "./layout/Navbar";
-import Footers from "./layout/Footer";
-import { Hero } from "./sections/Hero";
-import Projects from "./sections/Projects";
-import { Experience } from "./sections/Experience";
-import { Testimonials } from "./sections/Testimonials";
-import Contact from "./sections/Contact";
-function App() {
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Layout from "./components/Layout/Layout";
+import Dashboard from "./pages/Dashboard/Dashboard";
+
+const App = () => {
   return (
-    <>
-      <Navbar />
-      <main>
-        <Hero />
-        <Projects />
-        <Experience />
-        <Testimonials />
-        <Contact />
-      </main>
-      <Footers />
-    </>
+    <div id="dashboard">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
-}
+};
 
 export default App;
