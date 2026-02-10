@@ -2,12 +2,592 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>js</title>
+    <title>Nexus Blog - Where Ideas Converge</title>
+    <link rel="stylesheet" href="src/output.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+  <body class="bg-black text-white overflow-x-hidden">
+    <!-- Animated Background -->
+    <div class="fixed inset-0 z-0">
+      <div
+        class="absolute inset-0 bg-linear-to-br from-purple-900/20 via-black to-blue-900/20"
+      ></div>
+      <div
+        class="absolute top-0 left-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl float-animation"
+      ></div>
+      <div
+        class="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl float-animation"
+        style="animation-delay: 1.5s"
+      ></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="z-50 glass sticky top-0">
+      <div class="container mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <div
+              class="w-10 h-10 bg-linear-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center"
+            >
+              <i class="fas fa-cube text-white"></i>
+            </div>
+            <span class="text-xl font-bold">Nexus</span>
+          </div>
+
+          <div class="hidden md:flex items-center space-x-8">
+            <a href="#" class="hover:text-purple-400 transition-colors"
+              >Articles</a
+            >
+            <a href="#" class="hover:text-purple-400 transition-colors"
+              >Topics</a
+            >
+            <a href="#" class="hover:text-purple-400 transition-colors"
+              >Authors</a
+            >
+            <a href="#" class="hover:text-purple-400 transition-colors"
+              >About</a
+            >
+          </div>
+
+          <div class="flex items-center space-x-4">
+            <button
+              class="p-2 glass rounded-lg hover:bg-white/10 transition-colors"
+            >
+              <i class="fas fa-search"></i>
+            </button>
+            <button
+              class="px-4 py-2 bg-linear-to-r from-indigo-500 to-purple-600 rounded-lg hover:shadow-lg hover:shadow-purple-500/25 transition-all"
+            >
+              Subscribe
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative z-10 container mx-auto px-6 py-12">
+      <div class="text-center mb-12">
+        <h1 class="text-5xl md:text-7xl font-bold mb-4">
+          <span class="gradient-text">Where Ideas</span><br />
+          <span class="text-white">Converge</span>
+        </h1>
+        <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+          Explore the intersection of technology, design, and human experience
+          through our curated collection of thought-provoking articles.
+        </p>
+      </div>
+
+      <!-- Category Pills -->
+      <div class="flex flex-wrap justify-center gap-3 mb-12">
+        <button
+          class="px-6 py-2 glass rounded-full hover:bg-white/10 transition-all category-btn active"
+          data-category="all"
+        >
+          <i class="fas fa-globe mr-2"></i>All Topics
+        </button>
+        <button
+          class="px-6 py-2 glass rounded-full hover:bg-white/10 transition-all category-btn"
+          data-category="tech"
+        >
+          <i class="fas fa-microchip mr-2"></i>Technology
+        </button>
+        <button
+          class="px-6 py-2 glass rounded-full hover:bg-white/10 transition-all category-btn"
+          data-category="design"
+        >
+          <i class="fas fa-palette mr-2"></i>Design
+        </button>
+        <button
+          class="px-6 py-2 glass rounded-full hover:bg-white/10 transition-all category-btn"
+          data-category="ai"
+        >
+          <i class="fas fa-robot mr-2"></i>AI & ML
+        </button>
+        <button
+          class="px-6 py-2 glass rounded-full hover:bg-white/10 transition-all category-btn"
+          data-category="culture"
+        >
+          <i class="fas fa-users mr-2"></i>Culture
+        </button>
+      </div>
+    </section>
+
+    <!-- Bento Grid Main Content -->
+    <main class="relative z-10 container mx-auto px-6 pb-20">
+      <div
+        class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4 auto-rows-[200px]"
+      >
+        <!-- Featured Large Card -->
+        <div
+          class="bento-card md:col-span-4 lg:col-span-4 lg:row-span-2 glass rounded-2xl p-6 overflow-hidden group cursor-pointer"
+          data-category="tech"
+        >
+          <div class="relative h-full">
+            <div
+              class="absolute inset-0 bg-linear-to-br from-indigo-600/20 to-purple-600/20 rounded-2xl"
+            ></div>
+            <img
+              src="https://picsum.photos/seed/featured1/800/400"
+              alt="Featured"
+              class="absolute inset-0 w-full h-full object-cover rounded-2xl opacity-40"
+            />
+            <div class="relative z-10 h-full flex flex-col justify-between">
+              <div>
+                <span
+                  class="inline-block px-3 py-1 bg-indigo-500/20 rounded-full text-xs mb-4"
+                >
+                  <i class="fas fa-fire mr-1"></i>Featured
+                </span>
+                <h2
+                  class="text-2xl md:text-3xl font-bold mb-3 group-hover:text-purple-400 transition-colors"
+                >
+                  The Future of Human-AI Collaboration
+                </h2>
+                <p class="text-gray-300 mb-4 line-clamp-3">
+                  Exploring how artificial intelligence is reshaping creative
+                  industries and opening new frontiers in human expression and
+                  innovation.
+                </p>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <img
+                    src="https://picsum.photos/seed/author1/40/40"
+                    alt="Author"
+                    class="w-10 h-10 rounded-full"
+                  />
+                  <div>
+                    <p class="text-sm font-medium">Sarah Chen</p>
+                    <p class="text-xs text-gray-400">5 min read</p>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-4 text-sm text-gray-400">
+                  <span><i class="fas fa-eye mr-1"></i>12.5k</span>
+                  <span><i class="fas fa-heart mr-1"></i>892</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trending Topics Card -->
+        <div
+          class="bento-card md:col-span-2 lg:col-span-2 glass rounded-2xl p-6 flex flex-col justify-between"
+          data-category="all"
+        >
+          <div>
+            <h3 class="text-lg font-bold mb-4 flex items-center">
+              <i class="fas fa-chart-line mr-2 text-purple-400"></i>
+              Trending Now
+            </h3>
+            <div class="space-y-3">
+              <div
+                class="flex items-center justify-between group cursor-pointer"
+              >
+                <span
+                  class="text-sm group-hover:text-purple-400 transition-colors"
+                  >Quantum Computing</span
+                >
+                <span class="text-xs text-green-400">+23%</span>
+              </div>
+              <div
+                class="flex items-center justify-between group cursor-pointer"
+              >
+                <span
+                  class="text-sm group-hover:text-purple-400 transition-colors"
+                  >Web3 & Blockchain</span
+                >
+                <span class="text-xs text-green-400">+18%</span>
+              </div>
+              <div
+                class="flex items-center justify-between group cursor-pointer"
+              >
+                <span
+                  class="text-sm group-hover:text-purple-400 transition-colors"
+                  >Sustainable Tech</span
+                >
+                <span class="text-xs text-green-400">+15%</span>
+              </div>
+              <div
+                class="flex items-center justify-between group cursor-pointer"
+              >
+                <span
+                  class="text-sm group-hover:text-purple-400 transition-colors"
+                  >Neural Interfaces</span
+                >
+                <span class="text-xs text-green-400">+12%</span>
+              </div>
+            </div>
+          </div>
+          <button
+            class="mt-4 text-sm text-purple-400 hover:text-purple-300 transition-colors"
+          >
+            View all trends <i class="fas fa-arrow-right ml-1"></i>
+          </button>
+        </div>
+
+        <!-- Medium Card 1 -->
+        <div
+          class="bento-card md:col-span-2 lg:col-span-2 glass rounded-2xl p-6 overflow-hidden group cursor-pointer"
+          data-category="design"
+        >
+          <div class="relative h-full">
+            <img
+              src="https://picsum.photos/seed/design1/400/200"
+              alt="Design"
+              class="absolute inset-0 w-full h-full object-cover rounded-2xl opacity-30"
+            />
+            <div class="relative z-10 h-full flex flex-col justify-between">
+              <span
+                class="inline-block px-3 py-1 bg-purple-500/20 rounded-full text-xs w-fit"
+              >
+                Design Systems
+              </span>
+              <div>
+                <h3
+                  class="text-lg font-bold mb-2 group-hover:text-purple-400 transition-colors"
+                >
+                  Building Scalable Design Systems
+                </h3>
+                <div
+                  class="flex items-center justify-between text-sm text-gray-400"
+                >
+                  <span>Alex Rivera</span>
+                  <span>3 min read</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Small Card 1 -->
+        <div
+          class="bento-card glass rounded-2xl p-4 flex flex-col justify-between group cursor-pointer"
+          data-category="ai"
+        >
+          <div>
+            <i class="fas fa-brain text-2xl text-purple-400 mb-3"></i>
+            <h4
+              class="font-semibold mb-2 group-hover:text-purple-400 transition-colors"
+            >
+              GPT-5 Insights
+            </h4>
+            <p class="text-xs text-gray-400">
+              Latest developments in language models
+            </p>
+          </div>
+          <div class="flex items-center justify-between text-xs text-gray-500">
+            <span>2 min</span>
+            <span><i class="fas fa-arrow-up text-green-400"></i> 45</span>
+          </div>
+        </div>
+
+        <!-- Small Card 2 -->
+        <div
+          class="bento-card glass rounded-2xl p-4 flex flex-col justify-between group cursor-pointer"
+          data-category="culture"
+        >
+          <div>
+            <i class="fas fa-paint-brush text-2xl text-indigo-400 mb-3"></i>
+            <h4
+              class="font-semibold mb-2 group-hover:text-purple-400 transition-colors"
+            >
+              Digital Art Revolution
+            </h4>
+            <p class="text-xs text-gray-400">NFTs and creative expression</p>
+          </div>
+          <div class="flex items-center justify-between text-xs text-gray-500">
+            <span>4 min</span>
+            <span><i class="fas fa-arrow-up text-green-400"></i> 32</span>
+          </div>
+        </div>
+
+        <!-- Wide Card -->
+        <div
+          class="bento-card md:col-span-4 lg:col-span-3 glass rounded-2xl p-6 overflow-hidden group cursor-pointer"
+          data-category="tech"
+        >
+          <div class="relative h-full">
+            <img
+              src="https://picsum.photos/seed/tech1/600/200"
+              alt="Tech"
+              class="absolute inset-0 w-full h-full object-cover rounded-2xl opacity-30"
+            />
+            <div class="relative z-10 h-full flex flex-col justify-between">
+              <div>
+                <span
+                  class="inline-block px-3 py-1 bg-blue-500/20 rounded-full text-xs"
+                >
+                  <i class="fas fa-code mr-1"></i>Development
+                </span>
+                <h3
+                  class="text-xl font-bold mt-3 mb-2 group-hover:text-purple-400 transition-colors"
+                >
+                  Rust in Production: A Year Later
+                </h3>
+                <p class="text-sm text-gray-300">
+                  Our journey migrating critical services to Rust and the
+                  performance gains we achieved.
+                </p>
+              </div>
+              <div class="flex items-center justify-between mt-4">
+                <div class="flex items-center space-x-2">
+                  <img
+                    src="https://picsum.photos/seed/author2/32/32"
+                    alt="Author"
+                    class="w-8 h-8 rounded-full"
+                  />
+                  <span class="text-sm">Marcus Kim</span>
+                </div>
+                <div class="flex items-center space-x-3 text-sm text-gray-400">
+                  <span><i class="fas fa-bookmark"></i></span>
+                  <span><i class="fas fa-share"></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Card -->
+        <div
+          class="bento-card md:col-span-2 lg:col-span-3 glass rounded-2xl p-6"
+          data-category="all"
+        >
+          <h3 class="text-lg font-bold mb-4">Community Stats</h3>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="text-center">
+              <div class="text-2xl font-bold gradient-text">2.5M+</div>
+              <div class="text-xs text-gray-400">Monthly Readers</div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl font-bold gradient-text">15K+</div>
+              <div class="text-xs text-gray-400">Published Articles</div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl font-bold gradient-text">500+</div>
+              <div class="text-xs text-gray-400">Expert Writers</div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl font-bold gradient-text">98%</div>
+              <div class="text-xs text-gray-400">Satisfaction Rate</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vertical Card -->
+        <div
+          class="bento-card md:col-span-2 lg:col-span-2 lg:row-span-2 glass rounded-2xl p-6 flex flex-col justify-between"
+          data-category="ai"
+        >
+          <div>
+            <div
+              class="w-full h-32 bg-linear-to-br from-purple-500/20 to-pink-500/20 rounded-lg mb-4 flex items-center justify-center"
+            >
+              <i class="fas fa-robot text-4xl text-purple-400"></i>
+            </div>
+            <h3 class="text-lg font-bold mb-2">AI Ethics Framework</h3>
+            <p class="text-sm text-gray-300 mb-4">
+              Navigating the moral complexities of artificial intelligence
+              development and deployment.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2 py-1 bg-white/5 rounded text-xs">Ethics</span>
+              <span class="px-2 py-1 bg-white/5 rounded text-xs">AI</span>
+              <span class="px-2 py-1 bg-white/5 rounded text-xs">Policy</span>
+            </div>
+          </div>
+          <button
+            class="mt-4 text-sm text-purple-400 hover:text-purple-300 transition-colors"
+          >
+            Read more <i class="fas fa-arrow-right ml-1"></i>
+          </button>
+        </div>
+
+        <!-- Quote Card -->
+        <div
+          class="bento-card md:col-span-2 lg:col-span-2 glass rounded-2xl p-6 flex items-center justify-center"
+          data-category="culture"
+        >
+          <div class="text-center">
+            <i class="fas fa-quote-left text-2xl text-purple-400/30 mb-4"></i>
+            <p class="text-lg font-medium mb-2 italic">
+              "The future belongs to those who believe in the beauty of their
+              dreams."
+            </p>
+            <p class="text-sm text-gray-400">- Eleanor Roosevelt</p>
+          </div>
+        </div>
+
+        <!-- Newsletter Card - FULL WIDTH -->
+        <div
+          class="bento-card col-span-1 md:col-span-4 lg:col-span-6 glass rounded-2xl p-6 gradient-border"
+          data-category="all"
+        >
+          <div class="flex flex-col md:flex-row items-center justify-between">
+            <div class="mb-4 md:mb-0">
+              <h3 class="text-xl font-bold mb-2">Stay Updated</h3>
+              <p class="text-sm text-gray-400">
+                Get weekly insights delivered to your inbox
+              </p>
+            </div>
+            <div
+              class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full md:w-auto"
+            >
+              <input
+                type="email"
+                placeholder="Enter your email"
+                class="px-4 py-2 bg-white/5 rounded-lg border border-white/10 focus:border-purple-400 focus:outline-none transition-colors w-full md:w-64"
+              />
+              <button
+                class="px-6 py-2 bg-linear-to-r from-indigo-500 to-purple-600 rounded-lg hover:shadow-lg hover:shadow-purple-500/25 transition-all w-full md:w-auto"
+              >
+                Subscribe
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Load More Button -->
+      <div class="text-center mt-12">
+        <button
+          class="px-8 py-3 glass rounded-full hover:bg-white/10 transition-all group"
+        >
+          <span class="mr-2">Load More Articles</span>
+          <i
+            class="fas fa-chevron-down group-hover:translate-y-1 transition-transform"
+          ></i>
+        </button>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 glass mt-20">
+      <div class="container mx-auto px-6 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          <div>
+            <div class="flex items-center space-x-2 mb-4">
+              <div
+                class="w-10 h-10 bg-linear-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center"
+              >
+                <i class="fas fa-cube text-white"></i>
+              </div>
+              <span class="text-xl font-bold">Nexus</span>
+            </div>
+            <p class="text-sm text-gray-400">
+              Connecting ideas, inspiring innovation, and shaping the future of
+              digital content.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="font-semibold mb-4">Explore</h4>
+            <ul class="space-y-2 text-sm text-gray-400">
+              <li>
+                <a href="#" class="hover:text-purple-400 transition-colors"
+                  >Latest Articles</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-purple-400 transition-colors"
+                  >Popular Topics</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-purple-400 transition-colors"
+                  >Trending Now</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-purple-400 transition-colors"
+                  >Archives</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-semibold mb-4">Community</h4>
+            <ul class="space-y-2 text-sm text-gray-400">
+              <li>
+                <a href="#" class="hover:text-purple-400 transition-colors"
+                  >Writers Program</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-purple-400 transition-colors"
+                  >Discord Server</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-purple-400 transition-colors"
+                  >Events</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-purple-400 transition-colors"
+                  >Newsletter</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-semibold mb-4">Connect</h4>
+            <div class="flex space-x-4 mb-4">
+              <a
+                href="#"
+                class="w-10 h-10 glass rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors"
+              >
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 glass rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors"
+              >
+                <i class="fab fa-github"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 glass rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors"
+              >
+                <i class="fab fa-linkedin"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 glass rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors"
+              >
+                <i class="fab fa-discord"></i>
+              </a>
+            </div>
+            <p class="text-sm text-gray-400">
+              Join our community of 50,000+ creators
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="border-t border-white/10 pt-8 text-center text-sm text-gray-400"
+        >
+          <p>
+            &copy; 2025 Nexus Blog. All rights reserved. |
+            <a href="#" class="hover:text-purple-400 transition-colors"
+              >Privacy Policy</a
+            >
+            |
+            <a href="#" class="hover:text-purple-400 transition-colors"
+              >Terms of Service</a
+            >
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script src="script.js"></script>
   </body>
 </html>
