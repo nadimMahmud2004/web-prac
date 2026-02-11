@@ -1,14 +1,17 @@
-import { Provider } from "react-redux";
-import "./App.css";
-import Quiz from "./components/Quiz";
-import { store } from "./store/store";
+import Features from "./components/Features";
+import Hero from "./components/Hero";
+import Navbar from "./components/Navbar";
+import Pricing from "./components/Pricing";
 
-function App() {
+const App = () => {
   return (
-    <Provider store={store}>
-      <Quiz />
-    </Provider>
+    <div className="min-h-screen bg-slate-950 text-white overflow-hidden">
+      <Navbar />
+      <Hero />
+      <Features />
+      <Pricing />
+    </div>
   );
-}
+};
 
 export default App;
