@@ -1,7 +1,14 @@
 import { BookOpen, Clock, Play, Trophy } from "lucide-react";
-import React from "react";
+import { useDispatch } from "react-redux";
+import { startQuiz } from "../store/quizSlice";
 
 const QuizStart = () => {
+  const dispatch = useDispatch();
+
+  const handleQuizStart = () => {
+    dispatch(startQuiz());
+  };
+
   return (
     <div className="max-w-4xl mx-auto">
       <div className="bg-white rounded-2xl shadow-xl p-8 text-center">
@@ -26,7 +33,7 @@ const QuizStart = () => {
             <div className="flex items-center justify-center mb-4">
               <BookOpen className="w-8 h-8 text-blue-600" />
             </div>
-            <div className="text-2xl font-bold text-blue-800 mb-2">8</div>
+            <div className="text-2xl font-bold text-blue-800 mb-2">20</div>
             <div className="text-2xl font-medium">Questions</div>
           </div>
 
@@ -86,7 +93,10 @@ const QuizStart = () => {
           </div>
         </div>
 
-        <button className="inline-flex items-center space-x-3 py-4 px-8 bg-linear-to-r from-blue-500 to-purple-600 text-white rounded-xl hover:from-blue-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-200 shadow-lg font-semibold text-lg cursor-pointer">
+        <button
+          className="inline-flex items-center space-x-3 py-4 px-8 bg-linear-to-r from-blue-500 to-purple-600 text-white rounded-xl hover:from-blue-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-200 shadow-lg font-semibold text-lg cursor-pointer"
+          onClick={handleQuizStart}
+        >
           <Play size={24} />
           <span>Start Quiz</span>
         </button>
