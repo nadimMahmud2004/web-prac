@@ -1,7 +1,9 @@
 import Features from "./components/Features";
+import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
 import Pricing from "./components/Pricing";
+import Testimonials from "./components/Testimonials";
 
 const App = () => {
   return (
@@ -10,6 +12,8 @@ const App = () => {
       <Hero />
       <Features />
       <Pricing />
+      <Testimonials />
+      <Footer />
     </div>
   );
 };
