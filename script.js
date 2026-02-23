@@ -275,23 +275,22 @@ document.addEventListener("DOMContentLoaded", function () {
       appendMessage(messageText, "user");
       chatbotInput.value = "";
 
-      // 2. Add dummy bot reply
       setTimeout(() => {
         appendMessage(
-          "Thank you for your message. An agent will be in touch with you shortly regarding your inquiry.",
+          "Thank you for your message . An agent will be in touch with you shortly regarding your inquiry.",
           "bot",
         );
       }, 1000);
     });
 
-    // Function to add a message to the chat window
+    // function to add a new message to chat window
+
     const appendMessage = (text, type) => {
       const messageElement = document.createElement("div");
       messageElement.classList.add("chat-message", type);
       messageElement.textContent = text;
       chatbotMessages.appendChild(messageElement);
 
-      // Scroll to bottom
       chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
     };
   }
