@@ -1,419 +1,1075 @@
-<!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PodcastHub - Modern Podcast Platform</title>
     <meta
-      name="description"
-      content="Discover, listen, and enjoy your favorite podcasts with our modern streaming platform"
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"
     />
-    <meta name="author" content="PodcastHub" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Professional Portfolio - Developer CV</title>
+
+    <!-- Tailwind CSS (CDN for development only) -->
+    <script>
+      // Suppress Tailwind CDN warning
+      if (typeof console !== "undefined" && console.warn) {
+        const originalWarn = console.warn;
+        console.warn = function (...args) {
+          if (
+            args[0] &&
+            typeof args[0] === "string" &&
+            args[0].includes("tailwindcss.com")
+          ) {
+            return; // Suppress Tailwind CDN warning
+          }
+          originalWarn.apply(console, args);
+        };
+      }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Fira+Code:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css" />
   </head>
-
-  <body class="light-theme">
-    <!-- Header -->
-    <header class="header" id="header">
-      <div class="container">
-        <div class="header-content">
-          <!-- Logo -->
-          <div class="logo">
-            <div class="logo-icon">🎧</div>
-            <span class="logo-text">PodcastHub</span>
-          </div>
-
-          <!-- Desktop Navigation -->
-          <nav class="nav-desktop">
-            <a href="#home" class="nav-link">Home</a>
-            <a href="#podcasts" class="nav-link">Podcasts</a>
-            <a href="#categories" class="nav-link">Categories</a>
-            <a href="#about" class="nav-link">About</a>
-          </nav>
-
-          <!-- Search Bar -->
-          <div class="search-container">
-            <input
-              type="text"
-              placeholder="Search podcasts..."
-              class="search-input"
-              id="searchInput"
-            />
-            <span class="search-icon">🔍</span>
-          </div>
-
-          <!-- Action Buttons -->
-          <div class="header-actions">
-            <button class="btn-icon" id="notificationBtn">
-              🔔
-              <span class="notification-dot"></span>
-            </button>
-            <button class="btn-icon" id="themeToggle">🌙</button>
-            <button class="btn-icon mobile-menu-toggle" id="mobileMenuToggle">
-              ☰
-            </button>
-          </div>
+  <body class="body-main" data-theme="dark" data-lang="en" data-dir="ltr">
+    <!-- Loading Screen -->
+    <div class="loader-screen" id="loader">
+      <div class="loader-content">
+        <div class="loader-code-text">
+          <div class="code-line" data-line="1">const portfolio = {</div>
+          <div class="code-line" data-line="2">loading: true,</div>
+          <div class="code-line" data-line="3">status: 'initializing...'</div>
+          <div class="code-line" data-line="4">};</div>
         </div>
-
-        <!-- Mobile Menu -->
-        <div class="mobile-menu" id="mobileMenu">
-          <div class="mobile-search">
-            <input
-              type="text"
-              placeholder="Search podcasts..."
-              class="search-input"
-            />
-            <span class="search-icon">🔍</span>
-          </div>
-          <nav class="nav-mobile">
-            <a href="#home" class="nav-link">Home</a>
-            <a href="#podcasts" class="nav-link">Podcasts</a>
-            <a href="#categories" class="nav-link">Categories</a>
-            <a href="#about" class="nav-link">About</a>
-          </nav>
+        <div class="loader-spinner-wrapper">
+          <div class="loader-spinner"></div>
         </div>
+        <div class="loader-progress-wrapper">
+          <div class="loader-progress-bar"></div>
+        </div>
+        <div class="loader-percentage" id="loaderPercent">0%</div>
       </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="main-header" id="header">
+      <nav class="nav-container">
+        <div class="nav-brand">
+          <div class="brand-logo">
+            <span class="logo-bracket">&lt;</span>
+            <span class="logo-text">Dev</span>
+            <span class="logo-bracket">/&gt;</span>
+          </div>
+        </div>
+
+        <div class="nav-menu" id="navMenu">
+          <a href="#home" class="nav-link active" data-section="home">
+            <i class="fas fa-home"></i>
+            <span class="nav-text" data-text-en="Home" data-text-ar="الرئيسية"
+              >Home</span
+            >
+          </a>
+          <a href="#about" class="nav-link" data-section="about">
+            <i class="fas fa-user"></i>
+            <span class="nav-text" data-text-en="About" data-text-ar="عني"
+              >About</span
+            >
+          </a>
+          <a href="#skills" class="nav-link" data-section="skills">
+            <i class="fas fa-code"></i>
+            <span class="nav-text" data-text-en="Skills" data-text-ar="المهارات"
+              >Skills</span
+            >
+          </a>
+          <a href="#experience" class="nav-link" data-section="experience">
+            <i class="fas fa-briefcase"></i>
+            <span
+              class="nav-text"
+              data-text-en="Experience"
+              data-text-ar="الخبرة"
+              >Experience</span
+            >
+          </a>
+          <a href="#projects" class="nav-link" data-section="projects">
+            <i class="fas fa-rocket"></i>
+            <span
+              class="nav-text"
+              data-text-en="Projects"
+              data-text-ar="المشاريع"
+              >Projects</span
+            >
+          </a>
+          <a href="#contact" class="nav-link" data-section="contact">
+            <i class="fas fa-envelope"></i>
+            <span class="nav-text" data-text-en="Contact" data-text-ar="التواصل"
+              >Contact</span
+            >
+          </a>
+        </div>
+
+        <div class="nav-controls">
+          <button class="lang-toggle" id="langToggle" title="Toggle Language">
+            <i class="fas fa-language"></i>
+            <span class="lang-text">AR</span>
+          </button>
+          <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+            <i class="fas fa-moon"></i>
+          </button>
+          <button class="menu-toggle" id="menuToggle" title="Toggle Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-      <div class="hero-bg"></div>
-      <div class="container">
-        <div class="hero-content">
-          <div class="hero-left">
-            <div class="hero-badge">
-              <span class="status-dot"></span>
-              <span>Now Live</span>
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Hero Section -->
+      <section id="home" class="hero-section">
+        <div class="hero-background">
+          <div class="code-grid-bg"></div>
+          <div class="floating-particles" id="particles"></div>
+        </div>
+
+        <div class="hero-container">
+          <div class="hero-content">
+            <div class="hero-greeting">
+              <span
+                class="greeting-text"
+                data-text-en="Hello, I'm"
+                data-text-ar="مرحباً، أنا"
+                >Hello, I'm</span
+              >
+              <span class="greeting-cursor">|</span>
             </div>
-            <h1 class="hero-title">
-              Discover Your Next
-              <span class="block gradient-text">Favorite Podcast</span>
+
+            <h1 class="hero-name" id="heroName">
+              <span class="name-prefix">const</span>
+              <span class="name-operator">=</span>
+              <span class="name-value">Developer</span>
+              <span class="name-suffix">;</span>
             </h1>
-            <p class="hero-description">
-              Immerse yourself in captivating stories, expert insights, and
-              inspiring conversations from creators around the world. Your
-              perfect podcast journey starts here.
+
+            <div class="hero-title">
+              <span class="title-prefix">//</span>
+              <span
+                class="title-text"
+                data-text-en="Full Stack Developer & UI/UX Designer"
+                data-text-ar="مطور Full Stack & مصمم UI/UX"
+                >Full Stack Developer & UI/UX Designer</span
+              >
+            </div>
+
+            <p
+              class="hero-description"
+              data-text-en="Passionate developer creating exceptional digital experiences with modern technologies."
+              data-text-ar="مطور شغوف بإنشاء تجارب رقمية استثنائية باستخدام التقنيات الحديثة."
+            >
+              Passionate developer creating exceptional digital experiences with
+              modern technologies.
             </p>
+
             <div class="hero-buttons">
-              <button class="btn btn-primary">▶️ Start Listening</button>
-              <button class="btn btn-secondary">🎧 Browse Library</button>
+              <a href="#contact" class="btn btn-primary">
+                <span data-text-en="Get In Touch" data-text-ar="تواصل معي"
+                  >Get In Touch</span
+                >
+                <i class="fas fa-arrow-right"></i>
+              </a>
+              <a href="#projects" class="btn btn-secondary">
+                <span data-text-en="View Projects" data-text-ar="عرض المشاريع"
+                  >View Projects</span
+                >
+                <i class="fas fa-code"></i>
+              </a>
             </div>
-            <div class="hero-stats">
-              <div class="stat">
-                <div class="stat-number">10K+</div>
-                <div class="stat-label">Episodes</div>
+
+            <div class="hero-social">
+              <a href="#" class="social-icon" title="GitHub">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="#" class="social-icon" title="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a href="#" class="social-icon" title="Twitter">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="social-icon" title="CodePen">
+                <i class="fab fa-codepen"></i>
+              </a>
+              <a href="#" class="social-icon" title="Email">
+                <i class="fas fa-envelope"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="hero-image-wrapper">
+            <div class="hero-image-container">
+              <div class="profile-image-glow"></div>
+              <div class="profile-image-frame">
+                <div class="profile-image" id="profileImage">
+                  <div class="profile-placeholder">
+                    <i class="fas fa-code"></i>
+                  </div>
+                </div>
               </div>
-              <div class="stat">
-                <div class="stat-number">500+</div>
-                <div class="stat-label">Podcasts</div>
+              <div class="floating-badge badge-1">
+                <i class="fab fa-react"></i>
+                <div class="badge-content">
+                  <span class="badge-title">React</span>
+                  <span class="badge-libs">Redux, Router, Hooks</span>
+                </div>
               </div>
-              <div class="stat">
-                <div class="stat-number">1M+</div>
-                <div class="stat-label">Listeners</div>
+              <div class="floating-badge badge-2">
+                <i class="fab fa-node-js"></i>
+                <div class="badge-content">
+                  <span class="badge-title">Node.js</span>
+                  <span class="badge-libs">Express, Socket.io, MongoDB</span>
+                </div>
+              </div>
+              <div class="floating-badge badge-3">
+                <i class="fab fa-js"></i>
+                <div class="badge-content">
+                  <span class="badge-title">JavaScript</span>
+                  <span class="badge-libs">ES6+, TypeScript, jQuery</span>
+                </div>
               </div>
             </div>
           </div>
-          <div class="hero-right">
-            <div class="featured-card">
-              <div class="featured-badges">
-                <span class="badge badge-featured">Featured</span>
-                <span class="badge badge-latest">📅 Latest</span>
-              </div>
-              <div class="featured-image">
-                <img
-                  src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400"
-                  alt="Featured Episode"
-                />
-                <button class="play-button" data-episode="0">▶️</button>
-              </div>
-              <div class="featured-content">
-                <h3>The Future of AI in Everyday Life</h3>
-                <p>
-                  How artificial intelligence is transforming our daily
-                  experiences.
-                </p>
-                <div class="featured-meta">
-                  <span>42:15 • 12.5K plays</span>
-                  <button class="btn-text" data-episode="0">Play Now</button>
-                </div>
-              </div>
-              <div class="glass-effect">
-                <div class="hero-audio-visualizer">
-                  <div class="audio-bar" style="height: 8px"></div>
-                  <div class="audio-bar" style="height: 16px"></div>
-                  <div class="audio-bar" style="height: 12px"></div>
-                  <div class="audio-bar" style="height: 20px"></div>
-                  <div class="audio-bar" style="height: 6px"></div>
-                </div>
-              </div>
-            </div>
+        </div>
+
+        <div class="scroll-indicator">
+          <div class="scroll-mouse">
+            <div class="scroll-wheel"></div>
           </div>
+          <span
+            class="scroll-text"
+            data-text-en="Scroll Down"
+            data-text-ar="انتقل للأسفل"
+            >Scroll Down</span
+          >
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Featured Podcasts -->
-    <section class="section" id="podcasts">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-badge">🎧 Featured Podcasts</div>
-          <h2 class="section-title">
-            Trending Shows You'll
-            <span class="block gradient-text">Love to Follow</span>
-          </h2>
-          <p class="section-description">
-            Hand-picked podcasts from our community of creators, covering
-            everything from technology and business to wellness and
-            entertainment.
-          </p>
-        </div>
-        <div class="podcasts-grid" id="podcastsGrid">
-          <!-- Podcasts will be populated by JavaScript -->
-        </div>
-        <div class="section-footer">
-          <button class="btn btn-outline">Explore All Podcasts</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Latest Episodes -->
-    <section class="section episodes-section">
-      <div class="container">
-        <div class="section-header-carousel">
-          <div>
-            <div class="section-badge">📅 Latest Episodes</div>
+      <!-- About Section -->
+      <section id="about" class="section about-section">
+        <div class="section-container">
+          <div class="section-header">
+            <span class="section-number">01</span>
             <h2 class="section-title">
-              Fresh Content
-              <span class="block gradient-text">Just Dropped</span>
+              <span class="title-bracket">&lt;</span>
+              <span
+                class="title-text"
+                data-text-en="About Me"
+                data-text-ar="عني"
+                >About Me</span
+              >
+              <span class="title-bracket">/&gt;</span>
             </h2>
+            <div class="section-line"></div>
           </div>
-          <div class="carousel-controls">
-            <button class="carousel-btn" id="prevBtn">‹</button>
-            <button class="carousel-btn" id="nextBtn">›</button>
-          </div>
-        </div>
-        <div class="episodes-carousel">
-          <div class="episodes-track" id="episodesTrack">
-            <!-- Episodes will be populated by JavaScript -->
-          </div>
-        </div>
-        <div class="carousel-dots" id="carouselDots">
-          <!-- Dots will be populated by JavaScript -->
-        </div>
-      </div>
-    </section>
 
-    <!-- Categories -->
-    <section class="section" id="categories">
-      <div class="container">
-        <div class="section-header">
-          <div class="section-badge">Explore Categories</div>
-          <h2 class="section-title">
-            Find Your Perfect
-            <span class="block gradient-text">Content Match</span>
-          </h2>
-          <p class="section-description">
-            Browse through our diverse collection of podcast categories and
-            discover content that matches your interests and passions.
-          </p>
-        </div>
-        <div class="categories-grid" id="categoriesGrid">
-          <!-- Categories will be populated by JavaScript -->
-        </div>
-      </div>
-    </section>
+          <div class="about-content">
+            <div class="about-text-wrapper">
+              <div class="about-intro">
+                <p
+                  class="about-text"
+                  data-text-en="I'm a passionate Full Stack Developer with over 5 years of experience in building modern web applications and mobile solutions. I specialize in JavaScript technologies, React, Node.js, and creating beautiful user interfaces."
+                  data-text-ar="أنا مطور Full Stack شغوف مع أكثر من 5 سنوات من الخبرة في بناء تطبيقات الويب الحديثة والحلول الجوالة. أتخصص في تقنيات JavaScript، React، Node.js، وإنشاء واجهات مستخدم جميلة."
+                >
+                  I'm a passionate Full Stack Developer with over 5 years of
+                  experience in building modern web applications and mobile
+                  solutions. I specialize in JavaScript technologies, React,
+                  Node.js, and creating beautiful user interfaces.
+                </p>
+              </div>
 
-    <!-- Newsletter -->
-    <section class="section newsletter-section">
-      <div class="container">
-        <div class="newsletter-card">
-          <div class="newsletter-content">
-            <div class="section-badge">🔔 Stay Updated</div>
-            <h2 class="section-title">Never Miss a Beat</h2>
-            <p class="section-description">
-              Get personalized podcast recommendations, exclusive early access
-              to new episodes, and curated weekly playlists delivered straight
-              to your inbox.
-            </p>
-            <form class="newsletter-form" id="newsletterForm">
-              <input
-                type="email"
-                placeholder="Enter your email address"
-                class="newsletter-input"
-                id="emailInput"
-                required
-              />
-              <button type="submit" class="btn btn-primary">
-                🎧 Subscribe
+              <div class="about-stats">
+                <div class="stat-item">
+                  <div class="stat-number" data-count="50">0</div>
+                  <div
+                    class="stat-label"
+                    data-text-en="Projects"
+                    data-text-ar="مشروع"
+                  >
+                    Projects
+                  </div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-number" data-count="5">0</div>
+                  <div
+                    class="stat-label"
+                    data-text-en="Years Experience"
+                    data-text-ar="سنوات خبرة"
+                  >
+                    Years Experience
+                  </div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-number" data-count="30">0</div>
+                  <div
+                    class="stat-label"
+                    data-text-en="Happy Clients"
+                    data-text-ar="عميل سعيد"
+                  >
+                    Happy Clients
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="about-image-wrapper">
+              <div class="about-image-container">
+                <div class="code-block">
+                  <div class="code-line">
+                    <span class="code-keyword">const</span>
+                    <span class="code-variable">developer</span>
+                    <span class="code-operator">=</span>
+                    <span class="code-brace">{</span>
+                  </div>
+                  <div class="code-line indent">
+                    <span class="code-property">name</span>
+                    <span class="code-operator">:</span>
+                    <span class="code-string">'Developer'</span>
+                    <span class="code-comma">,</span>
+                  </div>
+                  <div class="code-line indent">
+                    <span class="code-property">skills</span>
+                    <span class="code-operator">:</span>
+                    <span class="code-bracket">[</span>
+                    <span class="code-string">'React'</span>
+                    <span class="code-comma">,</span>
+                    <span class="code-string">'Node.js'</span>
+                    <span class="code-comma">,</span>
+                    <span class="code-string">'TypeScript'</span>
+                    <span class="code-bracket">]</span>
+                    <span class="code-comma">,</span>
+                  </div>
+                  <div class="code-line indent">
+                    <span class="code-property">passion</span>
+                    <span class="code-operator">:</span>
+                    <span class="code-string">'Coding'</span>
+                  </div>
+                  <div class="code-line">
+                    <span class="code-brace">}</span>
+                    <span class="code-semicolon">;</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Skills Section -->
+      <section id="skills" class="section skills-section">
+        <div class="section-container">
+          <div class="section-header">
+            <span class="section-number">02</span>
+            <h2 class="section-title">
+              <span class="title-bracket">&lt;</span>
+              <span
+                class="title-text"
+                data-text-en="Skills"
+                data-text-ar="المهارات"
+                >Skills</span
+              >
+              <span class="title-bracket">/&gt;</span>
+            </h2>
+            <div class="section-line"></div>
+          </div>
+
+          <div class="skills-grid">
+            <div class="skill-category">
+              <h3
+                class="category-title"
+                data-text-en="Frontend"
+                data-text-ar="الواجهة الأمامية"
+              >
+                Frontend
+              </h3>
+              <div class="skill-items">
+                <div class="skill-item" data-skill="React" data-percent="95">
+                  <div class="skill-header">
+                    <span class="skill-name">React</span>
+                    <span class="skill-percent">0%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <div class="skill-progress"></div>
+                  </div>
+                </div>
+                <div class="skill-item" data-skill="Vue.js" data-percent="85">
+                  <div class="skill-header">
+                    <span class="skill-name">Vue.js</span>
+                    <span class="skill-percent">0%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <div class="skill-progress"></div>
+                  </div>
+                </div>
+                <div
+                  class="skill-item"
+                  data-skill="TypeScript"
+                  data-percent="90"
+                >
+                  <div class="skill-header">
+                    <span class="skill-name">TypeScript</span>
+                    <span class="skill-percent">0%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <div class="skill-progress"></div>
+                  </div>
+                </div>
+                <div class="skill-item" data-skill="Next.js" data-percent="88">
+                  <div class="skill-header">
+                    <span class="skill-name">Next.js</span>
+                    <span class="skill-percent">0%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <div class="skill-progress"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="skill-category">
+              <h3
+                class="category-title"
+                data-text-en="Backend"
+                data-text-ar="الخلفية"
+              >
+                Backend
+              </h3>
+              <div class="skill-items">
+                <div class="skill-item" data-skill="Node.js" data-percent="92">
+                  <div class="skill-header">
+                    <span class="skill-name">Node.js</span>
+                    <span class="skill-percent">0%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <div class="skill-progress"></div>
+                  </div>
+                </div>
+                <div class="skill-item" data-skill="Express" data-percent="90">
+                  <div class="skill-header">
+                    <span class="skill-name">Express</span>
+                    <span class="skill-percent">0%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <div class="skill-progress"></div>
+                  </div>
+                </div>
+                <div class="skill-item" data-skill="MongoDB" data-percent="85">
+                  <div class="skill-header">
+                    <span class="skill-name">MongoDB</span>
+                    <span class="skill-percent">0%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <div class="skill-progress"></div>
+                  </div>
+                </div>
+                <div
+                  class="skill-item"
+                  data-skill="PostgreSQL"
+                  data-percent="80"
+                >
+                  <div class="skill-header">
+                    <span class="skill-name">PostgreSQL</span>
+                    <span class="skill-percent">0%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <div class="skill-progress"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="skill-category">
+              <h3
+                class="category-title"
+                data-text-en="Tools & Others"
+                data-text-ar="الأدوات وغيرها"
+              >
+                Tools & Others
+              </h3>
+              <div class="skill-items">
+                <div class="skill-item" data-skill="Git" data-percent="95">
+                  <div class="skill-header">
+                    <span class="skill-name">Git</span>
+                    <span class="skill-percent">0%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <div class="skill-progress"></div>
+                  </div>
+                </div>
+                <div class="skill-item" data-skill="Docker" data-percent="75">
+                  <div class="skill-header">
+                    <span class="skill-name">Docker</span>
+                    <span class="skill-percent">0%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <div class="skill-progress"></div>
+                  </div>
+                </div>
+                <div class="skill-item" data-skill="AWS" data-percent="70">
+                  <div class="skill-header">
+                    <span class="skill-name">AWS</span>
+                    <span class="skill-percent">0%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <div class="skill-progress"></div>
+                  </div>
+                </div>
+                <div class="skill-item" data-skill="Figma" data-percent="88">
+                  <div class="skill-header">
+                    <span class="skill-name">Figma</span>
+                    <span class="skill-percent">0%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <div class="skill-progress"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Experience Section -->
+      <section id="experience" class="section experience-section">
+        <div class="section-container">
+          <div class="section-header">
+            <span class="section-number">03</span>
+            <h2 class="section-title">
+              <span class="title-bracket">&lt;</span>
+              <span
+                class="title-text"
+                data-text-en="Experience"
+                data-text-ar="الخبرة"
+                >Experience</span
+              >
+              <span class="title-bracket">/&gt;</span>
+            </h2>
+            <div class="section-line"></div>
+          </div>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-marker"></div>
+              <div class="timeline-content">
+                <div class="timeline-header">
+                  <div class="timeline-year">2022 - Present</div>
+                  <div class="timeline-badge">Current</div>
+                </div>
+                <h3
+                  class="timeline-title"
+                  data-text-en="Senior Full Stack Developer"
+                  data-text-ar="مطور Full Stack أول"
+                >
+                  Senior Full Stack Developer
+                </h3>
+                <div class="timeline-company">
+                  <i class="fas fa-building"></i>
+                  Tech Company Inc.
+                </div>
+                <p
+                  class="timeline-description"
+                  data-text-en="Leading a team of developers in building complex web applications using React and Node.js. Developing advanced user interfaces and optimizing performance. Implementing microservices architecture and CI/CD pipelines."
+                  data-text-ar="قيادة فريق من المطورين في بناء تطبيقات ويب معقدة باستخدام React و Node.js. تطوير واجهات مستخدم متقدمة وتحسين الأداء. تنفيذ معمارية microservices وخطوط CI/CD."
+                >
+                  Leading a team of developers in building complex web
+                  applications using React and Node.js. Developing advanced user
+                  interfaces and optimizing performance. Implementing
+                  microservices architecture and CI/CD pipelines.
+                </p>
+                <div class="timeline-achievements">
+                  <div class="achievement-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span
+                      data-text-en="Led team of 5 developers"
+                      data-text-ar="قيادة فريق من 5 مطورين"
+                      >Led team of 5 developers</span
+                    >
+                  </div>
+                  <div class="achievement-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span
+                      data-text-en="Improved performance by 40%"
+                      data-text-ar="تحسين الأداء بنسبة 40%"
+                      >Improved performance by 40%</span
+                    >
+                  </div>
+                  <div class="achievement-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span
+                      data-text-en="Deployed 20+ production apps"
+                      data-text-ar="نشر أكثر من 20 تطبيق إنتاجي"
+                      >Deployed 20+ production apps</span
+                    >
+                  </div>
+                </div>
+                <div class="timeline-tags">
+                  <span class="tag">React</span>
+                  <span class="tag">Node.js</span>
+                  <span class="tag">TypeScript</span>
+                  <span class="tag">MongoDB</span>
+                  <span class="tag">Docker</span>
+                  <span class="tag">AWS</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-marker"></div>
+              <div class="timeline-content">
+                <div class="timeline-header">
+                  <div class="timeline-year">2020 - 2022</div>
+                </div>
+                <h3
+                  class="timeline-title"
+                  data-text-en="Frontend Developer"
+                  data-text-ar="مطور واجهة أمامية"
+                >
+                  Frontend Developer
+                </h3>
+                <div class="timeline-company">
+                  <i class="fas fa-building"></i>
+                  Digital Solutions
+                </div>
+                <p
+                  class="timeline-description"
+                  data-text-en="Developed interactive user interfaces using React and Vue.js. Worked on improving user experience and performance optimization. Collaborated with designers to implement pixel-perfect designs."
+                  data-text-ar="تطوير واجهات مستخدم تفاعلية باستخدام React و Vue.js. العمل على تحسين تجربة المستخدم وتحسين الأداء. التعاون مع المصممين لتنفيذ تصاميم دقيقة."
+                >
+                  Developed interactive user interfaces using React and Vue.js.
+                  Worked on improving user experience and performance
+                  optimization. Collaborated with designers to implement
+                  pixel-perfect designs.
+                </p>
+                <div class="timeline-achievements">
+                  <div class="achievement-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span
+                      data-text-en="Built 15+ responsive websites"
+                      data-text-ar="بناء أكثر من 15 موقع متجاوب"
+                      >Built 15+ responsive websites</span
+                    >
+                  </div>
+                  <div class="achievement-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span
+                      data-text-en="Reduced load time by 50%"
+                      data-text-ar="تقليل وقت التحميل بنسبة 50%"
+                      >Reduced load time by 50%</span
+                    >
+                  </div>
+                </div>
+                <div class="timeline-tags">
+                  <span class="tag">React</span>
+                  <span class="tag">Vue.js</span>
+                  <span class="tag">JavaScript</span>
+                  <span class="tag">SASS</span>
+                  <span class="tag">Webpack</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-marker"></div>
+              <div class="timeline-content">
+                <div class="timeline-header">
+                  <div class="timeline-year">2018 - 2020</div>
+                </div>
+                <h3
+                  class="timeline-title"
+                  data-text-en="Junior Developer"
+                  data-text-ar="مطور مبتدئ"
+                >
+                  Junior Developer
+                </h3>
+                <div class="timeline-company">
+                  <i class="fas fa-building"></i>
+                  Creative Studio
+                </div>
+                <p
+                  class="timeline-description"
+                  data-text-en="Developed websites using HTML, CSS, and JavaScript. Learned best practices in web development. Worked on various client projects and gained experience in modern web technologies."
+                  data-text-ar="تطوير مواقع ويب باستخدام HTML و CSS و JavaScript. تعلم أفضل الممارسات في تطوير الويب. العمل على مشاريع عملاء متنوعة واكتساب خبرة في تقنيات الويب الحديثة."
+                >
+                  Developed websites using HTML, CSS, and JavaScript. Learned
+                  best practices in web development. Worked on various client
+                  projects and gained experience in modern web technologies.
+                </p>
+                <div class="timeline-achievements">
+                  <div class="achievement-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span
+                      data-text-en="Completed 30+ projects"
+                      data-text-ar="إكمال أكثر من 30 مشروع"
+                      >Completed 30+ projects</span
+                    >
+                  </div>
+                  <div class="achievement-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span
+                      data-text-en="Learned modern frameworks"
+                      data-text-ar="تعلم إطارات العمل الحديثة"
+                      >Learned modern frameworks</span
+                    >
+                  </div>
+                </div>
+                <div class="timeline-tags">
+                  <span class="tag">HTML</span>
+                  <span class="tag">CSS</span>
+                  <span class="tag">JavaScript</span>
+                  <span class="tag">jQuery</span>
+                  <span class="tag">Bootstrap</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section id="projects" class="section projects-section">
+        <div class="section-container">
+          <div class="section-header">
+            <span class="section-number">04</span>
+            <h2 class="section-title">
+              <span class="title-bracket">&lt;</span>
+              <span
+                class="title-text"
+                data-text-en="Projects"
+                data-text-ar="المشاريع"
+                >Projects</span
+              >
+              <span class="title-bracket">/&gt;</span>
+            </h2>
+            <div class="section-line"></div>
+          </div>
+
+          <div class="projects-grid">
+            <div class="project-card">
+              <div class="project-image">
+                <div class="project-overlay">
+                  <div class="project-links">
+                    <a href="#" class="project-link" title="View Project">
+                      <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    <a href="#" class="project-link" title="View Code">
+                      <i class="fab fa-github"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="project-placeholder">
+                  <i class="fas fa-shopping-cart"></i>
+                </div>
+              </div>
+              <div class="project-content">
+                <h3
+                  class="project-title"
+                  data-text-en="E-Commerce Platform"
+                  data-text-ar="منصة التجارة الإلكترونية"
+                >
+                  E-Commerce Platform
+                </h3>
+                <p
+                  class="project-description"
+                  data-text-en="A complete e-commerce platform with payment integration and advanced inventory management."
+                  data-text-ar="منصة تجارة إلكترونية كاملة مع تكامل الدفع وإدارة المخزون المتقدمة."
+                >
+                  A complete e-commerce platform with payment integration and
+                  advanced inventory management.
+                </p>
+                <div class="project-tags">
+                  <span class="tag">React</span>
+                  <span class="tag">Node.js</span>
+                  <span class="tag">MongoDB</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <div class="project-image">
+                <div class="project-overlay">
+                  <div class="project-links">
+                    <a href="#" class="project-link" title="View Project">
+                      <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    <a href="#" class="project-link" title="View Code">
+                      <i class="fab fa-github"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="project-placeholder">
+                  <i class="fas fa-tasks"></i>
+                </div>
+              </div>
+              <div class="project-content">
+                <h3
+                  class="project-title"
+                  data-text-en="Task Management App"
+                  data-text-ar="تطبيق إدارة المهام"
+                >
+                  Task Management App
+                </h3>
+                <p
+                  class="project-description"
+                  data-text-en="A web application for task management with real-time synchronization and modern design."
+                  data-text-ar="تطبيق ويب لإدارة المهام مع مزامنة فورية وتصميم عصري."
+                >
+                  A web application for task management with real-time
+                  synchronization and modern design.
+                </p>
+                <div class="project-tags">
+                  <span class="tag">React</span>
+                  <span class="tag">Firebase</span>
+                  <span class="tag">TypeScript</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <div class="project-image">
+                <div class="project-overlay">
+                  <div class="project-links">
+                    <a href="#" class="project-link" title="View Project">
+                      <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    <a href="#" class="project-link" title="View Code">
+                      <i class="fab fa-github"></i>
+                    </a>
+                  </div>
+                </div>
+                <div class="project-placeholder">
+                  <i class="fas fa-blog"></i>
+                </div>
+              </div>
+              <div class="project-content">
+                <h3
+                  class="project-title"
+                  data-text-en="Blog Platform"
+                  data-text-ar="منصة المدونة"
+                >
+                  Blog Platform
+                </h3>
+                <p
+                  class="project-description"
+                  data-text-en="A modern blog platform with CMS features and beautiful UI design."
+                  data-text-ar="منصة مدونة حديثة مع ميزات CMS وتصميم واجهة مستخدم جميل."
+                >
+                  A modern blog platform with CMS features and beautiful UI
+                  design.
+                </p>
+                <div class="project-tags">
+                  <span class="tag">Next.js</span>
+                  <span class="tag">Prisma</span>
+                  <span class="tag">PostgreSQL</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact" class="section contact-section">
+        <div class="section-container">
+          <div class="section-header">
+            <span class="section-number">05</span>
+            <h2 class="section-title">
+              <span class="title-bracket">&lt;</span>
+              <span
+                class="title-text"
+                data-text-en="Contact"
+                data-text-ar="التواصل"
+                >Contact</span
+              >
+              <span class="title-bracket">/&gt;</span>
+            </h2>
+            <div class="section-line"></div>
+          </div>
+
+          <div class="contact-content">
+            <div class="contact-info">
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div class="contact-details">
+                  <h4
+                    class="contact-label"
+                    data-text-en="Email"
+                    data-text-ar="البريد الإلكتروني"
+                  >
+                    Email
+                  </h4>
+                  <a href="mailto:developer@example.com" class="contact-value"
+                    >developer@example.com</a
+                  >
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-phone"></i>
+                </div>
+                <div class="contact-details">
+                  <h4
+                    class="contact-label"
+                    data-text-en="Phone"
+                    data-text-ar="الهاتف"
+                  >
+                    Phone
+                  </h4>
+                  <a href="tel:+966501234567" class="contact-value"
+                    >+966 50 123 4567</a
+                  >
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="contact-details">
+                  <h4
+                    class="contact-label"
+                    data-text-en="Location"
+                    data-text-ar="الموقع"
+                  >
+                    Location
+                  </h4>
+                  <span
+                    class="contact-value"
+                    data-text-en="Riyadh, Saudi Arabia"
+                    data-text-ar="الرياض، المملكة العربية السعودية"
+                    >Riyadh, Saudi Arabia</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <form class="contact-form" id="contactForm">
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-input"
+                  placeholder="Name"
+                  data-placeholder-en="Name"
+                  data-placeholder-ar="الاسم"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="email"
+                  class="form-input"
+                  placeholder="Email"
+                  data-placeholder-en="Email"
+                  data-placeholder-ar="البريد الإلكتروني"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-input"
+                  placeholder="Subject"
+                  data-placeholder-en="Subject"
+                  data-placeholder-ar="الموضوع"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <textarea
+                  class="form-input form-textarea"
+                  rows="5"
+                  placeholder="Message"
+                  data-placeholder-en="Message"
+                  data-placeholder-ar="الرسالة"
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-submit">
+                <span data-text-en="Send Message" data-text-ar="إرسال الرسالة"
+                  >Send Message</span
+                >
+                <i class="fas fa-paper-plane"></i>
               </button>
             </form>
-            <div class="newsletter-features">
-              <div class="feature">
-                <span class="feature-dot green"></span>
-                <span>Weekly recommendations</span>
-              </div>
-              <div class="feature">
-                <span class="feature-dot blue"></span>
-                <span>Early access</span>
-              </div>
-              <div class="feature">
-                <span class="feature-dot purple"></span>
-                <span>Curated playlists</span>
-              </div>
-              <div class="feature">
-                <span class="feature-dot pink"></span>
-                <span>No spam, ever</span>
-              </div>
-            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
+    <footer class="main-footer">
+      <div class="footer-container">
         <div class="footer-content">
-          <div class="footer-brand">
-            <div class="logo">
-              <div class="logo-icon">🎧</div>
-              <span class="logo-text">PodcastHub</span>
-            </div>
-            <p class="footer-description">
-              Discover, listen, and connect with your favorite podcasts. Join
-              millions of listeners exploring the world's best audio content.
+          <div class="footer-text-wrapper">
+            <p class="footer-text">
+              <span class="footer-copyright">© 2025 Developer Portfolio</span>
+              <span class="footer-divider">•</span>
+              <span class="footer-built">Built with passion and code</span>
             </p>
-            <div class="social-links">
-              <a href="#" class="social-link">𝕏</a>
-              <a href="#" class="social-link">📘</a>
-              <a href="#" class="social-link">📷</a>
-              <a href="#" class="social-link">💼</a>
-            </div>
+            <p class="footer-author">
+              <span
+                class="footer-by-text"
+                data-text-en="by"
+                data-text-ar="بواسطة"
+                >by</span
+              >
+              <a
+                href="https://www.linkedin.com/in/mohammad-abu-sakour-kn"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-author-link"
+              >
+                <i class="fas fa-code"></i>
+                <span>Kan3an</span>
+              </a>
+            </p>
           </div>
-          <div class="footer-links">
-            <div class="footer-column">
-              <h4>Product</h4>
-              <a href="#">Features</a>
-              <a href="#">Pricing</a>
-              <a href="#">API</a>
-              <a href="#">Documentation</a>
-            </div>
-            <div class="footer-column">
-              <h4>Company</h4>
-              <a href="#">About Us</a>
-              <a href="#">Careers</a>
-              <a href="#">Press</a>
-              <a href="#">Contact</a>
-            </div>
-            <div class="footer-column">
-              <h4>Resources</h4>
-              <a href="#">Blog</a>
-              <a href="#">Help Center</a>
-              <a href="#">Community</a>
-              <a href="#">Guidelines</a>
-            </div>
-          </div>
-        </div>
-        <div class="section-wrapper">
-          <div class="section-inner">
-            <div class="section-text">
-              <h3>Stay in the loop</h3>
-              <p>Get the latest podcast recommendations and updates</p>
-            </div>
-            <button class="subscribe-button">Subscribe to Newsletter</button>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <div class="footer-legal">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Cookie Policy</a>
-          </div>
-          <div class="footer-copyright">
-            © 2025 PodcastHub. All rights reserved. <br />
-            Made with <span style="color: red">❤</span> by
+          <div class="footer-social">
             <a
-              href="https://www.codewithfaraz.com"
+              href="https://www.linkedin.com/in/mohammad-abu-sakour-kn"
               target="_blank"
-              style="text-decoration: none; color: #2563eb"
-              >codewithfaraz</a
+              rel="noopener noreferrer"
+              class="footer-social-link"
             >
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="#" class="footer-social-link" title="GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="#" class="footer-social-link" title="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
           </div>
         </div>
       </div>
     </footer>
 
-    <!-- Audio Player -->
-    <div class="audio-player" id="audioPlayer" style="display: none">
-      <div class="player-content">
-        <div class="player-info">
-          <img src="" alt="" class="player-image" id="playerImage" />
-          <div class="player-details">
-            <h4 class="player-title" id="playerTitle"></h4>
-            <p class="player-description" id="playerDescription"></p>
-          </div>
-        </div>
-        <div class="player-controls">
-          <button class="player-btn" id="playPauseBtn">▶️</button>
-          <div class="progress-container">
-            <div class="progress-time">
-              <span id="currentTime">0:00</span>
-              <span>/</span>
-              <span id="duration">0:00</span>
-            </div>
-            <div class="progress-bar">
-              <div class="progress-fill" id="progressFill"></div>
-              <input
-                type="range"
-                min="0"
-                max="100"
-                value="0"
-                class="progress-slider"
-                id="progressSlider"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="player-actions">
-          <button class="player-btn" id="volumeBtn">🔊</button>
-          <input
-            type="range"
-            min="0"
-            max="100"
-            value="80"
-            class="volume-slider"
-            id="volumeSlider"
-          />
-          <button class="player-btn" id="playlistBtn">📋</button>
-          <button class="player-btn" id="closePlayerBtn">✕</button>
-        </div>
-      </div>
-      <div class="audio-visualizer" id="audioVisualizer">
-        <!-- Visualizer bars will be generated by JavaScript -->
-      </div>
-    </div>
-
-    <!-- Scroll to Top -->
-    <button class="scroll-to-top" id="scrollToTop">↑</button>
-
-    <!-- Toast Notification -->
-    <div class="toast" id="toast">
-      <span class="toast-message" id="toastMessage"></span>
-    </div>
-
-    <!-- Hidden Audio Element -->
-    <audio id="audioElement" preload="metadata"></audio>
-
-    <!-- JavaScript -->
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <!-- Motion One loaded dynamically -->
     <script src="script.js"></script>
   </body>
 </html>
