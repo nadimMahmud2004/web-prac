@@ -737,3 +737,23 @@ function setupScrollAnimations() {
     observer.observe(el);
   });
 }
+
+// utility Functions
+
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+setInterval(() => {
+  if (isPlaying) {
+    updateVisualizer();
+  }
+}, 100);
