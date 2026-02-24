@@ -835,15 +835,12 @@ function initSmoothScroll() {
   });
 
   let currentSection = "";
-
   window.addEventListener("scroll", () => {
     const scrollPos = window.scrollY + 150;
 
     sections.forEach((section) => {
       const sectionTop = section.offsetTop;
-
       const sectionHeight = section.offsetHeight;
-
       const sectionId = section.getAttribute("id");
 
       if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
@@ -860,3 +857,8 @@ function initSmoothScroll() {
     });
   });
 }
+
+window.Animations = {
+  initParallax,
+  initSmoothScroll,
+};
