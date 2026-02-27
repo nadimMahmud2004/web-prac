@@ -862,8 +862,3 @@ function initSmoothScroll() {
     });
   });
 }
-
-window.Animations = {
-  initParallax,
-  initSmoothScroll,
-};
