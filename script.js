@@ -1,64 +1,108 @@
-// window.addEventListener("scroll", () => {
-//   const header = document.getElementById("header");
+const AppState = {
+  currentLang: "en",
+  currentTheme: "dark",
+  currentSection: "home",
+  isMenuOpen: false,
+  isLoaded: false,
+};
 
-//   if (window.scrollY > 100) {
-//     header.classList.add("scrolled");
-//   } else {
-//     header.classList.remove("scrolled");
-//   }
-// });
+document.addEventListener("DOMContentLoaded", () => {
+  initializeApp();
+});
 
-// // smooth scrolling for navigation links
-
-// document.querySelectorAll('s[href^="#"]').forEach((anchor) => {
-//   anchor.addEventListener("click", function (e) {
-//     e.preventDefault();
-
-//     document.querySelector(this.getAttribute("href")).scrollIntoView({
-//       behavior: "smooth",
-//     });
-//   });
-// });
-
-const SPENDING_THRESHOLD = 200;
-const TAX_RATE = 0.08;
-const PHONE_PRICE = 99.99;
-const ACCESSORY_PRICE = 9.99;
-const bank_balance = 303.91;
-const amount = 0;
-
-function calculateTax(amount) {
-  return amount * TAX_RATE;
+function initializeApp() {
+  loadPreferences();
+  initLanguage();
+  initTheme();
+  initNavigation();
+  initScrollEffects();
+  initFormHandlers();
+  initMobileMenu();
+  updateLanguageUI();
+  updateThemeUI();
+  AppState.isLoaded = true;
 }
 
-function formatAmount(amount) {
-  return "$" + amount.ToFixed(2);
+function loadPreferences() {
+  const savedLang = localStorage.getItem("portfolio-lang");
+  const savedTheme = localStorage.getItem("portfolio-theme");
+
+  if (savedLang) AppState.currentLang = savedLang;
+  if (savedTheme) AppState.currentTheme = savedTheme;
 }
 
-// keep buying phones while you still have money
-
-while (amount < bank_balance) {
-  // buy a new phone
-
-  amount = amount * PHONE_PRICE;
-
-  // can we afford the accessory?
-
-  if (amount < SPENDING_THRESHOLD) {
-    amount = amount + ACCESSORY_PRICE;
+function initLanguage() {
+  const langToggle = document.getElementById("langToggle");
+  if (langToggle) {
+    langToggle.addEventListener("click", toggleLanguage);
   }
+
+  setLanguage(AppState.currentLang);
 }
 
-// DON'T forget to pay the government , too
+function toggleLanguage() {
+  const newLang = (AppState.currentLang = "en" ? "ar" : "en");
+  setLanguage(newLang);
 
-amount = amount + calculateTax(amount);
+  localStorage.setItem("portfolio-lang", newLang);
+}
 
-console.log(`You Purchase` + formatAmount(amount));
+function setLanguage(lang) {
+  AppState.currentLang = lang;
 
-// you purchase : amount will show
+  const html = document.documentElement;
+  const body = document.body;
 
-// can you actually afford this purchase?
+  if (lang === "ar") {
+    html.setAttribute("lang", "ar");
+    html.setAttribute("dir", "rtl");
+    body.getAttribute("data-lang", "ar");
+    body.setAttribute("data-dir", "rtl");
+  } else {
+    html.setAttribute("lang", "en");
+    html.setAttribute("dir", "ltr");
+    body.setAttribute("data-lang", "en");
+    body.setAttribute("data-dir", "ltr");
+  }
+  updateLanguageUI();
+}
 
-if (amount > bank_balance) {
-  console.log("You can't afford this purchase..");
+function updateLanguageUI() {
+  const textElements = document.querySelectorAll(
+    "[data-text-en], [data-text-ar]",
+  );
+
+  textElements.forEach((element) => {
+    const enText = element.getAttribute("data-text-en");
+    const arText = element.getAttribute("data-text-ar");
+
+    if (AppState.currentLang == "en" && enText) {
+      element.textContent = enText;
+    }
+  });
+
+  const placeHolderElements = document.querySelectorAll(
+    "[data-placeholder-en], [data-placeholder-ar]",
+  );
+
+  placeHolderElements.forEach((element) => {
+    const enPlaceholder = element.getAttribute("data-placeholder-en");
+    const arPlaceholder = element.getAttribute("data-placeholder-ar");
+
+    if (AppState.currentLang === "ar" && arPlaceholder) {
+      element.setAttribute("placeholder", arPlaceholder);
+    } else if (AppState.currentLang === "en" && enPlaceholder) {
+      element.setAttribute("placeholder", enPlaceholder);
+    }
+  });
+
+  const langToggle = document.getElementById("langToggle");
+
+  if (langToggle) {
+    const langText = langToggle.querySelector(".lang-text");
+
+    if (langText) {
+      langText.textContent = AppState.currentLang === "en" ? "Ar" : "EN";
+    }
+  }
 }
