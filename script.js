@@ -181,10 +181,8 @@ function handleScroll() {
 
 function updateActiveNavLink(clickedLink, sectionId = null) {
   const navLinks = document.querySelectorAll(".nav-link");
-
   navLinks.forEach((link) => {
     link.classList.remove("active");
-
     if (clickedLink && link === clickedLink) {
       link.classList.add("active");
     } else if (sectionId) {
@@ -198,7 +196,6 @@ function updateActiveNavLink(clickedLink, sectionId = null) {
 
 function updateHeaderOnScroll() {
   const header = document.querySelector(".main-header");
-
   if (window.scrollY > 50) {
     header.classList.add("scrolled");
   } else {
@@ -208,7 +205,7 @@ function updateHeaderOnScroll() {
 
 function initScrollEffects() {
   const observerOptions = {
-    thresHold: 0.1,
+    threshold: 0.1,
     rootMargin: "0px 0px -100px 0px",
   };
 
@@ -220,6 +217,7 @@ function initScrollEffects() {
       }
     });
   }, observerOptions);
+
   const fadeElements = document.querySelectorAll(".fade-in");
   fadeElements.forEach((element) => observer.observe(element));
 
@@ -229,7 +227,6 @@ function initScrollEffects() {
 
 function initFormHandlers() {
   const contactForm = document.getElementById("contactForm");
-
   if (contactForm) {
     contactForm.addEventListener("submit", handleFormSubmit);
   }
@@ -237,11 +234,9 @@ function initFormHandlers() {
 
 function handleFormSubmit(e) {
   e.preventDefault();
-
   const formData = new FormData(e.target);
   const data = Object.fromEntries(formData);
-
-  console.log("Form submitted : ", data);
+  console.log("Form submitted:", data);
 
   const message =
     AppState.currentLang === "ar"
@@ -254,7 +249,6 @@ function handleFormSubmit(e) {
 
 function initMobileMenu() {
   const menuToggle = document.getElementById("menuToggle");
-
   if (menuToggle) {
     menuToggle.addEventListener("click", toggleMobileMenu);
   }
@@ -275,7 +269,6 @@ function initMobileMenu() {
 
 function toggleMobileMenu() {
   AppState.isMenuOpen = !AppState.isMenuOpen;
-
   const navMenu = document.getElementById("navMenu");
   const menuToggle = document.getElementById("menuToggle");
 
@@ -290,7 +283,6 @@ function toggleMobileMenu() {
 
 function generateParticles() {
   const particlesContainer = document.getElementById("particles");
-
   if (!particlesContainer) return;
 
   const codeSymbols = [
@@ -316,15 +308,99 @@ function generateParticles() {
     "#",
     "@",
   ];
-
   const particleCount = 20;
 
   for (let i = 0; i < particleCount; i++) {
     const particle = document.createElement("div");
-
     particle.className = "particle";
-
     particle.textContent =
       codeSymbols[Math.floor(Math.random() * codeSymbols.length)];
+    particle.style.left = Math.random() * 100 + "%";
+    particle.style.animationDelay = Math.random() * 15 + "s";
+    particle.style.animationDuration = 10 + Math.random() * 10 + "s";
+    particlesContainer.appendChild(particle);
   }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  generateParticles();
+});
+
+//--------------animations.js-----------------
+function inView(element, callback, options = {}) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          callback(entry);
+          if (options.once !== false) {
+            observer.unobserve(entry.target);
+          }
+        }
+      });
+    },
+    {
+      threshold: options.amount || 0.1,
+      rootMargin: options.rootMargin || "0px",
+    },
+  );
+  observer.observe(element);
+  return () => observer.unobserve(element);
+}
+
+function animateElement(element, props, options = {}) {
+  if (typeof anime === "undefined") return;
+  const animeProps = {};
+  if (props.opacity) animeProps.opacity = props.opacity;
+  if (props.x !== undefined) animeProps.translateX = props.x;
+  if (props.y !== undefined) animeProps.translateY = props.y;
+  if (props.scale) animeProps.scale = props.scale;
+  return anime({
+    targets: element,
+    ...animeProps,
+    duration: (options.duration || 0.8) * 1000,
+    delay: (options.delay || 0) * 1000,
+    easing: options.easing || "easeOutExpo",
+  });
+}
+
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    initLoaderAnimation();
+  }, 100);
+});
+
+function initLoaderAnimation() {
+  const loader = document.getElementById("loader");
+  const loaderPercent = document.getElementById("loaderPercent");
+  if (!loader || !loaderPercent) return;
+
+  let progress = 0;
+  const progressInterval = setInterval(() => {
+    progress += Math.random() * 15;
+    if (progress >= 100) {
+      progress = 100;
+      clearInterval(progressInterval);
+      setTimeout(() => {
+        if (typeof anime !== "undefined") {
+          anime({
+            targets: loader,
+            opacity: [1, 0],
+            duration: 500,
+            easing: "easeInOutQuad",
+            complete: () => {
+              loader.classList.add("hidden");
+              initPageAnimations();
+            },
+          });
+        } else {
+          loader.classList.add("hidden");
+          initPageAnimations();
+        }
+      }, 300);
+    }
+    if (loaderPercent) {
+      loaderPercent.textContent = Math.floor(progress) + "%";
+    }
+  }, 100);
 }
