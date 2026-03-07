@@ -4,269 +4,316 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="src/output.css" />
+    <!-- highlight.js for syntax highlighting in modals -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <link rel="stylesheet" href="styles.css" />
-
-    <!-- Tailwind CSS (CDN for development only) -->
-    <script>
-      // Suppress Tailwind CDN warning
-      if (typeof console !== "undefined" && console.warn) {
-        const originalWarn = console.warn;
-        console.warn = function (...args) {
-          if (
-            args[0] &&
-            typeof args[0] === "string" &&
-            args[0].includes("tailwindcss.com")
-          ) {
-            return; // Suppress Tailwind CDN warning
-          }
-          originalWarn.apply(console, args);
-        };
-      }
-    </script>
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Fira+Code:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css" />
   </head>
-  <body class="body-main" data-theme="dark" data-dir="ltr">
-    <!-- Loading Screen -->
-    <div class="loader-screen" id="loader">
-      <div class="loader-content">
-        <div class="loader-code-text">
-          <div class="code-line" data-line="1">const portfolio = {</div>
-          <div class="code-line" data-line="2">loading: true,</div>
-          <div class="code-line" data-line="3">status: 'initializing...'</div>
-          <div class="code-line" data-line="4">};</div>
-        </div>
-        <div class="loader-spinner-wrapper">
-          <div class="loader-spinner"></div>
-        </div>
-        <div class="loader-progress-wrapper">
-          <div class="loader-progress-bar"></div>
-        </div>
-        <div class="loader-percentage" id="loaderPercent">0%</div>
-      </div>
-    </div>
+  <body class="overflow-x-hidden">
+    <!-- Header -->
 
-    <!-- Navigation Header -->
+    <!-- Custom Cursor -->
 
-    <header class="main-header" id="header">
-      <nav class="nav-container">
-        <div class="nav-brand">
-          <div class="brand-logo">
-            <span class="logo-bracket">&lt;</span>
-            <span class="logo-text">Dev</span>
-            <span class="logo-bracket">/&gt;</span>
-          </div>
+    <div id="cursor-dot"></div>
+
+    <!-- Header -->
+
+    <header
+      class="fixed top-0 left-0 right-0 z-50 bg-opacity-50 backdrop-blur-md border-b border-gray-800"
+    >
+      <nav
+        class="container mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <a href="#" class="text-2xl font-bold text-white"> << NM</a>
+
+        <div class="hidden md:flex space-x-4">
+          <a href="#about" class="text-accent transition-colors">/about</a>
+          <a href="#about" class="text-accent transition-colors">/portfolio</a>
+          <a href="#about" class="text-accent transition-colors">/experience</a>
+          <a href="#about" class="text-accent transition-colors">/contact</a>
         </div>
 
-        <div class="nav-menu" id="navMenu">
-          <a href="#home" class="nav-link active" data-section="home">
-            <i class="fas fa-home"></i>
-            <span class="nav-text" data-text-en="Home" data-text-ar="الرئيسية"
-              >Home</span
-            >
-          </a>
-          <a href="#about" class="nav-link" data-section="about">
-            <i class="fas fa-user"></i>
-            <span class="nav-text" data-text-en="About" data-text-ar="عني"
-              >About</span
-            >
-          </a>
-          <a href="#skills" class="nav-link" data-section="skills">
-            <i class="fas fa-code"></i>
-            <span class="nav-text" data-text-en="Skills" data-text-ar="المهارات"
-              >Skills</span
-            >
-          </a>
-          <a href="#experience" class="nav-link" data-section="experience">
-            <i class="fas fa-briefcase"></i>
-            <span
-              class="nav-text"
-              data-text-en="Experience"
-              data-text-ar="الخبرة"
-              >Experience</span
-            >
-          </a>
-          <a href="#projects" class="nav-link" data-section="projects">
-            <i class="fas fa-rocket"></i>
-            <span
-              class="nav-text"
-              data-text-en="Projects"
-              data-text-ar="المشاريع"
-              >Projects</span
-            >
-          </a>
-          <a href="#contact" class="nav-link" data-section="contact">
-            <i class="fas fa-envelope"></i>
-            <span class="nav-text" data-text-en="Contact" data-text-ar="التواصل"
-              >Contact</span
-            >
-          </a>
-        </div>
-
-        <div class="nav-controls">
-          <button class="lang-toggle" id="langToggle" title="Toggle Language">
-            <i class="fas fa-language"></i>
-            <span class="lang-text">AR</span>
-          </button>
-          <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
-            <i class="fas fa-moon"></i>
-          </button>
-          <button class="menu-toggle" id="menuToggle" title="Toggle Menu">
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-        </div>
+        <button class="md:hidden text-2xl" id="mobile-menu-btn">☰</button>
       </nav>
+
+      <div id="mobile-menu" class="hidden md:hidden bg-gray-900 bg-opacity-90">
+        <a href="#about" class="hidden md:hidden hover:bg-gray-700">/about</a>
+        <a href="#portfolio" class="hidden md:hidden hover:bg-gray-700"
+          >/portfolio</a
+        >
+        <a href="#experience" class="hidden md:hidden hover:bg-gray-700"
+          >/experience</a
+        >
+        <a href="#contact" class="hidden md:hidden hover:bg-gray-700"
+          >/contact</a
+        >
+      </div>
     </header>
+    <!-- Hero Section -->
+    <section id="hero" class="h-screen relative overflow-hidden">
+      <!-- Canvas Background -->
+      <canvas
+        id="hero-canvas"
+        class="absolute top-0 left-0 w-full h-full z-0"
+      ></canvas>
 
-    <!-- Main Content -->
-
-    <main class="main-content">
-      <!-- Hero Section -->
-      <section id="home" class="hero-section">
-        <div class="hero-background">
-          <div class="code-grid-bg"></div>
-          <div class="floating-particles" id="particles"></div>
+      <!-- Fake Terminal Card -->
+      <div
+        class="absolute bottom-8 left-8 w-105 bg-[#0d1117] border border-gray-700 rounded-xl shadow-2xl z-10"
+      >
+        <!-- Fake Window Bar -->
+        <div
+          class="flex items-center gap-2 px-3 py-2 border-b border-gray-700 bg-[#161b22] rounded-t-xl"
+        >
+          <span class="w-3 h-3 rounded-full bg-red-500"></span>
+          <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+          <span class="w-3 h-3 rounded-full bg-green-500"></span>
+          <span class="ml-4 text-gray-400 text-sm font-mono">terminal</span>
         </div>
 
-        <div class="hero-container">
-          <div class="hero-content">
-            <div class="hero-greeting">
-              <span
-                class="greeting-text"
-                data-text-en="Hello, I'm"
-                data-text-ar="مرحباً، أنا"
-                >Hello, I'm</span
-              >
-              <span class="greeting-cursor">|</span>
-            </div>
+        <!-- Terminal Content -->
+        <div class="p-4 font-mono text-green-400 text-sm leading-relaxed">
+          <p>$ Hello, I am <span class="text-accent">Ethan Cole</span></p>
+          <p>
+            $ I am a <span id="typewriter"></span
+            ><span class="typewriter-cursor">|</span>
+          </p>
+          <p>$ View my work 👇</p>
+        </div>
+      </div>
+    </section>
 
-            <h1 class="hero-name" id="heroName">
-              <span class="name-prefix">const</span>
-              <span class="name-operator">=</span>
-              <span class="name-value">Developer</span>
-              <span class="name-suffix">;</span>
-            </h1>
-
-            <div class="hero-title">
-              <span class="title-prefix">//</span>
-              <span
-                class="title-text"
-                data-text-en="Full Stack Developer & UI/UX Designer"
-                data-text-ar="مطور Full Stack & مصمم UI/UX"
-                >Full Stack Developer & UI/UX Designer</span
-              >
-            </div>
-
-            <p
-              class="hero-description"
-              data-text-en="Passionate developer creating exceptional digital experiences with modern technologies."
-              data-text-ar="مطور شغوف بإنشاء تجارب رقمية استثنائية باستخدام التقنيات الحديثة."
-            >
-              Passionate developer creating exceptional digital experiences with
-              modern technologies.
-            </p>
-
-            <div class="hero-buttons">
-              <a href="#contact" class="btn btn-primary">
-                <span data-text-en="Get In Touch" data-text-ar="تواصل معي"
-                  >Get In Touch</span
-                >
-                <i class="fas fa-arrow-right"></i>
-              </a>
-              <a href="#projects" class="btn btn-secondary">
-                <span data-text-en="View Projects" data-text-ar="عرض المشاريع"
-                  >View Projects</span
-                >
-                <i class="fas fa-code"></i>
-              </a>
-            </div>
-
-            <div class="hero-social">
-              <a href="#" class="social-icon" title="GitHub">
-                <i class="fab fa-github"></i>
-              </a>
-              <a href="#" class="social-icon" title="LinkedIn">
-                <i class="fab fa-linkedin-in"></i>
-              </a>
-              <a href="#" class="social-icon" title="Twitter">
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a href="#" class="social-icon" title="CodePen">
-                <i class="fab fa-codepen"></i>
-              </a>
-              <a href="#" class="social-icon" title="Email">
-                <i class="fas fa-envelope"></i>
-              </a>
+    <!-- About Section -->
+    <section id="about" class="py-20 reveal">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-12">
+          <span class="text-accent">01.</span> About Me
+        </h2>
+        <div class="flex flex-col md:flex-row items-center gap-12">
+          <div class="md:w-1/3 flex justify-center">
+            <div class="relative w-64 h-64">
+              <img
+                src="image/Nadim.jpg"
+                alt="Nadim Mahmud"
+                class="rounded-full w-full h-full object-cover border-4 border-accent"
+                id="about-img"
+                crossorigin="anonymous"
+              />
+              <div class="absolute inset-0 rounded-full glow opacity-75"></div>
             </div>
           </div>
-
-          <div class="hero-image-wrapper">
-            <div class="hero-image-container">
-              <div class="profile-image-glow"></div>
-              <div class="profile-image-frame">
-                <div class="profile-image" id="profileImage">
-                  <div class="profile-placeholder">
-                    <i class="fas fa-code"></i>
+          <div class="md:w-2/3">
+            <div class="bg-[#010409] border border-gray-800 rounded-lg p-6">
+              <div class="flex items-center mb-4">
+                <span class="h-3 w-3 bg-red-500 rounded-full mr-2"></span>
+                <span class="h-3 w-3 bg-yellow-500 rounded-full mr-2"></span>
+                <span class="h-3 w-3 bg-green-500 rounded-full"></span>
+              </div>
+              <p class="text-secondary mb-4">
+                > nadim_mahmud@portfolio:~$ cat ./bio.txt
+              </p>
+              <p class="text-primary leading-relaxed">
+                Hello! I'm Nadim, an aspired of passionate software engineer
+                with a knack for creating elegant and efficient solutions. I've
+                had the privilege of working on a diverse range of projects,
+                from scalable web applications to complex backend systems. My
+                journey in coding started with a simple "Hello, World!" and has
+                since evolved into a deep love for building things that make a
+                difference.
+              </p>
+              <p class="text-secondary mt-4">
+                > <span class="blinking-cursor">_</span>
+              </p>
+            </div>
+            <div class="mt-8">
+              <h3 class="text-2xl font-semibold mb-4">My Skills</h3>
+              <div class="space-y-4">
+                <div class="skill">
+                  <p class="flex justify-between mb-1">
+                    <span>JavaScript</span><span>90%</span>
+                  </p>
+                  <div class="w-full bg-gray-700 rounded-full h-2.5">
+                    <div
+                      class="bg-accent h-2.5 rounded-full skill-bar-inner"
+                      style="width: 0%"
+                      data-width="90%"
+                    ></div>
+                  </div>
+                </div>
+                <div class="skill">
+                  <p class="flex justify-between mb-1">
+                    <span>React</span><span>85%</span>
+                  </p>
+                  <div class="w-full bg-gray-700 rounded-full h-2.5">
+                    <div
+                      class="bg-accent h-2.5 rounded-full skill-bar-inner"
+                      style="width: 0%"
+                      data-width="85%"
+                    ></div>
+                  </div>
+                </div>
+                <div class="skill">
+                  <p class="flex justify-between mb-1">
+                    <span>Node.js</span><span>80%</span>
+                  </p>
+                  <div class="w-full bg-gray-700 rounded-full h-2.5">
+                    <div
+                      class="bg-accent h-2.5 rounded-full skill-bar-inner"
+                      style="width: 0%"
+                      data-width="80%"
+                    ></div>
+                  </div>
+                </div>
+                <div class="skill">
+                  <p class="flex justify-between mb-1">
+                    <span>Python</span><span>75%</span>
+                  </p>
+                  <div class="w-full bg-gray-700 rounded-full h-2.5">
+                    <div
+                      class="bg-green h-2.5 rounded-full skill-bar-inner"
+                      style="width: 0%"
+                      data-width="75%"
+                    ></div>
                   </div>
                 </div>
               </div>
-              <div class="floating-badge badge-1">
-                <i class="fab fa-react"></i>
-                <div class="badge-content">
-                  <span class="badge-title">React</span>
-                  <span class="badge-libs">Redux, Router, Hooks</span>
-                </div>
-              </div>
-              <div class="floating-badge badge-2">
-                <i class="fab fa-node-js"></i>
-                <div class="badge-content">
-                  <span class="badge-title">Node.js</span>
-                  <span class="badge-libs">Express, Socket.io, MongoDB</span>
-                </div>
-              </div>
-              <div class="floating-badge badge-3">
-                <i class="fab fa-js"></i>
-                <div class="badge-content">
-                  <span class="badge-title">JavaScript</span>
-                  <span class="badge-libs">ES6+, TypeScript, jQuery</span>
-                </div>
-              </div>
             </div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div class="scroll-indicator">
-          <div class="scroll-mouse">
-            <div class="scroll-wheel"></div>
-          </div>
-          <span
-            class="scroll-text"
-            data-text-en="Scroll Down"
-            data-text-ar="انتقل للأسفل"
-            >Scroll Down</span
-          >
+    <!-- Portfolio Section -->
+
+    <section id="portfolio" class="py-20 bg-[#010409] reveal">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-12">
+          <span class="text-accent">02.</span> My Portfolio
+        </h2>
+
+        <div class="flex justify-center mb-8 space-x-2 md:space-x-4">
+          <button class="filter-btn" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="frontend">Frontend</button>
+          <button class="filter-btn" data-filter="backend">Backend</button>
+          <button class="filter-btn" data-filter="fullstack">fullstack</button>
         </div>
-      </section>
-    </main>
 
-    <script src="script.js"></script>
+        <div
+          id="portfolio-grid"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3v gap-8"
+        >
+          <!-- Project cards will be injected here by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+
+    <section id="experience" class="py-20 reveal">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-12">
+          <span class="text-accent">03.</span> My Experience
+        </h2>
+
+        <div class="relative max-w-3xl mx-auto">
+          <!-- Experience items will be injected here by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+
+    <section id="contact" class="py-20 bg-[#010409] reveal">
+      <div class="container mx-auto px-6 max-w-2xl">
+        <h2 class="text-3xl font-bold text-center mb-12">
+          <span class="text-accent">04.</span> Get In Touch
+        </h2>
+
+        <div class="bg-[#161b22] border border-gray-800 rounded-lg p-8">
+          <div class="flex items-center mb-4">
+            <span class="h-3 w-3 bg-red-500 rounded-full mr-2"></span>
+            <span class="h-3 w-3 bg-yellow-500 rounded-full mr-2"></span>
+            <span class="h-3 w-3 bg-green-500 rounded-full"></span>
+          </div>
+
+          <form action="">
+            <div class="mb-4">
+              <label for="name" class="block mb-2 text-seondary"> >Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="w-full p-2 rounded-md form-input"
+              />
+            </div>
+            <div class="mb-4">
+              <label for="email" class="block mb-2 text-seondary">
+                >Email</label
+              >
+              <input
+                type="text"
+                id="email"
+                name="email"
+                class="w-full p-2 rounded-md form-input"
+              />
+            </div>
+            <div class="mb-4">
+              <label for="message" class="block mb-2 text-secondary"
+                >> Message:</label
+              >
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                class="w-full p-2 rounded-md form-input"
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full py-2 px-4 rounded-md text-white font-bold submit-btn"
+            >
+              SEND MESSAGE
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div id="project-modal-overlay">
+      <div id="project-modal">
+        <div class="modal-header">
+          <div class="flex items-center">
+            <span class="h-3 w-3 bg-red-500 rounded-full mr-2"></span>
+            <span class="h-3 w-3 bg-yellow-500 rounded-full mr-2"></span>
+            <span class="h-3 w-3 bg-green-500 rounded-full"></span>
+          </div>
+          <button id="modal-close-btn" class="text-2xl">×</button>
+        </div>
+        <div class="border-b border-gray-800 flex px-4">
+          <button class="modal-tab active" data-tab="description">
+            Description.md
+          </button>
+          <button class="modal-tab" data-tab="features">Features.js</button>
+          <button class="modal-tab" data-tab="snippet">Snippet.html</button>
+        </div>
+        <div class="modal-body">
+          <!-- Content will be injected here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-6 text-center text-secondary border-t border-gray-800">
+      <p>
+        © 2025 Nadim Mahmud . Designed & Built with <3 by
+        <a href="https://www.codewithfaraz.com">CodewithMe</a>
+      </p>
+    </footer>
   </body>
 </html>
