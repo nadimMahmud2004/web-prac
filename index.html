@@ -4,316 +4,445 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="src/output.css" />
-    <!-- highlight.js for syntax highlighting in modals -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap"
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
     />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- GSAP for advanced animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+
+    <!-- Tailwind Css -->
+
+    <link rel="stylesheet" href="src/output.css" />
+
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body class="overflow-x-hidden">
-    <!-- Header -->
-
+  <body class="bg-black">
     <!-- Custom Cursor -->
 
-    <div id="cursor-dot"></div>
+    <div class="cursor">
+      <div class="cursor-dot"></div>
+      <div class="cursor-outline"></div>
+    </div>
 
     <!-- Header -->
 
     <header
-      class="fixed top-0 left-0 right-0 z-50 bg-opacity-50 backdrop-blur-md border-b border-gray-800"
+      id="header"
+      class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
     >
-      <nav
-        class="container mx-auto px-6 py-4 flex justify-between items-center"
-      >
-        <a href="#" class="text-2xl font-bold text-white"> << NM</a>
-
-        <div class="hidden md:flex space-x-4">
-          <a href="#about" class="text-accent transition-colors">/about</a>
-          <a href="#about" class="text-accent transition-colors">/portfolio</a>
-          <a href="#about" class="text-accent transition-colors">/experience</a>
-          <a href="#about" class="text-accent transition-colors">/contact</a>
+      <div class="container mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <a href="#" class="text-2xl font-bold font-serif text-white magnetic"
+            >Stellar</a
+          >
+          <nav class="hidden md:flex items-center space-x-8">
+            <a
+              href="#about"
+              class="text-gray-300 hover:text-white transition-colors"
+              >About</a
+            >
+            <a
+              href="#services"
+              class="text-gray-300 hover:text-white transition-colors"
+              >Services</a
+            >
+            <a
+              href="#portfolio"
+              class="text-gray-300 hover:text-white transition-colors"
+              >Work</a
+            >
+            <a
+              href="#contact"
+              class="bg-green-500 text-white px-5 py-2 rounded-md hover:bg-green-600 transition-all font-semibold magnetic"
+              >Get In Touch</a
+            >
+          </nav>
+          <button class="md:hidden magnetic" id="mobile-menu-button">
+            <i data-lucide="menu" class="w-6 h-6 text-white"></i>
+          </button>
         </div>
+      </div>
 
-        <button class="md:hidden text-2xl" id="mobile-menu-btn">☰</button>
-      </nav>
-
-      <div id="mobile-menu" class="hidden md:hidden bg-gray-900 bg-opacity-90">
-        <a href="#about" class="hidden md:hidden hover:bg-gray-700">/about</a>
-        <a href="#portfolio" class="hidden md:hidden hover:bg-gray-700"
-          >/portfolio</a
+      <!-- Mobile Menu -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden px-6 pb-4"
+        style="background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(10px)"
+      >
+        <a href="#about" class="block py-2 text-gray-300 hover:text-white"
+          >About</a
         >
-        <a href="#experience" class="hidden md:hidden hover:bg-gray-700"
-          >/experience</a
+        <a href="#services" class="block py-2 text-gray-300 hover:text-white"
+          >Services</a
         >
-        <a href="#contact" class="hidden md:hidden hover:bg-gray-700"
-          >/contact</a
+        <a href="#portfolio" class="block py-2 text-gray-300 hover:text-white"
+          >Work</a
+        >
+        <a
+          href="#contact"
+          class="block mt-2 bg-green-500 text-white px-4 py-2 rounded-md text-center hover:bg-green-600"
+          >Get in Touch</a
         >
       </div>
     </header>
-    <!-- Hero Section -->
-    <section id="hero" class="h-screen relative overflow-hidden">
-      <!-- Canvas Background -->
-      <canvas
-        id="hero-canvas"
-        class="absolute top-0 left-0 w-full h-full z-0"
-      ></canvas>
 
-      <!-- Fake Terminal Card -->
-      <div
-        class="absolute bottom-8 left-8 w-105 bg-[#0d1117] border border-gray-700 rounded-xl shadow-2xl z-10"
+    <main>
+      <!-- Hero Section -->
+
+      <section
+        id="hero"
+        class="min-h-screen flex items-center justify-center text-white relative overflow-hidden"
       >
-        <!-- Fake Window Bar -->
-        <div
-          class="flex items-center gap-2 px-3 py-2 border-b border-gray-700 bg-[#161b22] rounded-t-xl"
-        >
-          <span class="w-3 h-3 rounded-full bg-red-500"></span>
-          <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
-          <span class="w-3 h-3 rounded-full bg-green-500"></span>
-          <span class="ml-4 text-gray-400 text-sm font-mono">terminal</span>
+        <div class="hero-bg-container">
+          <canvas id="particle-canvas"></canvas>
         </div>
 
-        <!-- Terminal Content -->
-        <div class="p-4 font-mono text-green-400 text-sm leading-relaxed">
-          <p>$ Hello, I am <span class="text-accent">Ethan Cole</span></p>
-          <p>
-            $ I am a <span id="typewriter"></span
-            ><span class="typewriter-cursor">|</span>
+        <div class="hero-content text-center container mx-auto px-6">
+          <h1
+            id="hero-title"
+            class="text-5xl md:text-8xl font-serif font-bold mb-6 leading-tight"
+          ></h1>
+          <p
+            id="hero-subtitle"
+            class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto text-gray-300 opacity-0"
+          >
+            We forge digital artifacts that define the future. Experience
+            interactive art, not just web design.
           </p>
-          <p>$ View my work 👇</p>
+          <a
+            id="hero-cta"
+            href="#about"
+            class="bg-white text-gray-900 font-bold px-10 py-4 rounded-md hover:bg-gray-200 transition-all text-lg transform hover:scale-105 opacity-0 magnetic"
+            >Begin the Journey</a
+          >
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-20 reveal">
-      <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-center mb-12">
-          <span class="text-accent">01.</span> About Me
-        </h2>
-        <div class="flex flex-col md:flex-row items-center gap-12">
-          <div class="md:w-1/3 flex justify-center">
-            <div class="relative w-64 h-64">
-              <img
-                src="image/Nadim.jpg"
-                alt="Nadim Mahmud"
-                class="rounded-full w-full h-full object-cover border-4 border-accent"
-                id="about-img"
-                crossorigin="anonymous"
-              />
-              <div class="absolute inset-0 rounded-full glow opacity-75"></div>
-            </div>
-          </div>
-          <div class="md:w-2/3">
-            <div class="bg-[#010409] border border-gray-800 rounded-lg p-6">
-              <div class="flex items-center mb-4">
-                <span class="h-3 w-3 bg-red-500 rounded-full mr-2"></span>
-                <span class="h-3 w-3 bg-yellow-500 rounded-full mr-2"></span>
-                <span class="h-3 w-3 bg-green-500 rounded-full"></span>
+      <!-- Main Content Wrapper -->
+
+      <div class="main-content">
+        <!-- About Section -->
+
+        <section id="about" class="py-24 md:py-40 overflow-hidden">
+          <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-5 gap-10 items-center">
+              <div class="md:col-span-3 gsap-reveal">
+                <h2
+                  class="text-4xl md:text-5xl font-serif font-bold text-white mb-4"
+                >
+                  Where code becomes poetry .
+                </h2>
+                <p class="text-gray-400 mt-8 mb-6 text-lg leading-relaxed">
+                  We are a collective of digital artisans—artists, thinkers, and
+                  technologists. Our medium is the web, our canvas the browser.
+                  We don't just solve problems; we craft emotions and build
+                  connections through immersive digital narratives.
+                </p>
               </div>
-              <p class="text-secondary mb-4">
-                > nadim_mahmud@portfolio:~$ cat ./bio.txt
-              </p>
-              <p class="text-primary leading-relaxed">
-                Hello! I'm Nadim, an aspired of passionate software engineer
-                with a knack for creating elegant and efficient solutions. I've
-                had the privilege of working on a diverse range of projects,
-                from scalable web applications to complex backend systems. My
-                journey in coding started with a simple "Hello, World!" and has
-                since evolved into a deep love for building things that make a
-                difference.
-              </p>
-              <p class="text-secondary mt-4">
-                > <span class="blinking-cursor">_</span>
-              </p>
-            </div>
-            <div class="mt-8">
-              <h3 class="text-2xl font-semibold mb-4">My Skills</h3>
-              <div class="space-y-4">
-                <div class="skill">
-                  <p class="flex justify-between mb-1">
-                    <span>JavaScript</span><span>90%</span>
-                  </p>
-                  <div class="w-full bg-gray-700 rounded-full h-2.5">
-                    <div
-                      class="bg-accent h-2.5 rounded-full skill-bar-inner"
-                      style="width: 0%"
-                      data-width="90%"
-                    ></div>
-                  </div>
-                </div>
-                <div class="skill">
-                  <p class="flex justify-between mb-1">
-                    <span>React</span><span>85%</span>
-                  </p>
-                  <div class="w-full bg-gray-700 rounded-full h-2.5">
-                    <div
-                      class="bg-accent h-2.5 rounded-full skill-bar-inner"
-                      style="width: 0%"
-                      data-width="85%"
-                    ></div>
-                  </div>
-                </div>
-                <div class="skill">
-                  <p class="flex justify-between mb-1">
-                    <span>Node.js</span><span>80%</span>
-                  </p>
-                  <div class="w-full bg-gray-700 rounded-full h-2.5">
-                    <div
-                      class="bg-accent h-2.5 rounded-full skill-bar-inner"
-                      style="width: 0%"
-                      data-width="80%"
-                    ></div>
-                  </div>
-                </div>
-                <div class="skill">
-                  <p class="flex justify-between mb-1">
-                    <span>Python</span><span>75%</span>
-                  </p>
-                  <div class="w-full bg-gray-700 rounded-full h-2.5">
-                    <div
-                      class="bg-green h-2.5 rounded-full skill-bar-inner"
-                      style="width: 0%"
-                      data-width="75%"
-                    ></div>
-                  </div>
+
+              <div class="md:col-span-2 gsap-reveal" data-gsap-reveal="0.2">
+                <div class="relative">
+                  <div
+                    id="about-border"
+                    class="absolute -top-8 -left-8 w-full h-full border-4 border-green-500 rounded-lg z-0"
+                  ></div>
+                  <img
+                    src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=1974&auto=format&fit=crop"
+                    alt="Creative team discussion"
+                    class="rounded-lg shadow-2xl w-full relative z-10"
+                  />
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
 
-    <!-- Portfolio Section -->
+        <!-- Services Section -->
 
-    <section id="portfolio" class="py-20 bg-[#010409] reveal">
-      <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-center mb-12">
-          <span class="text-accent">02.</span> My Portfolio
-        </h2>
-
-        <div class="flex justify-center mb-8 space-x-2 md:space-x-4">
-          <button class="filter-btn" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="frontend">Frontend</button>
-          <button class="filter-btn" data-filter="backend">Backend</button>
-          <button class="filter-btn" data-filter="fullstack">fullstack</button>
-        </div>
-
-        <div
-          id="portfolio-grid"
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3v gap-8"
-        >
-          <!-- Project cards will be injected here by JS -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Experience Section -->
-
-    <section id="experience" class="py-20 reveal">
-      <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-center mb-12">
-          <span class="text-accent">03.</span> My Experience
-        </h2>
-
-        <div class="relative max-w-3xl mx-auto">
-          <!-- Experience items will be injected here by JS -->
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-
-    <section id="contact" class="py-20 bg-[#010409] reveal">
-      <div class="container mx-auto px-6 max-w-2xl">
-        <h2 class="text-3xl font-bold text-center mb-12">
-          <span class="text-accent">04.</span> Get In Touch
-        </h2>
-
-        <div class="bg-[#161b22] border border-gray-800 rounded-lg p-8">
-          <div class="flex items-center mb-4">
-            <span class="h-3 w-3 bg-red-500 rounded-full mr-2"></span>
-            <span class="h-3 w-3 bg-yellow-500 rounded-full mr-2"></span>
-            <span class="h-3 w-3 bg-green-500 rounded-full"></span>
-          </div>
-
-          <form action="">
-            <div class="mb-4">
-              <label for="name" class="block mb-2 text-seondary"> >Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                class="w-full p-2 rounded-md form-input"
-              />
-            </div>
-            <div class="mb-4">
-              <label for="email" class="block mb-2 text-seondary">
-                >Email</label
-              >
-              <input
-                type="text"
-                id="email"
-                name="email"
-                class="w-full p-2 rounded-md form-input"
-              />
-            </div>
-            <div class="mb-4">
-              <label for="message" class="block mb-2 text-secondary"
-                >> Message:</label
-              >
-              <textarea
-                id="message"
-                name="message"
-                rows="4"
-                class="w-full p-2 rounded-md form-input"
-              ></textarea>
-            </div>
-
-            <button
-              type="submit"
-              class="w-full py-2 px-4 rounded-md text-white font-bold submit-btn"
+        <section id="services" class="py-24 md:py-32 bg-gray-900/50">
+          <div class="container mx-auto px-6 text-center">
+            <h2
+              class="text-4xl md:text-5xl font-serif font-bold text-white mb-4 gsap-reveal"
             >
-              SEND MESSAGE
-            </button>
-          </form>
-        </div>
-      </div>
-    </section>
+              Our Core Disciplines
+            </h2>
+            <p
+              class="text-lg text-gray-400 mb-12 max-w-2xl mx-auto gsap-reveal"
+            >
+              We provide a holistic approach to digital creation, ensuring every
+              facet of your project is polished to perfection.
+            </p>
 
-    <!-- Project Modal -->
-    <div id="project-modal-overlay">
-      <div id="project-modal">
-        <div class="modal-header">
-          <div class="flex items-center">
-            <span class="h-3 w-3 bg-red-500 rounded-full mr-2"></span>
-            <span class="h-3 w-3 bg-yellow-500 rounded-full mr-2"></span>
-            <span class="h-3 w-3 bg-green-500 rounded-full"></span>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+              <!-- Service Card -->
+
+              <div
+                class="service-card bg-gray-800 p-8 rounded-lg transition-all duration-300 ease-in-out transform hover:-translate-y-2 gsap-reveal"
+              >
+                <div
+                  class="service-icon bg-gray-700 text-teal-400 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-8 transition-all duration-300"
+                >
+                  <i data-lucide="gem" class="w-10 h-10"></i>
+                </div>
+
+                <h3 class="text-2xl font-bold mb-3 text-white">
+                  Experience Design
+                </h3>
+                <p class="text-gray-400">
+                  Crafting user-centric journeys that are both intuitive and
+                  delightful, turning visitors into advocates.
+                </p>
+              </div>
+              <!-- Service Card 2 -->
+              <div
+                class="service-card bg-gray-800 p-8 rounded-lg transition-all duration-300 ease-in-out transform hover:-translate-y-2 gsap-reveal"
+                data-gsap-delay="0.2"
+              >
+                <div
+                  class="service-icon bg-gray-700 text-teal-400 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-8 transition-all duration-300"
+                >
+                  <i data-lucide="cpu" class="w-10 h-10"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3 text-white">
+                  Creative Technology
+                </h3>
+                <p class="text-gray-400">
+                  Leveraging cutting-edge tech to build fast, scalable, and
+                  secure digital platforms that perform.
+                </p>
+              </div>
+              <!-- Service Card 3 -->
+              <div
+                class="service-card bg-gray-800 p-8 rounded-lg transition-all duration-300 ease-in-out transform hover:-translate-y-2 gsap-reveal"
+                data-gsap-delay="0.4"
+              >
+                <div
+                  class="service-icon bg-gray-700 text-teal-400 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-8 transition-all duration-300"
+                >
+                  <i data-lucide="megaphone" class="w-10 h-10"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-3 text-white">
+                  Brand Strategy
+                </h3>
+                <p class="text-gray-400">
+                  Defining compelling brand narratives that resonate deeply and
+                  create lasting market impact.
+                </p>
+              </div>
+            </div>
           </div>
-          <button id="modal-close-btn" class="text-2xl">×</button>
-        </div>
-        <div class="border-b border-gray-800 flex px-4">
-          <button class="modal-tab active" data-tab="description">
-            Description.md
-          </button>
-          <button class="modal-tab" data-tab="features">Features.js</button>
-          <button class="modal-tab" data-tab="snippet">Snippet.html</button>
-        </div>
-        <div class="modal-body">
-          <!-- Content will be injected here -->
-        </div>
-      </div>
-    </div>
+        </section>
 
-    <!-- Footer -->
-    <footer class="py-6 text-center text-secondary border-t border-gray-800">
-      <p>
-        © 2025 Nadim Mahmud . Designed & Built with <3 by
-        <a href="https://www.codewithfaraz.com">CodewithMe</a>
-      </p>
+        <!-- Portfolio Section -->
+
+        <section id="portfolio" class="py-24 md:py-40">
+          <div class="container mx-auto px-6">
+            <h2
+              class="text-4xl md:text-5xl font-serif font-bold text-white mb-4 text-center gsap-reveal"
+            >
+              Our Digital Canvases
+            </h2>
+            <p
+              class="text-lg text-center text-gray-400 mb-12 max-w-2xl mx-auto gsap-reveal"
+            >
+              A gallery of our explorations in digital form and function.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-10 mt-16">
+              <!-- Portfolio Item 1 -->
+
+              <div class="group relative gsap-reveal">
+                <div class="portfolio-image-wrapper">
+                  <img
+                    src="https://images.unsplash.com/photo-1708627193049-4df0693e9a37?q=80&w=1974&auto=format&fit=crop"
+                    alt="Abstract art project"
+                    class="portfolio-image w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-in-out"
+                  />
+                </div>
+                <div class="absolute bottom-0 lef p-8 text-white">
+                  <h3
+                    class="text-3xl font-serif font-bold mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-in-out"
+                  >
+                    Project Cygnus
+                  </h3>
+                  <p
+                    class="text-green-400 font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  >
+                    Art Installation Website
+                  </p>
+                </div>
+              </div>
+              <!-- Portfolio Item 2 -->
+              <div class="group relative gsap-reveal" data-gsap-delay="0.2">
+                <div class="portfolio-image-wrapper">
+                  <img
+                    src="https://images.unsplash.com/photo-1564316800929-be17a69d6966?q=80&w=1974&auto=format&fit=crop"
+                    alt="Fashion brand project"
+                    class="portfolio-image w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-in-out"
+                  />
+                </div>
+                <div class="absolute bottom-0 left-0 p-8 text-white">
+                  <h3
+                    class="text-3xl font-serif font-bold mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-in-out"
+                  >
+                    Atelier Noir
+                  </h3>
+                  <p
+                    class="text-green-300 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  >
+                    E-commerce Experience
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-24 md:py-32 bg-gray-900/50">
+          <div class="container mx-auto px-6">
+            <h2
+              class="text-4xl md:text-5xl font-serif font-bold text-white mb-4 text-center gsap-reveal"
+            >
+              Voices of Our Partners
+            </h2>
+            <p
+              class="text-lg text-gray-400 mb-12 max-w-2xl mx-auto gsap-reveal"
+            >
+              Our success is measured by the success of those we collaborate
+              with.
+            </p>
+            <div class="grid md:grid-cols-2 gap-8 mt-16">
+              <!-- Testimonial 1 -->
+              <div
+                class="testimonial-card bg-transparent border border-gray-800 p-8 rounded-lg relative gsap-reveal"
+              >
+                <p class="text-gray-300 italic text-xl mb-6">
+                  "Stellar didn't just deliver a product; they delivered a
+                  masterpiece. Their process is a masterclass in creativity and
+                  collaboration."
+                </p>
+                <div class="flex items-center">
+                  <img
+                    src="https://i.pravatar.cc/150?img=5"
+                    alt="Client Photo"
+                    class="w-14 h-14 rounded-full mr-4 border-2 border-teal-400"
+                  />
+                  <div>
+                    <h4 class="font-bold text-white text-lg">
+                      Elena Rodriguez
+                    </h4>
+                    <p class="text-gray-400">Founder, Artifex</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Testimonial 2 -->
+              <div
+                class="testimonial-card bg-transparent border border-gray-800 p-8 rounded-lg relative gsap-reveal"
+                data-gsap-delay="0.2"
+              >
+                <p class="text-gray-300 italic text-xl mb-6">
+                  "The ambition and talent at Stellar are simply unparalleled.
+                  They took our vision and elevated it to heights we never
+                  imagined."
+                </p>
+                <div class="flex items-center">
+                  <img
+                    src="https://i.pravatar.cc/150?img=8"
+                    alt="Client Photo"
+                    class="w-14 h-14 rounded-full mr-4 border-2 border-teal-400"
+                  />
+                  <div>
+                    <h4 class="font-bold text-white text-lg">David Lee</h4>
+                    <p class="text-gray-400">CTO, QuantumLeap</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Contact Section -->
+
+        <section id="contact" class="py-24 md:py-40">
+          <div class="container mx-auto px-6 text-center">
+            <h2
+              class="text-4xl md:text-5xl font-serif font-bold text-white mb-4 gsap-reveal"
+            >
+              Have an idea?
+            </h2>
+            <p
+              class="text-lg text-gray-400 mb-12 max-w-2xl mx-auto gsap-reveal"
+            >
+              Let's make it a reality. We're always excited to hear about
+              ambitious projects.
+            </p>
+
+            <div class="max-w-xl mx-auto mt-12 gsap-reveal">
+              <form action="#" method="post" class="space-y-6">
+                <input
+                  type="text"
+                  placeholder="Your Name..."
+                  class="w-full bg-gray-800 text-white px-5 py-4 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  required
+                />
+                <input
+                  type="text"
+                  placeholder="Your Email..."
+                  class="w-full bg-gray-800 text-white px-5 py-4 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  required
+                />
+
+                <textarea
+                  placeholder="Tell us about your project..."
+                  rows="6"
+                  class="w-full bg-gray-800 text-white px-5 py-4 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  required
+                ></textarea>
+                <button
+                  type="submit"
+                  class="w-full bg-teal-500 text-white font-bold px-6 py-4 rounded-md hover:bg-teal-600 transition-all text-lg transform hover:scale-105"
+                >
+                  Send Inquiry
+                </button>
+              </form>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="bg-gray-900 border-t border-gray-800">
+      <div class="container mx-auto px-6 py-8 text-center text-gray-400">
+        <div class="flex justify-center space-x-6 mb-6">
+          <a href="#" class="hover:text-white"
+            ><i data-lucide="twitter" class="w-6 h-6"></i
+          ></a>
+          <a href="#" class="hover:text-white"
+            ><i data-lucide="linkedin" class="w-6 h-6"></i
+          ></a>
+          <a href="#" class="hover:text-white"
+            ><i data-lucide="instagram" class="w-6 h-6"></i
+          ></a>
+        </div>
+        <p>
+          © 2025 Stellar. All Rights Reserved. A new vision of digital craft.
+        </p>
+        <p>
+          Made with ❤️ by
+          <a href="https://www.codewithfaraz.com" target="_blank"
+            >CodeWithFaraz</a
+          >
+        </p>
+      </div>
     </footer>
+    <script src="script.js"></script>
   </body>
 </html>
