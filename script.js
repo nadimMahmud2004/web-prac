@@ -679,7 +679,6 @@ function setupScrollAnimations() {
 }
 
 // Back to top button
-
 function setupBackToTop() {
   const backToTopBtn = document.getElementById("backToTop");
 
@@ -700,14 +699,11 @@ function setupBackToTop() {
 }
 
 // Newsletter form
-
 document.querySelector(".newsletter-form").addEventListener("submit", (e) => {
   e.preventDefault();
-
   const email = e.target.querySelector('input[type="email"]').value;
-
   if (email) {
-    alert("Thank you for subscribing to our newsletter !");
+    alert("Thank you for subscribing to our newsletter!");
     e.target.reset();
   }
 });
