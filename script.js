@@ -1,5 +1,3 @@
-const { isValidElement } = require("react");
-
 const mockPodcasts = [
   {
     id: 1,
@@ -240,13 +238,10 @@ document.addEventListener("DOMContentLoaded", function () {
   setupAudioPlayer();
 });
 
-// Theme  Management
-
+// Theme Management
 function initializeTheme() {
   const savedTheme = localStorage.getItem("theme");
-
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
-
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const shouldBeDark = savedTheme ? savedTheme === "dark" : prefersDark;
 
   if (shouldBeDark) {
@@ -272,45 +267,32 @@ function toggleTheme() {
   }
 }
 
-// Events Listener
-
+// Event Listeners
 function setupEventListeners() {
-  // theme toggle
-
+  // Theme toggle
   themeToggle.addEventListener("click", toggleTheme);
 
-  // mobile menu
+  // Mobile menu
+  mobileMenuToggle.addEventListener("click", toggleMobileMenu);
 
-  mobileMenuToggle.addEventListener("click", toggleMobileTheme);
-
-  // scroll to top
-
+  // Scroll to top
   scrollToTop.addEventListener("click", () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 
+  // Header scroll effect
   window.addEventListener("scroll", handleScroll);
 
-  // newsletter form
-
+  // Newsletter form
   newsletterForm.addEventListener("submit", handleNewsletterSubmit);
 
-  // smooth scroll for navigation links
-
+  // Smooth scroll for navigation links
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       e.preventDefault();
-
       const target = document.querySelector(this.getAttribute("href"));
-
       if (target) {
-        target.scrollIntoView({
-          behavior: "smooth",
-        });
-
+        target.scrollIntoView({ behavior: "smooth" });
         if (mobileMenu.classList.contains("show")) {
           toggleMobileMenu();
         }
@@ -326,16 +308,14 @@ function toggleMobileMenu() {
 function handleScroll() {
   const scrollY = window.scrollY;
 
-  // header scroll effect
-
+  // Header scroll effect
   if (scrollY > 20) {
     header.classList.add("scrolled");
   } else {
-    scrollToTop.classList.remove("scrolled");
+    header.classList.remove("scrolled");
   }
 
-  // scroll to top button
-
+  // Scroll to top button
   if (scrollY > 300) {
     scrollToTop.classList.add("show");
   } else {
@@ -343,34 +323,31 @@ function handleScroll() {
   }
 }
 
-// newsletter
-
+// Newsletter
 function handleNewsletterSubmit(e) {
   e.preventDefault();
   const email = document.getElementById("emailInput").value;
 
   if (!email) {
-    showToast("Please enter your email address ", "error");
-    return;
-  }
-
-  if (!isValidEmail(email)) {
     showToast("Please enter your email address", "error");
     return;
   }
 
-  // simulate API call
+  if (!isValidEmail(email)) {
+    showToast("Please enter a valid email address", "error");
+    return;
+  }
 
+  // Simulate API call
   showToast("Subscribing...", "info");
 
   setTimeout(() => {
     showToast("Successfully subscribed! 🎉", "success");
-
     document.getElementById("emailInput").value = "";
   }, 1000);
 }
 
-function isValidElement(email) {
+function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 }
@@ -385,8 +362,7 @@ function showToast(message, type = "info") {
   }, 3000);
 }
 
-// content population
-
+// Content Population
 function populatePodcasts() {
   const podcastsGrid = document.getElementById("podcastsGrid");
 
@@ -396,3 +372,390 @@ function populatePodcasts() {
     podcastsGrid.appendChild(podcastCard);
   });
 }
+
+function createPodcastCard(podcast) {
+  const card = document.createElement("div");
+  card.className = "podcast-card";
+  card.innerHTML = `
+    <div class="podcast-image">
+      <img src="${podcast.image}" alt="${podcast.title}" loading="lazy">
+      <div class="podcast-category">${podcast.category}</div>
+      <button class="play-button" data-episode="${podcast.id - 1}">▶️</button>
+    </div>
+    <div class="podcast-content">
+      <h3>${podcast.title}</h3>
+      <p class="podcast-author">by ${podcast.author}</p>
+      <p class="podcast-description">${podcast.description}</p>
+      <div class="podcast-meta">
+        <span>${podcast.episodes} episodes • ${podcast.duration}</span>
+        <span>⭐ ${podcast.rating}</span>
+      </div>
+      <div class="podcast-footer">
+        <span>${podcast.subscribers} subscribers</span>
+        <button class="btn-text" data-episode="${podcast.id - 1}">Listen</button>
+      </div>
+    </div>
+  `;
+
+  // Add event listeners for play buttons
+  const playButtons = card.querySelectorAll("[data-episode]");
+  playButtons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const episodeId = parseInt(button.dataset.episode);
+      playEpisode(mockEpisodes[episodeId]);
+    });
+  });
+
+  return card;
+}
+
+function populateEpisodes() {
+  const episodesTrack = document.getElementById("episodesTrack");
+
+  mockEpisodes.forEach((episode, index) => {
+    const episodeCard = createEpisodeCard(episode);
+    episodeCard.style.animationDelay = `${index * 0.1}s`;
+    episodesTrack.appendChild(episodeCard);
+  });
+
+  setupCarouselDots();
+}
+
+function createEpisodeCard(episode) {
+  const card = document.createElement("div");
+  card.className = "episode-card";
+
+  const publishDate = new Date(episode.publishDate).toLocaleDateString(
+    "en-US",
+    {
+      month: "short",
+      day: "numeric",
+    },
+  );
+
+  card.innerHTML = `
+    <div class="episode-image">
+      <img src="${episode.image}" alt="${episode.title}" loading="lazy">
+      ${episode.isNew ? '<div class="episode-new">New</div>' : ""}
+      <button class="play-button" data-episode-id="${episode.id}">▶️</button>
+    </div>
+    <div class="episode-content">
+      <h3>${episode.title}</h3>
+      <p class="episode-description">${episode.description}</p>
+      <div class="episode-meta">
+        <span>${publishDate} • ${episode.duration}</span>
+        <span>${episode.plays} plays</span>
+      </div>
+      <button class="btn btn-secondary" data-episode-id="${episode.id}">
+        ▶️ Play Episode
+      </button>
+    </div>
+  `;
+
+  // Add event listeners for play buttons
+  const playButtons = card.querySelectorAll("[data-episode-id]");
+  playButtons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      e.stopPropagation();
+      playEpisode(episode);
+    });
+  });
+
+  return card;
+}
+
+function populateCategories() {
+  const categoriesGrid = document.getElementById("categoriesGrid");
+
+  categories.forEach((category, index) => {
+    const categoryCard = createCategoryCard(category);
+    categoryCard.style.animationDelay = `${index * 0.1}s`;
+    categoriesGrid.appendChild(categoryCard);
+  });
+}
+
+function createCategoryCard(category) {
+  const card = document.createElement("div");
+  card.className = "category-card";
+  card.innerHTML = `
+    <div class="category-icon" style="background: ${category.color}">${category.icon}</div>
+    <h3 class="category-name">${category.name}</h3>
+    <p class="category-count">${category.count} podcasts</p>
+    <div class="category-progress">
+      <div class="category-progress-fill" style="background: ${category.color}"></div>
+    </div>
+  `;
+
+  return card;
+}
+
+// Episodes Carousel
+function setupCarousel() {
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+
+  prevBtn.addEventListener("click", () => moveCarousel(-1));
+  nextBtn.addEventListener("click", () => moveCarousel(1));
+
+  updateCarouselButtons();
+}
+
+function setupCarouselDots() {
+  const carouselDots = document.getElementById("carouselDots");
+  const maxIndex = Math.max(0, mockEpisodes.length - 3);
+
+  for (let i = 0; i <= maxIndex; i++) {
+    const dot = document.createElement("button");
+    dot.className = "carousel-dot";
+    if (i === 0) dot.classList.add("active");
+
+    dot.addEventListener("click", () => {
+      episodeCarouselIndex = i;
+      updateCarousel();
+      updateCarouselDots();
+      updateCarouselButtons();
+    });
+
+    carouselDots.appendChild(dot);
+  }
+}
+
+function moveCarousel(direction) {
+  const maxIndex = Math.max(0, mockEpisodes.length - 3);
+  episodeCarouselIndex += direction;
+
+  if (episodeCarouselIndex < 0) episodeCarouselIndex = 0;
+  if (episodeCarouselIndex > maxIndex) episodeCarouselIndex = maxIndex;
+
+  updateCarousel();
+  updateCarouselDots();
+  updateCarouselButtons();
+}
+
+function updateCarousel() {
+  const episodesTrack = document.getElementById("episodesTrack");
+  const translateX = -(episodeCarouselIndex * (100 / 3));
+  episodesTrack.style.transform = `translateX(${translateX}%)`;
+}
+
+function updateCarouselDots() {
+  const dots = document.querySelectorAll(".carousel-dot");
+  dots.forEach((dot, index) => {
+    dot.classList.toggle("active", index === episodeCarouselIndex);
+  });
+}
+
+function updateCarouselButtons() {
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const maxIndex = Math.max(0, mockEpisodes.length - 3);
+
+  prevBtn.disabled = episodeCarouselIndex === 0;
+  nextBtn.disabled = episodeCarouselIndex >= maxIndex;
+}
+
+// Audio Player
+function setupAudioPlayer() {
+  const playPauseBtn = document.getElementById("playPauseBtn");
+  const closePlayerBtn = document.getElementById("closePlayerBtn");
+  const progressSlider = document.getElementById("progressSlider");
+  const volumeSlider = document.getElementById("volumeSlider");
+  const volumeBtn = document.getElementById("volumeBtn");
+
+  playPauseBtn.addEventListener("click", togglePlayPause);
+  closePlayerBtn.addEventListener("click", closePlayer);
+  progressSlider.addEventListener("input", seekAudio);
+  volumeSlider.addEventListener("input", changeVolume);
+  volumeBtn.addEventListener("click", toggleMute);
+
+  audioElement.addEventListener("timeupdate", updateProgress);
+  audioElement.addEventListener("loadedmetadata", updateDuration);
+  audioElement.addEventListener("ended", () => {
+    isPlaying = false;
+    updatePlayButton();
+  });
+
+  // Setup audio visualizer
+  setupAudioVisualizer();
+}
+
+function playEpisode(episode) {
+  currentAudio = episode;
+  isPlaying = true;
+
+  // Update player UI
+  document.getElementById("playerImage").src = episode.image;
+  document.getElementById("playerTitle").textContent = episode.title;
+  document.getElementById("playerDescription").textContent =
+    episode.description;
+
+  // Load and play audio
+  audioElement.src = episode.audioUrl;
+  audioElement.play();
+
+  // Show player
+  audioPlayer.classList.add("show");
+  audioPlayer.style.display = "block";
+
+  updatePlayButton();
+  updateVisualizer();
+}
+
+function togglePlayPause() {
+  if (isPlaying) {
+    audioElement.pause();
+    isPlaying = false;
+  } else {
+    audioElement.play();
+    isPlaying = true;
+  }
+  updatePlayButton();
+  updateVisualizer();
+}
+
+function updatePlayButton() {
+  const playPauseBtn = document.getElementById("playPauseBtn");
+  playPauseBtn.textContent = isPlaying ? "⏸️" : "▶️";
+}
+
+function closePlayer() {
+  audioPlayer.classList.remove("show");
+  setTimeout(() => {
+    audioPlayer.style.display = "none";
+    audioElement.pause();
+    audioElement.src = "";
+    isPlaying = false;
+    currentAudio = null;
+  }, 300);
+}
+
+function seekAudio() {
+  const progressSlider = document.getElementById("progressSlider");
+  const seekTime = (progressSlider.value / 100) * audioElement.duration;
+  audioElement.currentTime = seekTime;
+}
+
+function changeVolume() {
+  const volumeSlider = document.getElementById("volumeSlider");
+  audioElement.volume = volumeSlider.value / 100;
+
+  const volumeBtn = document.getElementById("volumeBtn");
+  volumeBtn.textContent = volumeSlider.value > 0 ? "🔊" : "🔇";
+}
+
+function toggleMute() {
+  const volumeSlider = document.getElementById("volumeSlider");
+  const volumeBtn = document.getElementById("volumeBtn");
+
+  if (audioElement.volume > 0) {
+    audioElement.volume = 0;
+    volumeSlider.value = 0;
+    volumeBtn.textContent = "🔇";
+  } else {
+    audioElement.volume = 0.8;
+    volumeSlider.value = 80;
+    volumeBtn.textContent = "🔊";
+  }
+}
+
+function updateProgress() {
+  const progressSlider = document.getElementById("progressSlider");
+  const progressFill = document.getElementById("progressFill");
+  const currentTimeSpan = document.getElementById("currentTime");
+
+  const progress = (audioElement.currentTime / audioElement.duration) * 100;
+  progressSlider.value = progress || 0;
+  progressFill.style.width = `${progress || 0}%`;
+
+  currentTimeSpan.textContent = formatTime(audioElement.currentTime);
+}
+
+function updateDuration() {
+  const durationSpan = document.getElementById("duration");
+  durationSpan.textContent = formatTime(audioElement.duration);
+}
+
+function formatTime(seconds) {
+  if (isNaN(seconds)) return "0:00";
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = Math.floor(seconds % 60);
+  return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
+}
+
+function setupAudioVisualizer() {
+  const visualizer = document.getElementById("audioVisualizer");
+
+  // Create visualizer bars
+  for (let i = 0; i < 20; i++) {
+    const bar = document.createElement("div");
+    bar.className = "visualizer-bar";
+    bar.style.animationDelay = `${i * 0.1}s`;
+    visualizer.appendChild(bar);
+  }
+}
+
+function updateVisualizer() {
+  const visualizerBars = document.querySelectorAll(".visualizer-bar");
+
+  visualizerBars.forEach((bar, index) => {
+    if (isPlaying) {
+      const height = Math.random() * 20 + 5;
+      bar.style.height = `${height}px`;
+      bar.style.animationPlayState = "running";
+    } else {
+      bar.style.height = "5px";
+      bar.style.animationPlayState = "paused";
+    }
+  });
+}
+
+// Scroll Animations
+function setupScrollAnimations() {
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: "0px 0px -50px 0px",
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = "1";
+        entry.target.style.transform = "translateY(0)";
+      }
+    });
+  }, observerOptions);
+
+  // Observe all animated elements
+  const animatedElements = document.querySelectorAll(
+    ".podcast-card, .episode-card, .category-card, .section-header",
+  );
+  animatedElements.forEach((el) => {
+    el.style.opacity = "0";
+    el.style.transform = "translateY(50px)";
+    el.style.transition = "opacity 0.8s ease-out, transform 0.8s ease-out";
+    observer.observe(el);
+  });
+}
+
+// Utility functions
+
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunctions(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+// Auto-update visualizer when playing
+
+setInterval(() => {
+  if (isPlaying) {
+    updateVisualizer();
+  }
+}, 100);

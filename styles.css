@@ -145,6 +145,7 @@ body {
   right: 0;
   z-index: 1000;
   background-color: rgba(255, 255, 255, 0.8);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
   transition: var(--transition);
@@ -258,6 +259,10 @@ body {
   color: var(--text-muted);
 }
 
+.mobile-search .search-icon {
+  display: none;
+}
+
 .header-actions {
   display: flex;
   align-items: center;
@@ -345,6 +350,7 @@ body {
   background-color: transparent;
   color: var(--text-primary);
   border: 1px solid var(--border);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
 }
 
@@ -423,6 +429,7 @@ body {
   font-size: var(--font-size-sm);
   font-weight: 500;
   margin-bottom: var(--spacing-6);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
 }
 
@@ -489,6 +496,7 @@ body {
 .featured-card {
   position: relative;
   background-color: var(--bg-secondary);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border: 1px solid var(--border);
   border-radius: var(--radius-2xl);
