@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Future of AI in Everyday Life - PodcastHub Episode Page</title>
+    <title>PodcastHub - Modern Podcast Platform</title>
     <meta
       name="description"
-      content="Explore how artificial intelligence is transforming our daily experiences and shaping the future."
+      content="Discover, listen, and enjoy your favorite podcasts with our modern streaming platform"
     />
     <meta name="author" content="PodcastHub" />
 
@@ -18,9 +18,9 @@
       rel="stylesheet"
     />
 
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css" />
   </head>
+
   <body class="light-theme">
     <!-- Header -->
     <header class="header" id="header">
@@ -34,7 +34,7 @@
 
           <!-- Desktop Navigation -->
           <nav class="nav-desktop">
-            <a href="index.html" class="nav-link">Home</a>
+            <a href="#home" class="nav-link">Home</a>
             <a href="#podcasts" class="nav-link">Podcasts</a>
             <a href="#categories" class="nav-link">Categories</a>
             <a href="#about" class="nav-link">About</a>
@@ -75,7 +75,7 @@
             <span class="search-icon">🔍</span>
           </div>
           <nav class="nav-mobile">
-            <a href="index.html" class="nav-link">Home</a>
+            <a href="#home" class="nav-link">Home</a>
             <a href="#podcasts" class="nav-link">Podcasts</a>
             <a href="#categories" class="nav-link">Categories</a>
             <a href="#about" class="nav-link">About</a>
@@ -84,325 +84,200 @@
       </div>
     </header>
 
-    <!-- Episode Content -->
-    <main class="episode-main">
-      <!-- Breadcrumb -->
-      <section class="breadcrumb-section">
-        <div class="container">
-          <nav class="breadcrumb">
-            <a href="index.html" class="breadcrumb-link">Home</a>
-            <span class="breadcrumb-separator">›</span>
-            <a href="#" class="breadcrumb-link">Tech Talks</a>
-            <span class="breadcrumb-separator">›</span>
-            <span class="breadcrumb-current"
-              >The Future of AI in Everyday Life</span
-            >
-          </nav>
-        </div>
-      </section>
-
-      <!-- Episode Hero -->
-      <section class="episode-hero">
-        <div class="container">
-          <div class="episode-hero-content">
-            <div class="episode-hero-left">
-              <div class="episode-image-container">
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="hero-bg"></div>
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-left">
+            <div class="hero-badge">
+              <span class="status-dot"></span>
+              <span>Now Live</span>
+            </div>
+            <h1 class="hero-title">
+              Discover Your Next
+              <span class="block gradient-text">Favorite Podcast</span>
+            </h1>
+            <p class="hero-description">
+              Immerse yourself in captivating stories, expert insights, and
+              inspiring conversations from creators around the world. Your
+              perfect podcast journey starts here.
+            </p>
+            <div class="hero-buttons">
+              <button class="btn btn-primary">▶️ Start Listening</button>
+              <button class="btn btn-secondary">🎧 Browse Library</button>
+            </div>
+            <div class="hero-stats">
+              <div class="stat">
+                <div class="stat-number">10K+</div>
+                <div class="stat-label">Episodes</div>
+              </div>
+              <div class="stat">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Podcasts</div>
+              </div>
+              <div class="stat">
+                <div class="stat-number">1M+</div>
+                <div class="stat-label">Listeners</div>
+              </div>
+            </div>
+          </div>
+          <div class="hero-right">
+            <div class="featured-card">
+              <div class="featured-badges">
+                <span class="badge badge-featured">Featured</span>
+                <span class="badge badge-latest">📅 Latest</span>
+              </div>
+              <div class="featured-image">
                 <img
-                  src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600"
-                  alt="The Future of AI in Everyday Life"
-                  class="episode-hero-image"
+                  src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400"
+                  alt="Featured Episode"
                 />
-                <button class="episode-play-button" data-episode="0">▶️</button>
+                <button class="play-button" data-episode="0">▶️</button>
               </div>
-            </div>
-            <div class="episode-hero-right">
-              <div class="episode-badges">
-                <span class="episode-badge featured">Featured</span>
-                <span class="episode-badge new">🆕 New</span>
-              </div>
-              <h1 class="episode-title">The Future of AI in Everyday Life</h1>
-              <p class="episode-subtitle">
-                How artificial intelligence is transforming our daily
-                experiences and shaping the future of human interaction.
-              </p>
-
-              <div class="episode-meta">
-                <div class="episode-meta-item">
-                  <span class="meta-label">Duration:</span>
-                  <span class="meta-value">42:15</span>
-                </div>
-                <div class="episode-meta-item">
-                  <span class="meta-label">Published:</span>
-                  <span class="meta-value">Dec 15, 2024</span>
-                </div>
-                <div class="episode-meta-item">
-                  <span class="meta-label">Category:</span>
-                  <span class="meta-value">Technology</span>
-                </div>
-                <div class="episode-meta-item">
-                  <span class="meta-label">Plays:</span>
-                  <span class="meta-value">12.5K</span>
-                </div>
-              </div>
-
-              <div class="episode-actions">
-                <button
-                  class="btn btn-primary episode-play-btn"
-                  data-episode="0"
-                >
-                  ▶️ Play Episode
-                </button>
-                <button class="btn btn-secondary">⬇️ Download</button>
-                <button class="btn btn-secondary">🔗 Share</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Episode Content -->
-      <section class="episode-content-section">
-        <div class="container">
-          <div class="episode-layout">
-            <!-- Main Content -->
-            <div class="episode-main-content">
-              <!-- Episode Description -->
-              <div class="content-card">
-                <h2 class="content-title">Episode Description</h2>
-                <div class="episode-description">
-                  <p>
-                    In this thought-provoking episode, we dive deep into the
-                    rapidly evolving landscape of artificial intelligence and
-                    its profound impact on our daily lives. From smart home
-                    assistants to personalized recommendations, AI has quietly
-                    woven itself into the fabric of our existence.
-                  </p>
-
-                  <p>
-                    Join our expert panel as they explore the current state of
-                    AI technology, discuss emerging trends, and predict how
-                    these innovations will continue to reshape everything from
-                    healthcare and education to entertainment and
-                    transportation.
-                  </p>
-
-                  <h3>What You'll Learn:</h3>
-                  <ul>
-                    <li>Current AI applications in everyday technology</li>
-                    <li>The role of machine learning in personalization</li>
-                    <li>Ethical considerations and privacy concerns</li>
-                    <li>Future predictions for AI integration</li>
-                    <li>How to prepare for an AI-driven world</li>
-                  </ul>
-
-                  <p>
-                    Whether you're a tech enthusiast or simply curious about the
-                    future, this episode offers valuable insights into how AI
-                    will continue to transform our world in ways we're only
-                    beginning to understand.
-                  </p>
-                </div>
-              </div>
-
-              <!-- Guests & Hosts -->
-              <div class="content-card">
-                <h2 class="content-title">Guests & Hosts</h2>
-                <div class="guests-grid">
-                  <div class="guest-card">
-                    <img
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150"
-                      alt="Dr. Sarah Chen"
-                      class="guest-avatar"
-                    />
-                    <div class="guest-info">
-                      <h3 class="guest-name">Dr. Sarah Chen</h3>
-                      <p class="guest-role">
-                        AI Research Director at TechVision
-                      </p>
-                      <p class="guest-bio">
-                        Leading expert in machine learning with over 15 years of
-                        experience in AI development and implementation.
-                      </p>
-                    </div>
-                  </div>
-                  <div class="guest-card">
-                    <img
-                      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150"
-                      alt="Marcus Rodriguez"
-                      class="guest-avatar"
-                    />
-                    <div class="guest-info">
-                      <h3 class="guest-name">Marcus Rodriguez</h3>
-                      <p class="guest-role">Host & Tech Journalist</p>
-                      <p class="guest-bio">
-                        Award-winning technology journalist and podcast host
-                        covering emerging tech trends for over a decade.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Timestamps -->
-              <div class="content-card">
-                <h2 class="content-title">Episode Timestamps</h2>
-                <div class="timestamps-list">
-                  <div class="timestamp-item">
-                    <button class="timestamp-link" data-time="0">00:00</button>
-                    <span class="timestamp-description"
-                      >Introduction and welcome</span
-                    >
-                  </div>
-                  <div class="timestamp-item">
-                    <button class="timestamp-link" data-time="180">
-                      03:00
-                    </button>
-                    <span class="timestamp-description"
-                      >Current state of AI in consumer technology</span
-                    >
-                  </div>
-                  <div class="timestamp-item">
-                    <button class="timestamp-link" data-time="720">
-                      12:00
-                    </button>
-                    <span class="timestamp-description"
-                      >Machine learning and personalization</span
-                    >
-                  </div>
-                  <div class="timestamp-item">
-                    <button class="timestamp-link" data-time="1320">
-                      22:00
-                    </button>
-                    <span class="timestamp-description"
-                      >Ethical considerations and privacy</span
-                    >
-                  </div>
-                  <div class="timestamp-item">
-                    <button class="timestamp-link" data-time="1980">
-                      33:00
-                    </button>
-                    <span class="timestamp-description"
-                      >Future predictions and trends</span
-                    >
-                  </div>
-                  <div class="timestamp-item">
-                    <button class="timestamp-link" data-time="2400">
-                      40:00
-                    </button>
-                    <span class="timestamp-description"
-                      >Closing thoughts and key takeaways</span
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Sidebar -->
-            <div class="episode-sidebar">
-              <!-- Podcast Info -->
-              <div class="sidebar-card">
-                <h3 class="sidebar-title">About This Podcast</h3>
-                <div class="podcast-info">
-                  <img
-                    src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=200"
-                    alt="Tech Talks Podcast"
-                    class="podcast-cover"
-                  />
-                  <h4 class="podcast-name">Tech Talks</h4>
-                  <p class="podcast-description">
-                    Weekly conversations about technology, innovation, and the
-                    future of digital transformation.
-                  </p>
-                  <div class="podcast-stats">
-                    <div class="stat">
-                      <span class="stat-number">156</span>
-                      <span class="stat-label">Episodes</span>
-                    </div>
-                    <div class="stat">
-                      <span class="stat-number">2.3M</span>
-                      <span class="stat-label">Downloads</span>
-                    </div>
-                  </div>
-                  <button class="btn btn-primary btn-small">Subscribe</button>
-                </div>
-              </div>
-
-              <!-- Related Episodes -->
-              <div class="sidebar-card">
-                <h3 class="sidebar-title">Related Episodes</h3>
-                <div class="related-episodes">
-                  <div class="related-episode">
-                    <img
-                      src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=100"
-                      alt="Episode"
-                      class="related-episode-image"
-                    />
-                    <div class="related-episode-content">
-                      <h4 class="related-episode-title">
-                        Blockchain Revolution
-                      </h4>
-                      <p class="related-episode-meta">38:42 • 8.2K plays</p>
-                      <button class="btn-text" data-episode="1">Play</button>
-                    </div>
-                  </div>
-                  <div class="related-episode">
-                    <img
-                      src="https://images.unsplash.com/photo-1551808525-51a94da548ce?w=100"
-                      alt="Episode"
-                      class="related-episode-image"
-                    />
-                    <div class="related-episode-content">
-                      <h4 class="related-episode-title">
-                        Quantum Computing Basics
-                      </h4>
-                      <p class="related-episode-meta">45:12 • 12.1K plays</p>
-                      <button class="btn-text" data-episode="2">Play</button>
-                    </div>
-                  </div>
-                  <div class="related-episode">
-                    <img
-                      src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=100"
-                      alt="Episode"
-                      class="related-episode-image"
-                    />
-                    <div class="related-episode-content">
-                      <h4 class="related-episode-title">
-                        Cybersecurity in 2024
-                      </h4>
-                      <p class="related-episode-meta">52:30 • 15.7K plays</p>
-                      <button class="btn-text" data-episode="3">Play</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Subscribe -->
-              <div class="sidebar-card">
-                <h3 class="sidebar-title">Never Miss an Episode</h3>
-                <p class="sidebar-description">
-                  Get notified when new episodes are released.
+              <div class="featured-content">
+                <h3>The Future of AI in Everyday Life</h3>
+                <p>
+                  How artificial intelligence is transforming our daily
+                  experiences.
                 </p>
-                <form class="sidebar-form" id="newsletterForm">
-                  <input
-                    type="email"
-                    id="emailInput"
-                    placeholder="Your email address"
-                    class="sidebar-input"
-                    required
-                  />
-                  <button
-                    type="submit"
-                    class="btn btn-primary btn-small btn-full"
-                  >
-                    Subscribe
-                  </button>
-                </form>
+                <div class="featured-meta">
+                  <span>42:15 • 12.5K plays</span>
+                  <button class="btn-text" data-episode="0">Play Now</button>
+                </div>
+              </div>
+              <div class="glass-effect">
+                <div class="hero-audio-visualizer">
+                  <div class="audio-bar" style="height: 8px"></div>
+                  <div class="audio-bar" style="height: 16px"></div>
+                  <div class="audio-bar" style="height: 12px"></div>
+                  <div class="audio-bar" style="height: 20px"></div>
+                  <div class="audio-bar" style="height: 6px"></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
+
+    <!-- Featured Podcasts -->
+    <section class="section" id="podcasts">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-badge">🎧 Featured Podcasts</div>
+          <h2 class="section-title">
+            Trending Shows You'll
+            <span class="block gradient-text">Love to Follow</span>
+          </h2>
+          <p class="section-description">
+            Hand-picked podcasts from our community of creators, covering
+            everything from technology and business to wellness and
+            entertainment.
+          </p>
+        </div>
+        <div class="podcasts-grid" id="podcastsGrid">
+          <!-- Podcasts will be populated by JavaScript -->
+        </div>
+        <div class="section-footer">
+          <button class="btn btn-outline">Explore All Podcasts</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Latest Episodes -->
+    <section class="section episodes-section">
+      <div class="container">
+        <div class="section-header-carousel">
+          <div>
+            <div class="section-badge">📅 Latest Episodes</div>
+            <h2 class="section-title">
+              Fresh Content
+              <span class="block gradient-text">Just Dropped</span>
+            </h2>
+          </div>
+          <div class="carousel-controls">
+            <button class="carousel-btn" id="prevBtn">‹</button>
+            <button class="carousel-btn" id="nextBtn">›</button>
+          </div>
+        </div>
+        <div class="episodes-carousel">
+          <div class="episodes-track" id="episodesTrack">
+            <!-- Episodes will be populated by JavaScript -->
+          </div>
+        </div>
+        <div class="carousel-dots" id="carouselDots">
+          <!-- Dots will be populated by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="section" id="categories">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-badge">Explore Categories</div>
+          <h2 class="section-title">
+            Find Your Perfect
+            <span class="block gradient-text">Content Match</span>
+          </h2>
+          <p class="section-description">
+            Browse through our diverse collection of podcast categories and
+            discover content that matches your interests and passions.
+          </p>
+        </div>
+        <div class="categories-grid" id="categoriesGrid">
+          <!-- Categories will be populated by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="section newsletter-section">
+      <div class="container">
+        <div class="newsletter-card">
+          <div class="newsletter-content">
+            <div class="section-badge">🔔 Stay Updated</div>
+            <h2 class="section-title">Never Miss a Beat</h2>
+            <p class="section-description">
+              Get personalized podcast recommendations, exclusive early access
+              to new episodes, and curated weekly playlists delivered straight
+              to your inbox.
+            </p>
+            <form class="newsletter-form" id="newsletterForm">
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                class="newsletter-input"
+                id="emailInput"
+                required
+              />
+              <button type="submit" class="btn btn-primary">
+                🎧 Subscribe
+              </button>
+            </form>
+            <div class="newsletter-features">
+              <div class="feature">
+                <span class="feature-dot green"></span>
+                <span>Weekly recommendations</span>
+              </div>
+              <div class="feature">
+                <span class="feature-dot blue"></span>
+                <span>Early access</span>
+              </div>
+              <div class="feature">
+                <span class="feature-dot purple"></span>
+                <span>Curated playlists</span>
+              </div>
+              <div class="feature">
+                <span class="feature-dot pink"></span>
+                <span>No spam, ever</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">
@@ -448,6 +323,15 @@
             </div>
           </div>
         </div>
+        <div class="section-wrapper">
+          <div class="section-inner">
+            <div class="section-text">
+              <h3>Stay in the loop</h3>
+              <p>Get the latest podcast recommendations and updates</p>
+            </div>
+            <button class="subscribe-button">Subscribe to Newsletter</button>
+          </div>
+        </div>
         <div class="footer-bottom">
           <div class="footer-legal">
             <a href="#">Privacy Policy</a>
@@ -455,7 +339,14 @@
             <a href="#">Cookie Policy</a>
           </div>
           <div class="footer-copyright">
-            © 2024 PodcastHub. All rights reserved.
+            © 2025 PodcastHub. All rights reserved. <br />
+            Made with <span style="color: red">❤</span> by
+            <a
+              href="https://www.codewithfaraz.com"
+              target="_blank"
+              style="text-decoration: none; color: #2563eb"
+              >codewithfaraz</a
+            >
           </div>
         </div>
       </div>
