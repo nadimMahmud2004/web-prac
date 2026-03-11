@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ethan Cole - Developer Portfolio</title>
+    <title>Nadim Mahmud - Developer Portfolio</title>
     <link
       rel="icon"
       href="https://www.codewithfaraz.com/tools/placeholder?size=32x32&bgColor=0d1117&textColor=c9d1d9&text=EC"
       type="image/png"
     />
-    <link rel="stylesheet" href="src/output.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
@@ -22,65 +22,66 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body class="overflow-x-auto">
+
+  <body class="overflow-x-hidden">
     <!-- Custom Cursor -->
-    <div id="custom-cursor"></div>
+    <div id="cursor-dot"></div>
 
     <!-- Header -->
-
     <header
       class="fixed top-0 left-0 right-0 z-50 bg-opacity-50 backdrop-blur-md border-b border-gray-800"
     >
       <nav
         class="container mx-auto px-6 py-4 flex justify-between items-center"
       >
-        <a href="#" class="text-2xl font-bold text-white"><< NM /></a>
+        <a href="#" class="text-2xl font-bold text-white"><< EC /></a>
         <div class="hidden md:flex space-x-8">
-          <a href="#about" class="hover:text-accent transition-colors">About</a>
-          <a href="#contact" class="hover:text-accent transition-colors"
-            >Contact</a
+          <a href="#about" class="hover:text-accent transition-colors"
+            >/about</a
           >
-          <a href="experience" class="hover:text-accent transition-colors"
-            >Experience</a
+          <a href="#portfolio" class="hover:text-accent transition-colors"
+            >/portfolio</a
+          >
+          <a href="#experience" class="hover:text-accent transition-colors"
+            >/experience</a
           >
           <a href="#contact" class="hover:text-accent transition-colors"
-            >Contact</a
+            >/contact</a
           >
         </div>
         <button id="mobile-menu-btn" class="md:hidden text-2xl">☰</button>
       </nav>
-
       <div id="mobile-menu" class="hidden md:hidden bg-gray-900 bg-opacity-90">
         <a href="#about" class="block py-2 px-4 text-sm hover:bg-gray-700"
-          >About</a
+          >/about</a
         >
         <a href="#portfolio" class="block py-2 px-4 text-sm hover:bg-gray-700"
-          >Portfolio</a
+          >/portfolio</a
         >
         <a href="#experience" class="block py-2 px-4 text-sm hover:bg-gray-700"
-          >Experience</a
+          >/experience</a
         >
         <a href="#contact" class="block py-2 px-4 text-sm hover:bg-gray-700"
-          >Contact</a
+          >/contact</a
         >
       </div>
     </header>
 
     <!-- Hero Section -->
-
     <section id="hero" class="h-screen relative overflow-hidden">
       <!-- Canvas Background -->
       <canvas
         id="hero-canvas"
         class="absolute top-0 left-0 w-full h-full z-0"
       ></canvas>
-      <!-- Fake terminal Card -->
+
+      <!-- Fake Terminal Card -->
       <div
         class="absolute bottom-8 left-8 w-105 bg-[#0d1117] border border-gray-700 rounded-xl shadow-2xl z-10"
       >
-        <!-- Fake Terminal -->
+        <!-- Fake Window Bar -->
         <div
-          class="flex items-center gap-2 px-3 py-2 border-b border-gray-700 rounded-t-xl"
+          class="flex items-center gap-2 px-3 py-2 border-b border-gray-700 bg-[#161b22] rounded-t-xl"
         >
           <span class="w-3 h-3 rounded-full bg-red-500"></span>
           <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
@@ -89,12 +90,11 @@
         </div>
 
         <!-- Terminal Content -->
-
         <div class="p-4 font-mono text-green-400 text-sm leading-relaxed">
-          <p>$ Hello , I am <span class="text-accent">Nadim Mahmud</span></p>
+          <p>$ Hello, I am <span class="text-accent">Nadim Mahmud </span></p>
           <p>
-            $ I am a <span id="typewritter"></span>
-            <span class="typewriter-cursor">|</span>
+            $ I am a <span id="typewriter"></span
+            ><span class="typewriter-cursor">|</span>
           </p>
           <p>$ View my work 👇</p>
         </div>
@@ -112,7 +112,7 @@
             <div class="relative w-64 h-64">
               <img
                 src="image/Nadim.jpg"
-                alt="Ethan Cole"
+                alt="My Profile"
                 class="rounded-full w-full h-full object-cover border-4 border-accent"
                 id="about-img"
                 crossorigin="anonymous"
@@ -128,30 +128,28 @@
                 <span class="h-3 w-3 bg-green-500 rounded-full"></span>
               </div>
               <p class="text-secondary mb-4">
-                nadim_mahmud@portfolio:~$ cat ./bio.txt
+                > nadim_mahmud@portfolio:~$ cat ./bio.txt
               </p>
               <p class="text-primary leading-relaxed">
-                Hello ! I'm Nadim , a passionate and aspired software engineer
+                Hello! I'm Nadim, an aspired and passionate software engineer
                 with a knack for creating elegant and efficient solutions. With
-                over some experience in the tech industry . I've had the
-                privilege of working on a diverse range of projects , from
+                over some experience in the tech industry, I've had the
+                privilege of working on a diverse range of projects, from
                 scalable web applications to complex backend systems. My journey
-                in coding started with a simple "Hello World !" and has since
+                in coding started with a simple "Hello, World!" and has since
                 evolved into a deep love for building things that make a
-                difference .
+                difference.
               </p>
               <p class="text-secondary mt-4">
                 > <span class="blinking-cursor">_</span>
               </p>
             </div>
-
             <div class="mt-8">
               <h3 class="text-2xl font-semibold mb-4">My Skills</h3>
-
-              <div class="space-x-4">
+              <div class="space-y-4">
                 <div class="skill">
                   <p class="flex justify-between mb-1">
-                    <span>Javascript</span>
+                    <span>JavaScript</span><span>90%</span>
                   </p>
                   <div class="w-full bg-gray-700 rounded-full h-2.5">
                     <div
@@ -163,7 +161,7 @@
                 </div>
                 <div class="skill">
                   <p class="flex justify-between mb-1">
-                    <span>React</span>
+                    <span>React</span><span>85%</span>
                   </p>
                   <div class="w-full bg-gray-700 rounded-full h-2.5">
                     <div
@@ -175,7 +173,7 @@
                 </div>
                 <div class="skill">
                   <p class="flex justify-between mb-1">
-                    <span>Node.js</span>
+                    <span>Node.js</span><span>80%</span>
                   </p>
                   <div class="w-full bg-gray-700 rounded-full h-2.5">
                     <div
@@ -187,11 +185,11 @@
                 </div>
                 <div class="skill">
                   <p class="flex justify-between mb-1">
-                    <span>Python</span>
+                    <span>Python</span><span>75%</span>
                   </p>
                   <div class="w-full bg-gray-700 rounded-full h-2.5">
                     <div
-                      class="bg-accent h-2.5 rounded-full skill-bar-inner"
+                      class="bg-green h-2.5 rounded-full skill-bar-inner"
                       style="width: 0%"
                       data-width="75%"
                     ></div>
@@ -205,7 +203,6 @@
     </section>
 
     <!-- Portfolio Section -->
-
     <section id="portfolio" class="py-20 bg-[#010409] reveal">
       <div class="container mx-auto px-6">
         <h2 class="text-3xl font-bold text-center mb-12">
@@ -225,6 +222,7 @@
         </div>
       </div>
     </section>
+
     <!-- Experience Section -->
     <section id="experience" class="py-20 reveal">
       <div class="container mx-auto px-6">
@@ -321,8 +319,8 @@
     <!-- Footer -->
     <footer class="py-6 text-center text-secondary border-t border-gray-800">
       <p>
-        © 2025 Ethan Cole. Designed & Built with <3 by
-        <a href="https://www.codewithfaraz.com">CodewithFaraz</a>
+        © 2025 Nadim Mahmud . Designed & Built with <3 by
+        <a href="https://www.codewithfaraz.com">Me</a>
       </p>
     </footer>
     <script src="script.js"></script>
